@@ -9,4 +9,3 @@ data$residuals <- residuals(fit)
 x.vars <- all.vars(formula(fit))[-1]
 nm.chunks <- Chunks(x.vars, 4)
 plots <- lapply(nm.chunks, PartialResiduals, data = data)
-
