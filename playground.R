@@ -8,5 +8,5 @@ data$residuals <- residuals(fit)
 ## ------------------------ Residual Analysis -----------------------
 x.vars <- all.vars(formula(fit))[-1]
 nm.chunks <- Chunks(x.vars, 4)
-plots <- lapply(nm.chunks, PartialResiduals, data = data)
-
+partial.plots <- lapply(nm.chunks, PartialResiduals, data = data)
+qq <- CreateQQPlot(data)
