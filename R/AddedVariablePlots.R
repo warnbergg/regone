@@ -19,7 +19,7 @@ AddedVariablePlots <- function(nms, data, x.vars, fit) {
     }))
     plt <- ggplot2::ggplot(plot.data, ggplot2::aes(x = orig, y = pred)) +
         ggplot2::geom_line() +
-        ggplot2::facet_wrap(~id)
+        ggplot2::facet_wrap(~id, scales = "free")
 
     return(plt)
 }
