@@ -6,13 +6,13 @@
 #' @export
 PartialResiduals <- function(nms, data) {
     plt <- data[, c(nms, "density", "predicted", "residuals")] %>% 
-        gather(key = "iv", value = "x", -density, -predicted, -residuals) %>%
-        ggplot(aes(x = x, y = density)) + 
-        geom_segment(aes(xend = x, yend = predicted), alpha = .2) +
-        geom_point(aes(color = residuals)) +
-        scale_color_gradient2(low = "blue", mid = "white", high = "red") +
-        guides(color = FALSE) +
-        geom_point(aes(y = predicted), shape = 1) +
-        facet_grid(~ iv, scales = "free_x")
-    ggsave(paste0(paste0(nms, collapse = "_"), ".png"), plt) 
+        tidyr::gather(key = "iv", value = "x", -density, -predicted, -residuals) %>%
+        ggplot2::ggplot(ggplot2::aes(x = x, y = density)) + 
+        ggplot2::geom_segment(ggplot2::aes(xend = x, yend = predicted), alpha = .2) +
+        ggplot2::geom_point(ggplot2::aes(color = residuals)) +
+        ggplot2::scale_color_gradient2(low = "blue", mid = "white", high = "red") +
+        ggplot2::guides(color = FALSE) +
+        ggplot2::geom_point(ggplot2::aes(y = predicted), shape = 1) +
+        ggplot2::facet_grid(~ iv, scales = "free_x")
+    ggplot2::ggsave(paste0(paste0(nms, collapse = "_"), ".png"), plt) 
 }
