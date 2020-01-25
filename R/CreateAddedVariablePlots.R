@@ -29,7 +29,9 @@ CreateAddedVariablePlots <- function(nms, data, regressors, fit,
         ggplot2::facet_wrap(~id, scales = "free") +
         ggplot2::theme_minimal()
     if (save.plot)
-        ggplot2::ggsave(paste0(paste0(nms, collapse="_"), "_avp.png"), plt)
+        suppressMessages({
+            ggplot2::ggsave(paste0(paste0(nms, collapse="_"), "_avp.png"), plt)
+        })
     return(plt)
 }
 #' Summarize

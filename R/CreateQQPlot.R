@@ -9,6 +9,8 @@ CreateQQPlot <- function(residuals.df, save.plot = TRUE) {
         ggplot2::stat_qq() +
         ggplot2::stat_qq_line()
     if (save.plot)
-        ggplot2::ggsave("qqplot.png", plt)
+        suppressMessages({
+            ggplot2::ggsave("qqplot.png", plt)
+        })
     return (plt)
 }
