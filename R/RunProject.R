@@ -25,6 +25,7 @@ RunProject <- function(verbose = TRUE) {
     if (verbose)
         message("Running outlier detection analysis...")
     cd <- CreateCooksDistancePlot(data = data)
+    db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
     if (verbose)
         message("Project finished.")
 }

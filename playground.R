@@ -16,3 +16,4 @@ rar <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot, data = data)
 avp <- lapply(nm.chunks, CreateAddedVariablePlots, data = data, regressors = x.vars, fit = fit)
 ## ------------------------ Outlier detection -----------------------
 cd <- CreateCooksDistancePlot(data = data)
+db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
