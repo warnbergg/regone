@@ -7,7 +7,7 @@
 #' @param fit lm object. Linear Model (LM) object fit to data. No default
 #' @param save.plots Logical vector of length 1. If TRUE the added variable plots are saved to disk. Defaults to TRUE.
 #' @export
-AddedVariablePlots <- function(nms, data, x.vars,
+CreateAddedVariablePlots <- function(nms, data, x.vars,
                                fit, save.plots = TRUE) {
     added.variable.dfs <- x.vars %>%
         purrr::set_names() %>%
