@@ -10,7 +10,6 @@ data$r.student <- rstudent(fit)
 ## ------------------------ Residual Analysis -----------------------
 x.vars <- all.vars(formula(fit))[-1]
 nm.chunks <- Chunks(x.vars, 4)
-partial.plots <- lapply(nm.chunks, PartialResiduals, data = data)
 qq <- CreateQQPlot(data)
-regressor.againt.resid <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot,
-                                 data = data)
+pp <- lapply(nm.chunks, CnreateFittedAgainstActualPlot, data = data)
+rar <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot, data = data)
