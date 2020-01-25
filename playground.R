@@ -12,3 +12,5 @@ nm.chunks <- Chunks(x.vars, 4)
 plots <- lapply(nm.chunks, PartialResiduals, data = data)
 added.variable.plots <- lapply(nm.chunks, AddedVariablePlots,
                                data = data, x.vars = x.vars, fit = fit)
+partial.plots <- lapply(nm.chunks, PartialResiduals, data = data)
+qq <- CreateQQPlot(data)
