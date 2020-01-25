@@ -14,3 +14,5 @@ qq <- CreateQQPlot(data)
 pp <- lapply(nm.chunks, CreateFittedAgainstActualPlot, data = data)
 rar <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot, data = data)
 avp <- lapply(nm.chunks, CreateAddedVariablePlots, data = data, regressors = x.vars, fit = fit)
+## ------------------------ Outlier detection -----------------------
+cd <- CreateCooksDistancePlot(data = data)
