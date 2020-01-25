@@ -21,6 +21,10 @@ RunProject <- function(verbose = TRUE) {
     pp <- lapply(nm.chunks, CreateFittedAgainstActualPlot, data = data)
     rar <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot, data = data)
     avp <- lapply(nm.chunks, CreateAddedVariablePlots, data = data, regressors = x.vars, fit = fit)
+    ## ------------------------ Outlier detection -----------------------
+    if (verbose)
+        message("Running outlier detection analysis...")
+    cd <- CreateCooksDistancePlot(data = data)
     if (verbose)
         message("Project finished.")
 }
