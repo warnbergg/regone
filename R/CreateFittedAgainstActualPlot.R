@@ -16,6 +16,8 @@ CreateFittedAgainstActualPlot <- function(nms, data, save.plot = TRUE) {
         ggplot2::geom_point(ggplot2::aes(y = predicted), shape = 1) +
         ggplot2::facet_grid(~ iv, scales = "free_x")
     if (save.plot)
-        ggplot2::ggsave(paste0(paste0(nms, collapse = "_"), ".png"), plt)
+        suppressMessages({
+            ggplot2::ggsave(paste0(paste0(nms, collapse = "_"), ".png"), plt)
+        })
     return (plt)
 }
