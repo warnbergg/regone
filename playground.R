@@ -11,7 +11,6 @@ data$r.student <- rstudent(fit)
 x.vars <- all.vars(formula(fit))[-1]
 nm.chunks <- Chunks(x.vars, 4)
 qq <- CreateQQPlot(data)
-pp <- lapply(nm.chunks, CnreateFittedAgainstActualPlot, data = data)
+pp <- lapply(nm.chunks, CreateFittedAgainstActualPlot, data = data)
 rar <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot, data = data)
-added.variable.plots <- lapply(nm.chunks, AddedVariablePlots,
-                               data = data, x.vars = x.vars, fit = fit)
+avp <- lapply(nm.chunks, CreateAddedVariablePlots, data = data, regressors = x.vars, fit = fit)
