@@ -4,8 +4,6 @@
 #' @param verbose Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE 
 #' @export
 RunProject <- function(verbose = TRUE) {
-    library(devtools)
-    devtools::load_all()
     `%>%` <- magrittr::`%>%`
     data <- read.csv("../data/bodyfatmen.csv")
     fit <- lm(data)
@@ -18,15 +16,17 @@ RunProject <- function(verbose = TRUE) {
     x.vars <- all.vars(formula(fit))[-1]
     nm.chunks <- Chunks(x.vars, 4)
     qq <- CreateQQPlot(data)
-    pp <- lapply(nm.chunks, CreateFittedAgainstActualPlot, data = data)
-    rar <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot, data = data)
-    avp <- lapply(nm.chunks, CreateAddedVariablePlots, data = data, regressors = x.vars, fit = fit)
+    ra <- lapply(nm.chunks, function(nms) {
+        CreateFittedAgainstActualPlot(data = data, nms = nms)
+        CreateRegressorAgainstResidualsPlot(data = data, nms = nms)
+        CreateAddedVariablePlots(data = data, nms = nms, regressors = x.vars, fit = fit)
+    })
     ## Outlier and influential points detection
     if (verbose)
         message("Running outlier detection analysis...")
-    cd <- CreateCooksDistancePlot(data = data)
+    cd <- CreateCooksDistancePlot(fit = fit)
+    di <- CreateDffitsPlot(fit = fit)
     db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
-    di <- CreateDffitsPlot(fit)
     if (verbose)
         message("Project finished.")
 }
