@@ -12,7 +12,7 @@ RunProject <- function(verbose = TRUE) {
     data$predicted <- predict(fit)
     data$residuals <- residuals(fit)
     data$r.student <- rstudent(fit)
-    ## ------------------------ Residual Analysis -----------------------
+    ## Residual analysis
     if (verbose)
         message("Running residual analysis...")
     x.vars <- all.vars(formula(fit))[-1]
@@ -21,11 +21,12 @@ RunProject <- function(verbose = TRUE) {
     pp <- lapply(nm.chunks, CreateFittedAgainstActualPlot, data = data)
     rar <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot, data = data)
     avp <- lapply(nm.chunks, CreateAddedVariablePlots, data = data, regressors = x.vars, fit = fit)
-    ## ------------------------ Outlier detection -----------------------
+    ## Outlier and influential points detection
     if (verbose)
         message("Running outlier detection analysis...")
     cd <- CreateCooksDistancePlot(data = data)
     db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
+    di <- CreateDffitsPlot(fit)
     if (verbose)
         message("Project finished.")
 }

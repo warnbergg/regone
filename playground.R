@@ -17,3 +17,4 @@ avp <- lapply(nm.chunks, CreateAddedVariablePlots, data = data, regressors = x.v
 ## ------------------------ Outlier detection -----------------------
 cd <- CreateCooksDistancePlot(data = data)
 db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
+di <- CreateDffitsPlot(fit)
