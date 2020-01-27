@@ -3,6 +3,7 @@
 #' Creates and returns a plot with fitted against residuals plot.
 #' @param plot.data data.frame object. Containing the externally studentized residuals, and the fitted response varibles. No default.
 #' @param save.plot Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE
+#' @importFrom magrittr "%>%"
 #' @export
 CreateFittedAgainstResidualsPlot <- function(plot.data, save.plot = TRUE) {
     ## Error handling

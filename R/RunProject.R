@@ -4,7 +4,6 @@
 #' @param verbose Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE 
 #' @export
 RunProject <- function(verbose = TRUE) {
-    `%>%` <- magrittr::`%>%`
     data <- read.csv("../data/bodyfatmen.csv")
     fit <- lm(data)
     data$predicted <- predict(fit)
