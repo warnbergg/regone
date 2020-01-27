@@ -11,9 +11,12 @@ data$r.student <- rstudent(fit)
 x.vars <- all.vars(formula(fit))[-1]
 nm.chunks <- Chunks(x.vars, 4)
 qq <- CreateQQPlot(data)
-pp <- lapply(nm.chunks, CreateFittedAgainstActualPlot, data = data)
-rar <- lapply(nm.chunks, CreateRegressorAgainstResidualsPlot, data = data)
-avp <- lapply(nm.chunks, CreateAddedVariablePlots, data = data, regressors = x.vars, fit = fit)
+ra <- lapply(nm.chunks, function(nms) {
+    CreateFittedAgainstActualPlot(data = data, nms = nms)
+    CreateRegressorAgainstResidualsPlot(data = data, nms = nms)
+    CreateAddedVariablePlots(data = data, nms = nms, regressors = x.vars, fit = fit)
+})
 ## ------------------------ Outlier detection -----------------------
-cd <- CreateCooksDistancePlot(data = data)
+cd <- CreateCooksDistancePlot(fit = fit)
+di <- CreateDffitsPlot(fit = fit)
 db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)

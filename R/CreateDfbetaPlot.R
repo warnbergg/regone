@@ -1,16 +1,21 @@
 #' CreateDfbetaPlot
 #'
-#' Computes dfbeta for regressors and intercept, creates plot, and optionally saves to disk.
+#' Computes DFBETA for each parameter of the fitted model, plots the dfbetas as specified in nms, and optionally saves them to disk.
 #' @param nms Character vector. Regresors from which to calculate dfbeta. No default.
 #' @param fit lm object. Linear Model fit to the data. No default.
-#' @param save.plot Logical vector of length 1. If TRUE the dfbeta plots are saved to disk. Defaults to TRUE.
+#' @param critical.value Numeric vector of length 1. Cutoff/critical value for DFBETA plots. Defaults to NULL, in which case no critical values are plotted.
+#' @param save.plot Logical vector of length 1. If TRUE the DFBETA plots are saved to disk. Defaults to TRUE.
 #' @export
-CreateDfbetaPlot <- function(nms, fit, save.plot = TRUE) {
+CreateDfbetaPlot <- function(nms, fit, critical.value = NULL,
+                             save.plot = TRUE) {
     db <- dfbeta(fit)
     plt <- reshape2::melt(db[, nms]) %>%
         ggplot2::ggplot(ggplot2::aes(x = Var1, y = value)) +
         ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black") +
         ggplot2::facet_wrap(~Var2)
+    if (!is.null(critical.value))
+        plt <- plt + ggplot2::geom_hline(yintercept = c(critical.value, -critical.value),
+                                         linetype = "dashed")
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave(paste0(paste0(nms, collapse = "_"), "_dfbeta.png"), plt)
