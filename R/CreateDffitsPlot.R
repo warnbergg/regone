@@ -12,8 +12,8 @@ CreateDffitsPlot <- function(fit, critical.value = NULL, save.plot = TRUE) {
         ggplot2::ggplot(ggplot2::aes(x = obs, y = di)) +
         ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black")
     if (!is.null(critical.value))
-        plt + ggplot2::geom_hline(yintercept = c(critical.value, -critical.value),
-                                  linetype = "dashed")
+        plt <- plt + ggplot2::geom_hline(yintercept = c(critical.value, -critical.value),
+                                         linetype = "dashed")
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave("dffits.png", plt)
