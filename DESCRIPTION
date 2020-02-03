@@ -12,7 +12,8 @@ Imports:
 	tidyr,
 	broom,
 	reshape2,
-	car
+	car,
+	olsrr
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
