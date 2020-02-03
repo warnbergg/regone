@@ -28,5 +28,8 @@ RunProject <- function(verbose = TRUE) {
         message("Running multicolinearity analysis...")
     mc.list <- GenerateMulticolinearityMeasures(data, fit)
     if (verbose)
+        message("Running variable selection analysis...")
+    apr <- RunAllPossibleRegression(fit = fit)
+    if (verbose)
         message("Project finished.")
 }
