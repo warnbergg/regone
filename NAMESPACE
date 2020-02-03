@@ -12,4 +12,3 @@ export(CreateRegressorAgainstResidualsPlot)
 export(RunProject)
 export(Summarize)
 importFrom(magrittr,"%>%")
-

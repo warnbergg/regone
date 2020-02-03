@@ -9,7 +9,6 @@ RunProject <- function(verbose = TRUE) {
     data$predicted <- predict(fit)
     data$residuals <- residuals(fit)
     data$r.student <- rstudent(fit)
-    ## Residual analysis
     if (verbose)
         message("Running residual analysis...")
     x.vars <- all.vars(formula(fit))[-1]
@@ -20,12 +19,14 @@ RunProject <- function(verbose = TRUE) {
         CreateRegressorAgainstResidualsPlot(data = data, nms = nms)
         CreateAddedVariablePlots(data = data, nms = nms, regressors = x.vars, fit = fit)
     })
-    ## Outlier and influential points detection
     if (verbose)
         message("Running outlier detection analysis...")
     cd <- CreateCooksDistancePlot(fit = fit)
     di <- CreateDffitsPlot(fit = fit)
     db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
+    if (verbose)
+        message("Running multicolinearity analysis...")
+    mc.list <- GenerateMulticolinearityMeasures(data, fit)
     if (verbose)
         message("Project finished.")
 }
