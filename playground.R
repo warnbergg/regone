@@ -20,3 +20,5 @@ ra <- lapply(nm.chunks, function(nms) {
 cd <- CreateCooksDistancePlot(fit = fit)
 di <- CreateDffitsPlot(fit = fit)
 db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
+## ------------------------ Multicolinearity ------------------------
+mc.list <- GenerateMulticolinearityMeasures(data, fit)
