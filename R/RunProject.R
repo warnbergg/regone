@@ -17,7 +17,7 @@ RunProject <- function(verbose = TRUE) {
     ra <- lapply(nm.chunks, function(nms) {
         CreateFittedAgainstActualPlot(data = data, nms = nms)
         CreateRegressorAgainstResidualsPlot(data = data, nms = nms)
-        CreateAddedVariablePlots(data = data, nms = nms, regressors = x.vars, fit = fit)
+        CreateAddedVariablePlots(fit)
     })
     if (verbose)
         message("Running outlier detection analysis...")
