@@ -11,6 +11,8 @@ CreateCooksDistancePlot <- function(fit, save.plot = TRUE) {
         ggplot2::ggplot(ggplot2::aes(x = observation, y = cd)) +
         ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black")
     if (save.plot)
-        ggplot2::ggsave("cd.png", plt)
+        suppressMessages({
+            ggplot2::ggsave("cd.png", plt)
+        })
     return (plt)
 }
