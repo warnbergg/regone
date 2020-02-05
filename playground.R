@@ -3,7 +3,8 @@ library(devtools)
 devtools::load_all()
 `%>%` <- magrittr::`%>%`
 data <- read.csv("../data/bodyfatmen.csv")
-fit <- lm(density ~ ., data = data)
+fit <- lm(formula = density ~ ., data = data)
+b <- BootstrapEstimates(data, R = 10)
 data$predicted <- predict(fit)
 data$residuals <- residuals(fit)
 data$r.student <- rstudent(fit)
@@ -24,3 +25,4 @@ db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
 mc.list <- GenerateMulticolinearityMeasures(data, fit)
 ## ------------------------ Variable selection ------------------------
 apr <- RunAllPossibleRegression(fit = fit)
+

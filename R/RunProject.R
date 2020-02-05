@@ -5,7 +5,8 @@
 #' @export
 RunProject <- function(verbose = TRUE) {
     data <- read.csv("../data/bodyfatmen.csv")
-    fit <- lm(data)
+    fit <- lm(formula = density ~ ., data = data)
+    boot.sum <- BootstrapEstimates(data, R = 10)
     data$predicted <- predict(fit)
     data$residuals <- residuals(fit)
     data$r.student <- rstudent(fit)
