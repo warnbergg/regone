@@ -26,4 +26,3 @@ db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
 mc.list <- GenerateMulticolinearityMeasures(data, fit)
 ## ------------------------ Variable selection ------------------------
 apr <- RunAllPossibleRegression(fit = fit)
-

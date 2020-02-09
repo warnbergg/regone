@@ -1,4 +1,4 @@
-% Created 2020-02-09 Sun 08:17
+% Created 2020-02-09 Sun 08:53
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -51,19 +51,64 @@ Examiner \par
 \tableofcontents
 \newpage
 \section{Residual analysis}
-\label{sec:org3d8c841}
+\label{sec:org8d7d2da}
 \subsection{Introduction}
-\label{sec:org1b339d9}
-\subsection{Norm}
-\label{sec:org85413d9}
-\subsection{Added Variable Analysis}
-\label{sec:org3975cf4}
+\label{sec:org399f122}
+\subsection{Normality of Residuals}
+\label{sec:orgde58591}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=6cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/qqplot.png}
+\caption{\label{fig:org682c2bb}
+Normality plot of residuals.}
+\end{figure}
+
 \subsection{Fitted Against Residuals}
-\label{sec:orga3949cb}
+\label{sec:org0860431}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/far.png}
+\caption{\label{fig:org04893f9}
+Fitted values against R-student residuals.}
+\end{figure}
+
+\subsection{Added Variable Analysis}
+\label{sec:org16cdd9f}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/biceps_forearm_wrist_av.png}
+\caption{\label{fig:org355042e}
+Partial regression plots of regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.}
+\end{figure}   
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/thigh_knee_ankle_av.png}
+\caption{\label{fig:orgcb0c4ee}
+Partial regression plots of regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/chest_abdomen_hip_av.png}
+\caption{\label{fig:orge3a03f5}
+Partial regression plots of regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/age_weight_height_neck_av.png}
+\caption{\label{fig:orgc2357aa}
+Partial regression plots of regressors \texttt{age}, \texttt{weight}, \texttt{height}, and \texttt{neck}.}
+\end{figure}
+
 \section{Outlier detection}
-\label{sec:org48eb042}
+\label{sec:orgbe586bc}
 \section{Multicolinearity}
-\label{sec:orgdb2bb0f}
+\label{sec:org9408461}
 \section{Computer-Intensive Procedures}
-\label{sec:orgefee5c1}
+\label{sec:orgb23a12f}
 \end{document}

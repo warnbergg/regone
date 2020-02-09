@@ -24,9 +24,42 @@ Examiner \par
 \newpage
 * Residual analysis
 ** Introduction
-** Norm
-** Added Variable Analysis
+** Normality of Residuals
+
+   #+NAME: fig:qqplot
+   #+CAPTION: Normality plot of residuals.
+   #+ATTR_LATEX: :width 6cm
+   [[~/courses/Regression Analysis/regone/qqplot.png]]
+
 ** Fitted Against Residuals 
+
+   #+NAME: fig:far
+   #+CAPTION: Fitted values against R-student residuals.
+   #+ATTR_LATEX: :width 8cm
+   [[~/courses/Regression Analysis/regone/far.png]]
+   
+** Added Variable Analysis
+
+   #+NAME: fig:biceps_forearm_wrist_av
+   #+CAPTION: Partial regression plots of regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.
+   #+ATTR_LATEX: :width 8cm
+   [[~/courses/Regression Analysis/regone/biceps_forearm_wrist_av.png]]   
+
+   #+NAME: fig:thigh_knee_ankle_av
+   #+CAPTION: Partial regression plots of regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.
+   #+ATTR_LATEX: :width 8cm
+   [[~/courses/Regression Analysis/regone/thigh_knee_ankle_av.png]]
+
+   #+NAME: fig:chest_abdomen_hip_av
+   #+CAPTION: Partial regression plots of regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.
+   #+ATTR_LATEX: :width 8cm
+   [[~/courses/Regression Analysis/regone/chest_abdomen_hip_av.png]]
+
+   #+NAME: fig:age_weight_height_neck
+   #+CAPTION: Partial regression plots of regressors \texttt{age}, \texttt{weight}, \texttt{height}, and \texttt{neck}.
+   #+ATTR_LATEX: :width 8cm
+   [[~/courses/Regression Analysis/regone/age_weight_height_neck_av.png]]
+   
 * Outlier detection
 * Multicolinearity
 * Computer-Intensive Procedures
