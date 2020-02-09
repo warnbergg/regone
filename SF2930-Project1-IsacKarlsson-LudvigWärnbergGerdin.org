@@ -1,0 +1,32 @@
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage[margin=1.25in]{geometry} \usepackage{booktabs} \usepackage{graphicx} \usepackage{adjustbox} \usepackage{amsmath} \hypersetup{colorlinks=true,linkcolor=blue} \usepackage{amsthm} \newtheorem{definition}{Definition} 
+\begin{titlepage}
+\centering
+\includegraphics[width=0.15\textwidth]{example-image-1x1}\par\vspace{1cm}
+{\scshape\LARGE Kungliga Tekniska Högskolan \par}
+\vspace{1cm}
+{\scshape\Large SF2930 Project I \par}
+\vspace{1.5cm}
+{\huge\bfseries Scenario I: \\ Large-Sample Regression \par}
+\vspace{2cm}
+{\Large\itshape Isac Karlsson \\ Ludvig Wärnberg Gerdin}
+\vfill
+Examiner \par
+\textsc{Tatjana Pavlenko}
+
+\vfill
+
+{\large \today\par}
+\end{titlepage}
+# Page break
+\newpage
+\tableofcontents
+\newpage
+* Residual analysis
+** Introduction
+** Norm
+** Added Variable Analysis
+** Fitted Against Residuals 
+* Outlier detection
+* Multicolinearity
+* Computer-Intensive Procedures
