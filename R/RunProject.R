@@ -18,8 +18,9 @@ RunProject <- function(verbose = TRUE) {
     ra <- lapply(nm.chunks, function(nms) {
         CreateFittedAgainstActualPlot(data = data, nms = nms)
         CreateRegressorAgainstResidualsPlot(data = data, nms = nms)
-        CreateAddedVariablePlots(fit)
+        CreateAddedVariablePlots(fit = fit, nms = nms)
     })
+    far <- CreateFittedAgainstResidualsPlot(data)
     if (verbose)
         message("Running outlier detection analysis...")
     cd <- CreateCooksDistancePlot(fit = fit)
