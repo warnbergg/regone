@@ -4,7 +4,7 @@ devtools::load_all()
 `%>%` <- magrittr::`%>%`
 data <- read.csv("../data/bodyfatmen.csv")
 fit <- lm(formula = density ~ ., data = data)
-b <- BootstrapEstimates(data, R = 10)
+b <- BootstrapEstimates(data, R = 2000)
 data$predicted <- predict(fit)
 data$residuals <- residuals(fit)
 data$r.student <- rstudent(fit)
@@ -15,7 +15,7 @@ qq <- CreateQQPlot(data)
 ra <- lapply(nm.chunks, function(nms) {
     CreateFittedAgainstActualPlot(data = data, nms = nms)
     CreateRegressorAgainstResidualsPlot(data = data, nms = nms)
-    CreateAddedVariablePlots(fit)
+    CreateAddedVariablePlots(fit = fit, nms = nms)
 })
 ## ------------------------ Outlier detection -------------------------
 cd <- CreateCooksDistancePlot(fit = fit)
