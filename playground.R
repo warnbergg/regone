@@ -17,6 +17,7 @@ ra <- lapply(nm.chunks, function(nms) {
     CreateRegressorAgainstResidualsPlot(data = data, nms = nms)
     CreateAddedVariablePlots(fit = fit, nms = nms)
 })
+far <- CreateFittedAgainstResidualsPlot(data)
 ## ------------------------ Outlier detection -------------------------
 cd <- CreateCooksDistancePlot(fit = fit)
 di <- CreateDffitsPlot(fit = fit)
