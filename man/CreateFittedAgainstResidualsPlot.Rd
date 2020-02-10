@@ -4,10 +4,10 @@
 \alias{CreateFittedAgainstResidualsPlot}
 \title{CreateFittedAgainstResidualspLot}
 \usage{
-CreateFittedAgainstResidualsPlot(plot.data, save.plot = TRUE)
+CreateFittedAgainstResidualsPlot(data, save.plot = TRUE)
 }
 \arguments{
-\item{plot.data}{data.frame object. Containing the externally studentized residuals, and the fitted response varibles. No default.}
+\item{data}{data.frame. Containing the externally studentized residuals, and the fitted response varibles. No default.}
 
 \item{save.plot}{Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE}
 }
