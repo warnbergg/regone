@@ -24,6 +24,7 @@ RunProject <- function(verbose = TRUE) {
     if (verbose)
         message("Detecting possible variable transformation...")
     bx <- CreateBoxCoxPlot(fit = fit)
+    trans <- CreateTransformedQQPlot(fit = fit, data = data)
     if (verbose)
         message("Running outlier detection analysis...")
     cd <- CreateCooksDistancePlot(fit = fit)

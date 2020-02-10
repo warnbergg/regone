@@ -20,6 +20,7 @@ ra <- lapply(nm.chunks, function(nms) {
 far <- CreateFittedAgainstResidualsPlot(data = data)
 ## Variable transformation
 bx <- CreateBoxCoxPlot(fit = fit)
+trans <- CreateTransformedQQPlot(fit = fit, data = data)
 ## Outlier detection
 cd <- CreateCooksDistancePlot(fit = fit)
 di <- CreateDffitsPlot(fit = fit)

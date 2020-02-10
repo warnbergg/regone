@@ -27,9 +27,7 @@ Examiner \par
 * Analyses and Model Development
 ** Residual analysis
 *** Normality of residuals
-
 *** Fitted Against Residuals 
-   
 *** Added Variable Analysis
 ** Diagnostics and handling of Outliers
 ** Transformations of variables
@@ -100,6 +98,16 @@ Examiner \par
    #+ATTR_LATEX: :width 8cm
    [[~/courses/Regression Analysis/regone/chest_abdomen_hip_av.png]]
 ** Transformations of variables
+   
+   Figure [[fig:boxcox]] displays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
+   the dependent variable \texttt{density}. The $\lambda$ that maximized the log-likelihood is 0.9 (0.7-1.1 95% CI). 
+
+   Using $lambda = 0.9$ gives us the normal probability 
+   #+NAME: fig:boxcox
+   #+CAPTION: Values for lambda against the log-likelihood of \texttt{density} for Box-Cox transformations.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/boxcox.png]]
+
 ** Diagnostics and handling of Outliers
 * Conclusion
 \bibliographystyle{plain}
