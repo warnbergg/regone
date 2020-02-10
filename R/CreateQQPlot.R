@@ -7,7 +7,9 @@
 CreateQQPlot <- function(residuals.df, save.plot = TRUE) {
     plt <- ggplot2::ggplot(residuals.df, ggplot2::aes(sample = residuals)) +
         ggplot2::stat_qq() +
-        ggplot2::stat_qq_line()
+        ggplot2::stat_qq_line() +
+        ggplot2::ylab("Studentized residuals") +
+        ggplot2::xlab("Theoretical quantiles")
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave("qqplot.png", plt)

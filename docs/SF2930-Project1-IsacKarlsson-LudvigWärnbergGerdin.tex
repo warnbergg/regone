@@ -1,4 +1,4 @@
-% Created 2020-02-10 Mon 07:48
+% Created 2020-02-10 Mon 08:55
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -52,73 +52,75 @@ Examiner \par
 \newpage
 
 \section{Introduction and Project Goals}
-\label{sec:orgc750fb9}
+\label{sec:orgf15e73f}
 \section{Analyses and Model Development}
-\label{sec:orgbe5160a}
+\label{sec:org0681761}
 \subsection{Residual analysis}
-\label{sec:org5bbc1dc}
+\label{sec:orgf9023ce}
 \subsubsection{Normality of residuals}
-\label{sec:org67109ee}
+\label{sec:org2cf908d}
 
 \subsubsection{Fitted Against Residuals}
-\label{sec:org51dae8c}
+\label{sec:orge4f79ff}
 
 \subsubsection{Added Variable Analysis}
-\label{sec:org37d4283}
+\label{sec:orgab1b1dc}
 \subsection{Diagnostics and handling of Outliers}
-\label{sec:org383509a}
+\label{sec:orgadb80e9}
 \subsection{Transformations of variables}
-\label{sec:org007d576}
+\label{sec:org021163f}
 \subsection{Diagnostics and handling of Multicolinearity}
-\label{sec:orgc786672}
+\label{sec:orgfc713a0}
 \section{Results}
-\label{sec:org95403dc}
+\label{sec:org90085ba}
 \subsection{Residual analysis}
-\label{sec:org3bb7990}
+\label{sec:org0c75d0a}
 \subsubsection{Normality of residuals}
-\label{sec:org2469610}
+\label{sec:org05acc04}
 
-Figure \ref{fig:org91b5aaa} illustrates QQ plot of the model residuals. The observer may say that the 
-points exhibit a pattern that indicates 
-that the residuals come from a distribution with heavier tails than that of a normal distribution. 
+Figure \ref{fig:org2c6d76c} illustrates QQ plot of the model residuals. The observer may say that the 
+points exhibit a pattern that indicates that the residuals come from a distribution with heavier tails
+than that of a normal distribution. 
 \cite{Montgomery2012}. Still, the deviations from the diagonal line is relatively small, and hence
-we conclude that the first Gauss-Markov condition is fulfilled.
+we conclude that the first Gauss-Markov condition is fulfilled. That is, the model errors seem to be 
+normally distributed.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/qqplot.png}
-\caption{\label{fig:org91b5aaa}
+\caption{\label{fig:org2c6d76c}
 Normality plot of residuals.}
 \end{figure}
 
 \subsubsection{Fitted Against Residuals}
-\label{sec:org0334fd6}
+\label{sec:org75f783b}
 
-Figure \ref{fig:org9539cf3} illustrates the fitted values \(\hat y_j\) against the R-student residuals. No apparent 
-pattern is detected in the figure, i.e. the points seem to be randomly scattered along the horizontal line.
-Hence, we conclude that the second Gauss-Markov condition is fulfilled.
+Figure \ref{fig:org631cca4} illustrates the fitted values \(\hat y_j\) against the R-student residuals. No apparent 
+pattern is formed by the points, i.e. the points seem to be randomly scattered along the horizontal line.
+Hence we conclude that the second Gauss-Markov condition is fulfilled, that is the errors have a constant 
+variance.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/far.png}
-\caption{\label{fig:org9539cf3}
+\caption{\label{fig:org631cca4}
 Fitted values against R-student residuals.}
 \end{figure}
 
 \subsubsection{Added Variable Analysis}
-\label{sec:org3cbde36}
+\label{sec:orgab255e9}
 
-Partial regression plots are found in figure \ref{fig:org735ba5e}, \ref{fig:orgbebeaa5},
-\ref{fig:org620f868}, and \ref{fig:org810e6b9}. All figures exhibits potential outliers 
-(which will be further considered in section \ref{sec:org383509a}).
-More specifically, in figure \ref{fig:org735ba5e} we note a 
+Partial regression plots are found in figure \ref{fig:org222b26e}, \ref{fig:org0157cd4},
+\ref{fig:org96ebe9b}, and \ref{fig:org75bb6a6}. All figures exhibits potential outliers 
+(which will be further considered in section \ref{sec:orgadb80e9}).
+More specifically, in figure \ref{fig:org222b26e} we note a 
 few potential outliers on the right hand side of the plot for the \texttt{biceps} regressor, and on the
-right and left hand side for the \texttt{forearm} regressor. Moreover, in figure \ref{fig:orgbebeaa5}, we 
+right and left hand side for the \texttt{forearm} regressor. Moreover, in figure \ref{fig:org0157cd4}, we 
 notice outliers on the right hand side of the \texttt{ankle} plot, and a group of potential outliers on the
-\texttt{thigh} plot. Finally, we notice a few potential outliers in figure \ref{fig:org620f868} and 
-\ref{fig:org810e6b9}.
+\texttt{thigh} plot. Finally, we notice a few potential outliers in figure \ref{fig:org96ebe9b} and 
+\ref{fig:org75bb6a6}.
 
-Figure \ref{fig:orgbebeaa5}, \ref{fig:org620f868}, and \ref{fig:org810e6b9} 
+Figure \ref{fig:org0157cd4}, \ref{fig:org96ebe9b}, and \ref{fig:org75bb6a6} 
 conveys important information about the information that \texttt{knee}, \texttt{height}, and
 \texttt{chest} adds to the model. These regressors seem to follow a horizontal band along a fitted 
 line from the origin, which may suggest that none of the regressors adds additional information 
@@ -127,36 +129,36 @@ to the predictions.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/biceps_forearm_wrist_av.png}
-\caption{\label{fig:org735ba5e}
+\caption{\label{fig:org222b26e}
 Partial regression plots of regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.}
 \end{figure}   
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/thigh_knee_ankle_av.png}
-\caption{\label{fig:orgbebeaa5}
+\caption{\label{fig:org0157cd4}
 Partial regression plots of regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/age_weight_height_neck_av.png}
-\caption{\label{fig:org620f868}
+\caption{\label{fig:org96ebe9b}
 Partial regression plots of regressors \texttt{age}, \texttt{weight}, \texttt{height}, and \texttt{neck}.}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/chest_abdomen_hip_av.png}
-\caption{\label{fig:org810e6b9}
+\caption{\label{fig:org75bb6a6}
 Partial regression plots of regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.}
 \end{figure}
-\subsection{Diagnostics and handling of Outliers}
-\label{sec:orgea24267}
 \subsection{Transformations of variables}
-\label{sec:org8588221}
+\label{sec:org970d075}
+\subsection{Diagnostics and handling of Outliers}
+\label{sec:orgb86efca}
 \section{Conclusion}
-\label{sec:org28eddaf}
+\label{sec:org06a2b47}
 \bibliographystyle{plain}
 \bibliography{library}
 \end{document}
