@@ -14,7 +14,8 @@ Imports:
 	reshape2,
 	car,
 	olsrr,
-	boot
+	boot,
+	MASS
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
