@@ -102,8 +102,13 @@ Examiner \par
    Figure [[fig:boxcox]] displays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
    the dependent variable \texttt{density}. The $\lambda$ that maximized the log-likelihood is 0.9 (0.7-1.1 95% CI). 
 
-   Using $lambda = 0.9$ gives us the normal probability 
+   Using $\lambda = 0.9$ gives us the normal probability plot displayed on the right hand side in f
    #+NAME: fig:boxcox
+   #+CAPTION: Values for lambda against the log-likelihood of \texttt{density} for Box-Cox transformations.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/boxcox.png]]
+
+   #+NAME: fig:
    #+CAPTION: Values for lambda against the log-likelihood of \texttt{density} for Box-Cox transformations.
    #+ATTR_LATEX: :width 8cm :placement [h]
    [[~/courses/Regression Analysis/regone/boxcox.png]]
