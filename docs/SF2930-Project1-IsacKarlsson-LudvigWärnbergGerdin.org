@@ -1,15 +1,15 @@
 #+OPTIONS: toc:nil
-#+LATEX_HEADER: \usepackage[margin=1.25in]{geometry} \usepackage{booktabs} \usepackage{graphicx} \usepackage{adjustbox} \usepackage{amsmath} \hypersetup{colorlinks=true,linkcolor=blue} \usepackage{amsthm} \newtheorem{definition}{Definition} 
+#+LATEX_HEADER: \usepackage[margin=1.25in]{geometry} \usepackage{booktabs} \usepackage{graphicx} \usepackage{adjustbox} \usepackage{amsmath} \hypersetup{colorlinks=true,linkcolor=blue} \usepackage{amsthm} \newtheorem{definition}{Definition} \usepackage{bookmark}
 \begin{titlepage}
 \centering
 \includegraphics[width=0.15\textwidth]{example-image-1x1}\par\vspace{1cm}
 {\scshape\LARGE Kungliga Tekniska Högskolan \par}
 \vspace{1cm}
-{\scshape\Large SF2930 Project I \par}
+{\scshape\Large SF2930 Regression Analysis \par}
 \vspace{1.5cm}
-{\huge\bfseries Scenario I: \\ Large-Sample Regression \par}
+{\huge\bfseries Report I \\  \par}
 \vspace{2cm}
-{\Large\itshape Isac Karlsson \\ Ludvig Wärnberg Gerdin}
+{\Large\itshape Isac Karlsson, 981105-6994\\ Ludvig Wärnberg Gerdin. 980411-6250}
 \vfill
 Examiner \par
 \textsc{Tatjana Pavlenko}
@@ -22,23 +22,61 @@ Examiner \par
 \newpage
 \tableofcontents
 \newpage
-* Residual analysis
-** Introduction
-** Normality of Residuals
 
-   #+NAME: fig:qqplot
-   #+CAPTION: Normality plot of residuals.
-   #+ATTR_LATEX: :width 6cm
-   [[~/courses/Regression Analysis/regone/qqplot.png]]
+* Introduction and Project Goals
+* Analyses and Model Development
+** Residual analysis
+*** Normality of residuals
 
-** Fitted Against Residuals 
-
-   #+NAME: fig:far
-   #+CAPTION: Fitted values against R-student residuals.
-   #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/far.png]]
+*** Fitted Against Residuals 
    
-** Added Variable Analysis
+*** Added Variable Analysis
+** Diagnostics and handling of Outliers
+** Transformations of variables
+** Diagnostics and handling of Multicolinearity
+* Results
+** Residual analysis
+*** Normality of residuals
+    
+    Figure [[fig:qqplot]] illustrates QQ plot of the model residuals. The observer may say that the 
+    points exhibit a pattern that indicates 
+    that the residuals come from a distribution with heavier tails than that of a normal distribution. 
+    \cite{Montgomery2012}. Still, the deviations from the diagonal line is relatively small, and hence
+    we conclude that the first Gauss-Markov condition is fulfilled.
+
+    #+NAME: fig:qqplot
+    #+CAPTION: Normality plot of residuals.
+    #+ATTR_LATEX: :width 8cm
+    [[~/courses/Regression Analysis/regone/qqplot.png]]
+
+*** Fitted Against Residuals
+    
+    Figure [[fig:far]] illustrates the fitted values $\hat y_j$ against the R-student residuals. No apparent 
+    pattern is detected in the figure, i.e. the points seem to be randomly scattered along the horizontal line.
+    Hence, we conclude that the second Gauss-Markov condition is fulfilled.
+
+    #+NAME: fig:far
+    #+CAPTION: Fitted values against R-student residuals.
+    #+ATTR_LATEX: :width 8cm
+    [[~/courses/Regression Analysis/regone/far.png]]
+   
+*** Added Variable Analysis
+   
+   Partial regression plots are found in figure [[fig:biceps_forearm_wrist_av]], [[fig:thigh_knee_ankle_av]],
+   [[fig:age_weight_height_neck]], and [[fig:chest_abdomen_hip_av]]. All figures exhibits potential outliers 
+   (which will be further considered in section [[Diagnostics and handling of Outliers]]).
+   More specifically, in figure [[fig:biceps_forearm_wrist_av]] we note a 
+   few potential outliers on the right hand side of the plot for the \texttt{biceps} regressor, and on the
+   right and left hand side for the \texttt{forearm} regressor. Moreover, in figure [[fig:thigh_knee_ankle_av]], we 
+   notice outliers on the right hand side of the \texttt{ankle} plot, and a group of potential outliers on the
+   \texttt{thigh} plot. Finally, we notice a few potential outliers in figure [[fig:age_weight_height_neck]] and 
+   [[fig:chest_abdomen_hip_av]].
+  
+   Figure [[fig:thigh_knee_ankle_av]], [[fig:age_weight_height_neck]], and [[fig:chest_abdomen_hip_av]] 
+   conveys important information about the information that \texttt{knee}, \texttt{height}, and
+   \texttt{chest} adds to the model. These regressors seem to follow a horizontal band along a fitted 
+   line from the origin, which may suggest that none of the regressors adds additional information 
+   to the predictions.
 
    #+NAME: fig:biceps_forearm_wrist_av
    #+CAPTION: Partial regression plots of regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.
@@ -50,16 +88,17 @@ Examiner \par
    #+ATTR_LATEX: :width 8cm
    [[~/courses/Regression Analysis/regone/thigh_knee_ankle_av.png]]
 
-   #+NAME: fig:chest_abdomen_hip_av
-   #+CAPTION: Partial regression plots of regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.
-   #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/chest_abdomen_hip_av.png]]
-
    #+NAME: fig:age_weight_height_neck
    #+CAPTION: Partial regression plots of regressors \texttt{age}, \texttt{weight}, \texttt{height}, and \texttt{neck}.
    #+ATTR_LATEX: :width 8cm
    [[~/courses/Regression Analysis/regone/age_weight_height_neck_av.png]]
-   
-* Outlier detection
-* Multicolinearity
-* Computer-Intensive Procedures
+
+   #+NAME: fig:chest_abdomen_hip_av
+   #+CAPTION: Partial regression plots of regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.
+   #+ATTR_LATEX: :width 8cm
+   [[~/courses/Regression Analysis/regone/chest_abdomen_hip_av.png]]
+** Diagnostics and handling of Outliers
+** Transformations of variables
+* Conclusion
+\bibliographystyle{plain}
+\bibliography{library}
