@@ -120,12 +120,21 @@ Examiner \par
 
 ** Diagnostics and handling of Outliers
    
+   Figure [[fig:cd]] illustrates Cook's distance for all points, where the three observations with the largest 
+   Cook's distance are labelled. 
+
    #+NAME: fig:cd
    #+CAPTION: Plot of Cook's distance for all observations.
    #+ATTR_LATEX: :width 8cm :placement [h]
    [[~/courses/Regression Analysis/regone/cd.png]]
 
-   #+NAME: fig:diffits
+   Figure [[fig:dffits]] reports the $DFFITS$ values. We label observations as in figure [[fig:cd]]. We observe 
+   that the three largest absolute $DFFITS$ correspond to the same observations as in the Cook's distance plot.
+
+   Figure [[fig:biceps_forearm_wrist_dfbeta]], [[fig:age_weight_height_neck_dfbeta]], [[fig:thigh_knee_ankle_dfbeta]], and
+   [[fig:chest_abdomen_hip_dfbeta]] presents $DFBETA$ values for groups of regressors. Observation 39
+   is present in a number of these figures.
+   #+NAME: fig:dffits
    #+CAPTION: $DFFITS$ for all observations.
    #+ATTR_LATEX: :width 8cm :placement [h]
    [[~/courses/Regression Analysis/regone/dffits.png]]
