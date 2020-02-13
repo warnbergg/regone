@@ -99,21 +99,53 @@ Examiner \par
    [[~/courses/Regression Analysis/regone/chest_abdomen_hip_av.png]]
 ** Transformations of variables
    
-   Figure [[fig:boxcox]] displays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
+   Figure [[fig:boxcox_fit]] displays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
    the dependent variable \texttt{density}. The $\lambda$ that maximized the log-likelihood is 0.9 (0.7-1.1 95% CI). 
 
-   Using $\lambda = 0.9$ gives us the normal probability plot displayed on the right hand side in f
-   #+NAME: fig:boxcox
-   #+CAPTION: Values for lambda against the log-likelihood of \texttt{density} for Box-Cox transformations.
-   #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/boxcox.png]]
+   Using $\lambda = 0.9$ gives us the normal probability plot displayed on the right hand side in figure
 
-   #+NAME: fig:
+   #+NAME: fig:boxcox_fit
    #+CAPTION: Values for lambda against the log-likelihood of \texttt{density} for Box-Cox transformations.
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/boxcox.png]]
+   [[~/courses/Regression Analysis/regone/boxcox_fit.png]]
 
 ** Diagnostics and handling of Outliers
+
+   #+NAME: fig:cd
+   #+CAPTION: Plot of Cook's distance for all observations.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/cd.png]]
+
+   #+NAME: fig:diffits
+   #+CAPTION: $DFFITS$ for all observations.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/dffits.png]]
+
+   #+NAME: fig:dfbeta
+   #+CAPTION: $DFFITS$ for all observations.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/dffits.png]]
+
+   #+NAME: fig:biceps_forearm_wrist_dfbeta
+   #+CAPTION: \texttt{DFBETA} for regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/biceps_forearm_wrist_dfbeta.png]]
+
+   #+NAME: fig:age_weight_height_neck_dfbeta
+   #+CAPTION: \texttt{DFBETA} for regressors \texttt{age}, \texttt{weight}, \texttt{height} and \texttt{neck}.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/age_weight_height_neck_dfbeta.png]]
+
+   #+NAME: fig:thigh_knee_ankle_dfbeta
+   #+CAPTION: \texttt{DFBETA} for regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/thigh_knee_ankle_dfbeta.png]]
+
+   #+NAME: fig:chest_abdomen_hip_dfbeta
+   #+CAPTION: \texttt{DFBETA} for regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/chest_abdomen_hip_dfbeta.png]]
+
 * Conclusion
 \bibliographystyle{plain}
 \bibliography{library}
