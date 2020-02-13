@@ -14,10 +14,12 @@ CreateTransformedQQPlot<- function(fit, data, lambda = 0.9,
     new.fit <- lm(formula = ((density^lambda - 1)/lambda) ~ ., data = data)
     res <- data.frame(residuals = MASS::studres(new.fit))
     qq <- CreateQQPlot(res, save.plot = FALSE)
+    qq <- qq + ggplot2::ggtitle("Quantile-Quantile plot")
     plt <- gridExtra::grid.arrange(bx, qq, ncol = 2)
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave("boxcox_fit.png", plt)
+            ggplot2::ggsave("boxcox_fit.png", plt,
+                            width = 12, height = 5)
         })
     return (plt)
 }
