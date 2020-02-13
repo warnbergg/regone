@@ -9,10 +9,13 @@
 CreateDfbetaPlot <- function(nms, fit, critical.value = NULL,
                              save.plot = TRUE) {
     db <- dfbeta(fit)
-    plt <- reshape2::melt(db[, nms]) %>%
-        ggplot2::ggplot(ggplot2::aes(x = Var1, y = value)) +
+    plot.data <- reshape2::melt(db[, nms])
+    colnames(plot.data) <- c("Observation", "Regressor", "Value")
+    plt <- plot.data  %>%
+        ggplot2::ggplot(ggplot2::aes(x = Observation, y = Value, label = Observation)) +
         ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black") +
-        ggplot2::facet_wrap(~Var2)
+        ggplot2::geom_label(data = plot.data %>% group_by(Regressor) %>% dplyr::top_n(n = 3, wt = abs(Value))) + 
+        ggplot2::facet_wrap(~Regressor)
     if (!is.null(critical.value))
         plt <- plt + ggplot2::geom_hline(yintercept = c(critical.value, -critical.value),
                                          linetype = "dashed")

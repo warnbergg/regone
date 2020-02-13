@@ -7,10 +7,11 @@
 #' @export
 CreateDffitsPlot <- function(fit, critical.value = NULL, save.plot = TRUE) {
     di <- dffits(fit)
-    plot.data <- data.frame(di = di, obs = seq_along(di))
+    plot.data <- data.frame(DFFITS = di, Observation = seq_along(di))
     plt <- plot.data %>%
-        ggplot2::ggplot(ggplot2::aes(x = obs, y = di)) +
-        ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black")
+        ggplot2::ggplot(ggplot2::aes(x = Observation, y = DFFITS, label = Observation)) +
+        ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black") + 
+        ggplot2::geom_label(data = plot.data %>% dplyr::top_n(n = 3, wt = abs(DFFITS)))
     if (!is.null(critical.value))
         plt <- plt + ggplot2::geom_hline(yintercept = c(critical.value, -critical.value),
                                          linetype = "dashed")

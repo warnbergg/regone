@@ -7,9 +7,11 @@
 CreateCooksDistancePlot <- function(fit, save.plot = TRUE) {
     ## Error handling
     cd <- cooks.distance(fit)
-    plt <- data.frame(cd = cd, observation = seq_along(cd)) %>%
-        ggplot2::ggplot(ggplot2::aes(x = observation, y = cd)) +
-        ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black")
+    plot.data <- data.frame(cd = cd, observation = seq_along(cd))
+    plt <- plot.data %>%
+        ggplot2::ggplot(ggplot2::aes(x = observation, y = cd, label = observation)) +
+        ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black") +
+        ggplot2::geom_label(data = plot.data %>% dplyr::top_n(n = 3, wt = cd))
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave("cd.png", plt)
