@@ -9,7 +9,7 @@
 \vspace{1.5cm}
 {\huge\bfseries Report I \\  \par}
 \vspace{2cm}
-{\Large\itshape Isac Karlsson, 981105-6994\\ Ludvig Wärnberg Gerdin. 980411-6250}
+{\Large\itshape Isac Karlsson\\ Ludvig Wärnberg Gerdin}
 \vfill
 Examiner \par
 \textsc{Tatjana Pavlenko}
