@@ -3,7 +3,7 @@
 #' Run full code for project.
 #' @param verbose Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE 
 #' @export
-RunProject <- function(verbose = TRUE) {
+RunProject <- function(data = read.csv("../data/bodyfatmen.csv"), verbose = TRUE) {
     data <- read.csv("../data/bodyfatmen.csv")
     fit <- lm(formula = density ~ ., data = data)
     boot.sum <- BootstrapEstimates(data, R = 10)
