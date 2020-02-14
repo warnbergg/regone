@@ -11,7 +11,7 @@ CreateDfbetaPlot(nms, fit, critical.value = NULL, save.plot = TRUE)
 
 \item{fit}{lm object. Linear Model fit to the data. No default.}
 
-\item{critical.value}{Numeric vector of length 1. Cutoff/critical value for DFBETA plots. Defaults to NULL, in which case no critical values are plotted.}
+\item{critical.value}{Numeric vector of length 1. Cutoff/critical value for DFBETA plots. Defaults to NULL, in which case no cut-off value is plotted.}
 
 \item{save.plot}{Logical vector of length 1. If TRUE the DFBETA plots are saved to disk. Defaults to TRUE.}
 }

@@ -4,7 +4,7 @@
 \alias{RunProject}
 \title{RunProject}
 \usage{
-RunProject(verbose = TRUE)
+RunProject(data = read.csv("../data/bodyfatmen.csv"), verbose = TRUE)
 }
 \arguments{
 \item{verbose}{Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE}

@@ -4,12 +4,14 @@
 \alias{GenerateMulticolinearityMeasures}
 \title{GenerateMulticolinearityMeasures}
 \usage{
-GenerateMulticolinearityMeasures(data, fit)
+GenerateMulticolinearityMeasures(data, fit, create.corr.heatmap = TRUE)
 }
 \arguments{
 \item{data}{data.frame Data used to fit the model. Used for pair-wise correlation analysis and eigenvalue system analysis. No default.}
 
 \item{fit}{lm object. Fitted model. No default}
+
+\item{save.corr.heatmap}{Logical vector of length 1. If TRUE creates and saves a heatmap of the regressor correlation matrix. Defaults to TRUE.}
 }
 \description{
 Produces variance inflation factors, eigenvalue system analysis for the fitted model.
