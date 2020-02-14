@@ -28,7 +28,7 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"), verbose = TRUE
     if (verbose)
         message("Running outlier detection analysis...")
     cd <- CreateCooksDistancePlot(fit = fit)
-    di <- CreateDffitsPlot(fit = fit)
+    di <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)))
     db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
     if (verbose)
         message("Computing multicolinearity measures...")
