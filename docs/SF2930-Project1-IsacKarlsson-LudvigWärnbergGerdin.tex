@@ -1,4 +1,4 @@
-% Created 2020-02-13 Thu 16:33
+% Created 2020-02-14 Fri 18:11
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -52,35 +52,35 @@ Examiner \par
 \newpage
 
 \section{Introduction and Project Goals}
-\label{sec:org0bfdbac}
+\label{sec:orgfd704c2}
 \section{Analyses and Model Development}
-\label{sec:org68d6ee7}
+\label{sec:orgf4dc896}
 \subsection{Residual analysis}
-\label{sec:org3450992}
+\label{sec:org978b79e}
 \subsubsection{Normality of residuals}
-\label{sec:orgd303dcc}
+\label{sec:org7242c9e}
 
-The normality of residuals therefore ensures that the confidence intervals presented in section \ref{sec:org06a3ff9}
+The normality of residuals therefore ensures that the confidence intervals presented in section \ref{sec:org730b7bb}
 are valid.
 
 \subsubsection{Fitted Against Residuals}
-\label{sec:org4d205a2}
+\label{sec:orgb065d6b}
 \subsubsection{Added Variable Analysis}
-\label{sec:orga5578fd}
+\label{sec:orgd033f63}
 \subsection{Diagnostics and handling of Outliers}
-\label{sec:org08cae6f}
+\label{sec:org2ef79cf}
 \subsection{Transformations of variables}
-\label{sec:org63c69f0}
+\label{sec:org558ce0e}
 \subsection{Diagnostics and handling of Multicolinearity}
-\label{sec:orga5f5466}
+\label{sec:orge6de87f}
 \section{Results}
-\label{sec:org06a3ff9}
+\label{sec:org730b7bb}
 \subsection{Residual analysis}
-\label{sec:orgd93a1f3}
+\label{sec:org24a5549}
 \subsubsection{Normality of residuals}
-\label{sec:org52cb10e}
+\label{sec:orgc24be41}
 
-Figure \ref{fig:orgd8a1c69} illustrates QQ plot of the model residuals. The observer may say that the 
+Figure \ref{fig:orgb0e0070} illustrates QQ plot of the model residuals. The observer may say that the 
 points exhibit a pattern that indicates that the residuals come from a distribution with heavier tails
 than that of a normal distribution. 
 \cite{Montgomery2012}. Still, the deviations from the diagonal line is relatively small, and hence
@@ -90,14 +90,14 @@ normally distributed.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/qqplot.png}
-\caption{\label{fig:orgd8a1c69}
+\caption{\label{fig:orgb0e0070}
 Normality plot of residuals.}
 \end{figure}
 
 \subsubsection{Fitted Against Residuals}
-\label{sec:orgd6db02b}
+\label{sec:org9954f69}
 
-Figure \ref{fig:org3d2c550} illustrates the fitted values \(\hat y_j\) against the R-student residuals. No apparent 
+Figure \ref{fig:org6418d98} illustrates the fitted values \(\hat y_j\) against the R-student residuals. No apparent 
 pattern is formed by the points, i.e. the points seem to be randomly scattered along the horizontal line.
 Hence we conclude that the second Gauss-Markov condition is fulfilled, that is the errors have a constant 
 variance.
@@ -105,24 +105,24 @@ variance.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/far.png}
-\caption{\label{fig:org3d2c550}
+\caption{\label{fig:org6418d98}
 Fitted values against R-student residuals.}
 \end{figure}
 
 \subsubsection{Added Variable Analysis}
-\label{sec:org81fcfc3}
+\label{sec:org5420652}
 
-Partial regression plots are found in figure \ref{fig:orgfc00962}, \ref{fig:orgff4a85f},
-\ref{fig:org916f991}, and \ref{fig:org3c4c5d5}. All figures exhibits potential outliers 
-(which will be further considered in section \ref{sec:org08cae6f}).
-More specifically, in figure \ref{fig:orgfc00962} we note a 
+Partial regression plots are found in figure \ref{fig:orgd5f74db}, \ref{fig:org77eabbe},
+\ref{fig:org8318a5d}, and \ref{fig:org7f27407}. All figures exhibits potential outliers 
+(which will be further considered in section \ref{sec:org2ef79cf}).
+More specifically, in figure \ref{fig:orgd5f74db} we note a 
 few potential outliers on the right hand side of the plot for the \texttt{biceps} regressor, and on the
-right and left hand side for the \texttt{forearm} regressor. Moreover, in figure \ref{fig:orgff4a85f}, we 
+right and left hand side for the \texttt{forearm} regressor. Moreover, in figure \ref{fig:org77eabbe}, we 
 notice outliers on the right hand side of the \texttt{ankle} plot, and a group of potential outliers on the
-\texttt{thigh} plot. Finally, we notice a few potential outliers in figure \ref{fig:org916f991} and 
-\ref{fig:org3c4c5d5}.
+\texttt{thigh} plot. Finally, we notice a few potential outliers in figure \ref{fig:org8318a5d} and 
+\ref{fig:org7f27407}.
 
-Figure \ref{fig:orgff4a85f}, \ref{fig:org916f991}, and \ref{fig:org3c4c5d5} 
+Figure \ref{fig:org77eabbe}, \ref{fig:org8318a5d}, and \ref{fig:org7f27407} 
 conveys important information about the information that \texttt{knee}, \texttt{height}, and
 \texttt{chest} adds to the model. These regressors seem to follow a horizontal band along a fitted 
 line from the origin, which may suggest that none of the regressors adds additional information 
@@ -131,106 +131,114 @@ to the predictions.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/biceps_forearm_wrist_av.png}
-\caption{\label{fig:orgfc00962}
+\caption{\label{fig:orgd5f74db}
 Partial regression plots of regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.}
 \end{figure}   
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/thigh_knee_ankle_av.png}
-\caption{\label{fig:orgff4a85f}
+\caption{\label{fig:org77eabbe}
 Partial regression plots of regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/age_weight_height_neck_av.png}
-\caption{\label{fig:org916f991}
+\caption{\label{fig:org8318a5d}
 Partial regression plots of regressors \texttt{age}, \texttt{weight}, \texttt{height}, and \texttt{neck}.}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/chest_abdomen_hip_av.png}
-\caption{\label{fig:org3c4c5d5}
+\caption{\label{fig:org7f27407}
 Partial regression plots of regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.}
 \end{figure}
 \subsection{Transformations of variables}
-\label{sec:orgfb988d7}
+\label{sec:org110bf12}
 
-Figure \ref{fig:orgea822ef} displays the values of \(\lambda\) to be used in a potential Box-Cox transformation of 
+Figure \ref{fig:orgc51dfd4} displays the values of \(\lambda\) to be used in a potential Box-Cox transformation of 
 the dependent variable \texttt{density}. The \(\lambda\) that maximized the log-likelihood is 0.9 (0.7-1.1 95\% CI). 
 
-Using \(\lambda = 0.9\) gives us the normal probability plot displayed on the right hand side in figure \ref{fig:orgea822ef}.
+Using \(\lambda = 0.9\) gives us the normal probability plot displayed on the right hand side in figure \ref{fig:orgc51dfd4}.
 We notice that this affects the distribution of residuals by making it more light-tailed. That is, the 
 the tails of the distribution are too light for the distribution to be considered normal.
 
-In section \ref{sec:org3450992} we noted that there was no indication that a transformation was needed. 
+In section \ref{sec:org978b79e} we noted that there was no indication that a transformation was needed. 
 Here, we see that the transformation of the response variable only makes matters worse.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/boxcox_fit.png}
-\caption{\label{fig:orgea822ef}
+\caption{\label{fig:orgc51dfd4}
 Values for lambda against the log-likelihood of \texttt{density} for Box-Cox transformations.}
 \end{figure}
 
 \subsection{Diagnostics and handling of Outliers}
-\label{sec:org0398ef9}
+\label{sec:orgb3f92c2}
 
-Figure \ref{fig:org6979ff3} illustrates Cook's distance for all points, where the three observations with the largest 
-Cook's distance are labelled. 
+Figure \ref{fig:orgdb7ed08} illustrates Cook's distance for all points, where the three observations with the largest 
+Cook's distance are labelled. Considering the cut-off \(D_i = 1\) as proposed in \cite{Montgomery2012}, 
+where \(D_i\) is the Cook's distance for observation \(i\), we note that none of the observations would be 
+considered influential. Still, observation 39 and 83 are largely different relative
+to the other points in terms of their Cook's distance. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/cd.png}
-\caption{\label{fig:org6979ff3}
+\caption{\label{fig:orgdb7ed08}
 Plot of Cook's distance for all observations.}
 \end{figure}
 
-Figure \ref{fig:org135d653} reports the \(DFFITS\) values. We label observations as in figure \ref{fig:org6979ff3}. We observe 
+Figure \ref{fig:org69597f5} reports the \(DFFITS\) values. We label observations as in figure \ref{fig:orgdb7ed08}. We observe 
 that the three largest absolute \(DFFITS\) correspond to the same observations as in the Cook's distance plot.
+The recommended cutoff-value referred to in \cite{Montgomery2012}, i.e. \(2\sqrt{\frac{p}{n}}\)
+where \(p = 13\) is the number of potential regressors and \(n = 248\) is the sample size, is 
+plotted as a dotted line, and the points that lie below or above this cut-off value is labelled.
+We observe that several points are considered influential points when using that cut-off value.
 
-Figure \ref{fig:org329c214}, \ref{fig:org08012db}, \ref{fig:orgfbb0b29}, and
-\ref{fig:org1fc6e9a} presents \(DFBETA\) values for groups of regressors. Observation 39
-is present in a number of these figures.
+Figure \ref{fig:org00f6d0e}, \ref{fig:org4c2a880}, \ref{fig:orgc73ecec}, and
+\ref{fig:org734cdc2} presents \(DFBETA\) values for groups of regressors. Observation 39
+is present in a number of these figures. Using the aforementioned cut-off value of \(\frac{2}{\sqrt{n}}\), we 
+we note that none of these points would be considered influential points.
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/dffits.png}
-\caption{\label{fig:org135d653}
+\caption{\label{fig:org69597f5}
 \(DFFITS\) for all observations.}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/biceps_forearm_wrist_dfbeta.png}
-\caption{\label{fig:org329c214}
+\caption{\label{fig:org00f6d0e}
 \(DFBETA\) for regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/age_weight_height_neck_dfbeta.png}
-\caption{\label{fig:org08012db}
+\caption{\label{fig:org4c2a880}
 \(DFBETA\) for regressors \texttt{age}, \texttt{weight}, \texttt{height} and \texttt{neck}.}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/thigh_knee_ankle_dfbeta.png}
-\caption{\label{fig:orgfbb0b29}
+\caption{\label{fig:orgc73ecec}
 \(DFBETA\) for regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/chest_abdomen_hip_dfbeta.png}
-\caption{\label{fig:org1fc6e9a}
+\caption{\label{fig:org734cdc2}
 \(DFBETA\) for regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.}
 \end{figure}
 
 \section{Conclusion}
-\label{sec:orgf9d7f82}
+\label{sec:org06f9126}
 \bibliographystyle{plain}
 \bibliography{library}
 \end{document}

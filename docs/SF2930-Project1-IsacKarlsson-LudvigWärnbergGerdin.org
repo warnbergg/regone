@@ -121,7 +121,10 @@ Examiner \par
 ** Diagnostics and handling of Outliers
    
    Figure [[fig:cd]] illustrates Cook's distance for all points, where the three observations with the largest 
-   Cook's distance are labelled. 
+   Cook's distance are labelled. Considering the cut-off $D_i = 1$ as proposed in \cite{Montgomery2012}, 
+   where $D_i$ is the Cook's distance for observation $i$, we note that none of the observations would be 
+   considered influential. Still, observation 39 and 83 are largely different relative
+   to the other points in terms of their Cook's distance. 
 
    #+NAME: fig:cd
    #+CAPTION: Plot of Cook's distance for all observations.
@@ -130,10 +133,15 @@ Examiner \par
 
    Figure [[fig:dffits]] reports the $DFFITS$ values. We label observations as in figure [[fig:cd]]. We observe 
    that the three largest absolute $DFFITS$ correspond to the same observations as in the Cook's distance plot.
+   The recommended cutoff-value referred to in \cite{Montgomery2012}, i.e. $2\sqrt{\frac{p}{n}}$
+   where $p = 13$ is the number of potential regressors and $n = 248$ is the sample size, is 
+   plotted as a dotted line, and the points that lie below or above this cut-off value is labelled.
+   We observe that several points are considered influential points when using that cut-off value.
 
    Figure [[fig:biceps_forearm_wrist_dfbeta]], [[fig:age_weight_height_neck_dfbeta]], [[fig:thigh_knee_ankle_dfbeta]], and
    [[fig:chest_abdomen_hip_dfbeta]] presents $DFBETA$ values for groups of regressors. Observation 39
-   is present in a number of these figures.
+   is present in a number of these figures. Using the aforementioned cut-off value of $\frac{2}{\sqrt{n}}$, we 
+   we note that none of these points would be considered influential points.
    #+NAME: fig:dffits
    #+CAPTION: $DFFITS$ for all observations.
    #+ATTR_LATEX: :width 8cm :placement [h]
