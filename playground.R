@@ -1,4 +1,5 @@
 
+
 library(devtools)
 devtools::load_all()
 `%>%` <- magrittr::`%>%`
@@ -23,7 +24,7 @@ bx <- CreateBoxCoxPlot(fit = fit)
 trans <- CreateTransformedQQPlot(fit = fit, data = data)
 ## Outlier detection
 cd <- CreateCooksDistancePlot(fit = fit)
-di <- CreateDffitsPlot(fit = fit)
+di <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)))
 db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
 ## Multicolinearity 
 mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit)
