@@ -24,19 +24,164 @@ Examiner \par
 \newpage
 
 * Introduction and Project Goals
+** Introduction
+  Our choice of scenario is Scenario I: Body fat assessment, which involves Large-Sample regression (p < n). 
+  According to the World Health organization (WHO) obesity, the state where excess body fat is causing
+  extensive health effects, is a large risk factor for some chronic diseases. Some examples are cancer
+  and diabetes. Since the number of cases of obesity is increasing one may want to identify these people 
+  quickly and reliably.
+
+** Data Description
+
+   Since BMI has shown to be a bad predictor of actual fatness, this project focuses on body fat mass (BFM).
+   There exists very accurate methods for calculating BFM but because of high costs and efforts cheaper 
+   methods such as regression models are widely used. 
+
+   The given dataset (BFM MEN) describes data of body density (calculated using underwater weighing), 
+   age and other anthropometric variables about 252 men.
+
+** Project Goals 
+
+  The main goal of the project is to create and validate our own regression model in order to predict BFM.
+  This includes the following:
+
+  1. Residual analysis for model adequacy checking
+  2. Handling of outliers, influential observations and leverage
+  3. Transformations of variables in order to correct model inadequacies
+  4. Multicollinearity treatments and diagnostics
+  5. Different types of variable selection and evaluation of these using cross validation
+  6. Computer-intensive procedures for model assessment (e.g. bootstrap residuals)
+
+\newpage
 * Analyses and Model Development
 ** Residual analysis
+
+   Some major assumptions we use in our analysis are:
+
+   1. The errors $\epsilon_i$ for observation $i$ are iid. normally distributed.
+   2. Mean of $\epsilon = 0$
+   3. Variance of $\epsilon = \sigma^2$, where $\sigma$ is a constant.
+   4. There is approximately a linear relationship between the regressors and the response ($y$).
+
+   When analysing violations of the assumptions given above, the primary tool is using the model residuals. 
+   We define the residual, or error, for observation $i$ as
+   
+   \[
+   e_i = y_i - \hat{y_i}, \ i = 1, ... , n
+   \]
+
+   One may view a residual as the difference between the data and the fit although it is also a way to analyze 
+   the variability in the response variable that cannot be explained by the regression model. Plotting residuals
+   is a effective method to examine how the regression model fits the data and make sure the assumptions listed 
+   are not violated.
+
+*** R-Student
+
+    It is possible to use an externally studentized residual given by \cite{Montgomery2012}
+
+    \[
+    t_i = \frac{e_i}{\sqrt{S^2_{i}(1 - h_{ii})}}, \ i = 1, ..., n
+    \]
+
+    which is often called R-student. Here an estimate of $\sigma^2$ is used instead of $MS_{Res}$
+    in order to create an externally studentized residual.
+
+    Now we introduce some basic residual plots, which are commonly generated using computers. These
+    should be analyzed routinely when solving any kind of regression modelling problem. Note that the
+    externally studentized residuals are often the ones plotted since they have constant variance.
+
 *** Normality of residuals
+
+    This is a tool for analysing if two datasets (of quantiles) come from the same probability distribution. 
+    By plotting the quantiles against each other we will hopefully see somewhat of a straight line. This 
+    corresponds to them originating from the same distribution. 
+
+    Here some small departures from the normality assumption does not have a large impact. Meanwhile 
+    large nonnormality could have more impact because, for example, prediction intervals depend on the 
+    normality assumption. One may check the normality assumption simple by constructing a normal probability
+    plot of the residuals. 
 
     The normality of residuals therefore ensures that the confidence intervals presented in section [[Results]]
     are valid.
     
 *** Fitted Against Residuals 
+
+    Simply a plot of the, often externally studentized, residuals versus the fitted values. This is useful
+    because it allows an easy way to detect model inadequacies. If the plot shows the residuals contained in
+    a horizontal band, then the model does not contain any obvious defects. If this is not the case one may
+    conclude that there are likely model imperfections.
 *** Added Variable Analysis
+
+    Particularly useful when analysing if the relationship between the regressor variables and the response
+    has been defined accurately. Another way to use these plots are when evaluating the marginal usefulness
+    of some variable that is not presently a part of the model. Here $y$ (the response variable) and $x_j$
+    (regressor) is regressed against the regressors (currently present in the model) and the residuals that
+    follow for each regression. When plotting these residuals against each other one may analyse the marginal
+    relationship for the regressor $x_j$ that has caught our attention.
+
+*** Other useful plots
+
+    One may want to analyze the possibility of multicollinearity being present in the data. Knowing that
+    this can disturb the least-squares fit in ways that results in the regression model ending up being
+    nearly useless. One way to do this is by create a scatter-plot of two regressors against each other
+    (i.e. analyzing the relationship between regressor variables. If two regressors are correlated one 
+    may not need to include them both in the model. If they are highly correlated the mentioned possibility 
+    of multicollinearity is larger. 
+
 ** Diagnostics and handling of Outliers
+*** Treatment of outliers
+
+    An observation that is noticeably different from the rest of the data is considered an outlier. A way
+    to spot y space outliers is simply by analyzing the residuals. The ones that are noticeably larger 
+    (when considering the absolute value of these residuals) than the other residuals is an indication of
+    potential outliers. The magnitude of the impact caused by these outliers depends on their location
+    in x space. An example of identifying potential outliers is by using scaled residuals (e.g. R-student). 
+
+    Note that outliers that are considered bad values should preferably be discarded. Meanwhile there should
+    always be non-statistical confirmation that the outlier really is a bad value before discarding it. One
+    could argue that outliers are the most important part of the data since it often control many 
+    properties when modelling. 
+
+    One way to analyse the effect of each outliers is by simply not including the data point and refitting.
+    In general we prefer it when the model is not too sensitive to a small number of observations. 
+    Each element $h_{ij}$ corresponds to the amount of leverage exercised by the ith observation $y_i$ on
+    the jth, fitted value, $\hat{y_j}$.
+
+    The hat matrix is can be very useful when detecting potential outliers, since it determines the variances
+    and covariances of $\hat{y}$ and e. 
+
+    It appears that large hat diagonals may correspond to an influential outlier since they are remote
+    in x space when compared to the rest of the data. Knowing this analysts also want to observe
+    the studentized residuals of each observation. Large hat diagonals along with large residuals 
+    are likely an influential observation. 
+
+
+*** Cook's Distance
+
+    One way to both of these at the same time is by using the squared distance between the least-squares
+    estimate (based on all n points) and also the estimate obtained when deleting the ith point. This is
+    called Cook’s distance and can be interpreted as the euclidean distance that the vector containing fitted
+    values is moved when deleting the ith observation.
+
+*** DFFITS & DFBETAS
+
+    Two other measures of the effects when deletion an observation is $DFBETAS$ and $DFFITS$. $DFBETAS$ tells us
+    about the effects on the regression coefficient $\hat{\beta_j} when deleting the ith observation. It is defined as
+    follows and is given in units of standard deviation.
+
+    $DFFITS$ analyses the effects on the fitted value when deleting the ith observation. Here $DFFITS$ tells us
+    the number of standard deviations that the fitted value is changed by when deleting observation $i$.
+    
 ** Transformations of variables
 ** Diagnostics and handling of Multicolinearity
+\newpage
 * Results
+** Significance tests
+   
+   Table 1 presents the ANOVA table for the full model. 
+
+   \input{../anova.tex}
+
 ** Residual analysis
 *** Normality of residuals
     
@@ -127,7 +272,7 @@ Examiner \par
    to the other points in terms of their Cook's distance. 
 
    #+NAME: fig:cd
-   #+CAPTION: Plot of Cook's distance for all observations.
+   #+CAPTION: Cook's distance for all observations.
    #+ATTR_LATEX: :width 8cm :placement [h]
    [[~/courses/Regression Analysis/regone/cd.png]]
 
@@ -167,6 +312,16 @@ Examiner \par
    #+ATTR_LATEX: :width 8cm :placement [h]
    [[~/courses/Regression Analysis/regone/chest_abdomen_hip_dfbeta.png]]
 
+** Diagnostics and Handling of Multicolinearity
+   
+   Table 2 presents the VIF and eigen value for each respective regressor. The eigen values for the \texttt{biceps},
+   \texttt{forearm}, and \texttt{wrist} regressors are relatively close to zero, and the VIF of the \texttt{weight},
+   \texttt{chest}, \texttt{abdomen}, and \texttt{hip} regressors are larger than 10 (NOTERA DETTA I METOD). Hence, there appears 
+   to be an indication of multicolinearity amongst the candidate regressors.
+
+   \input{../mc.tex} 
+
+\newpage
 * Conclusion
 \bibliographystyle{plain}
 \bibliography{library}
