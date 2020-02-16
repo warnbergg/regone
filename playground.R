@@ -9,6 +9,8 @@ b <- BootstrapEstimates(data = data, R = 2000)
 data$predicted <- predict(object = fit)
 data$residuals <- MASS::studres(fit)
 data$r.student <- rstudent(model = fit)
+## Significance tests
+st <- GenerateAnovaTable(fit = fit)
 ## Residual Analysis
 x.vars <- all.vars(formula(fit))[-1]
 nm.chunks <- Chunks(vec = x.vars, n.chunks = 4)
@@ -30,3 +32,4 @@ db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
 mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit)
 ## Variable selection
 apr <- RunAllPossibleRegression(fit = fit)
+

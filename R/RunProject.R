@@ -11,6 +11,9 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"), verbose = TRUE
     data$residuals <- residuals(fit)
     data$r.student <- rstudent(fit)
     if (verbose)
+        message("Generate significance tests...")    
+    st <- GenerateAnovaTable(fit = fit)
+    if (verbose)
         message("Running residual analysis...")
     x.vars <- all.vars(formula(fit))[-1]
     nm.chunks <- Chunks(x.vars, 4)
