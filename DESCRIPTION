@@ -16,7 +16,9 @@ Imports:
 	olsrr,
 	boot,
 	MASS,
-	gridExtra
+	gridExtra,
+	kableExtra,
+	knitr
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
