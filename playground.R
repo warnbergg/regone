@@ -1,5 +1,4 @@
 
-
 library(devtools)
 devtools::load_all()
 `%>%` <- magrittr::`%>%`

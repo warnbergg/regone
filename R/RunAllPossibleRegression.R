@@ -20,7 +20,8 @@ RunAllPossibleRegression <- function(fit, performance.measures = c("adjr", "aic"
               row.names = FALSE)
     ## Model indexes and regressors
     MakeTable(tbl = tbl, labels.list = setNames(c("mindex", "predictors"), nm = c("Model index", "Regressors")),
-              file.name = "model_table.tex", caption = "Model and regressors", row.names = FALSE)
+              file.name = "model_table.tex", caption = "Subset model corresponding to each model index in Table 3.",
+              row.names = FALSE)
     ## Performance plot
     plt <- with(subsets, reshape2::melt(data.frame(n, aic, adjr, cp, sbic), id = "n")) %>%
         dplyr::mutate(variable = factor(variable, labels = c("AIC",

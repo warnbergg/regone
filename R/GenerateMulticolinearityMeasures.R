@@ -11,7 +11,9 @@ GenerateMulticolinearityMeasures <- function(data, fit, save.plots = TRUE) {
     e <- eigen(c)$values
     k <- max(e)/min(e)
     v <- car::vif(fit)
-    plot.data <- reshape2::melt(data.frame(Regressor = names(d), vif = v, eigen = e))
+    plot.data <- suppressMessages({
+        reshape2::melt(data.frame(Regressor = names(d), vif = v, eigen = e))
+    })
     plt <- PlotVar(plot.data)
     ## Save table for multicolinearity measures
     knitr::opts_current$set(label = "mc")

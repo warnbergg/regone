@@ -1,12 +1,15 @@
 #' RunProject
 #'
 #' Run full code for project.
+#' @param data data.frame. The data to print use for analysis. Defaults to read.csv("../data/bodyfatmen.csv")
+#' @param dir Character vector of length 1. Directory in which to save analysis results. Defaults to "."
 #' @param verbose Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE 
 #' @export
-RunProject <- function(data = read.csv("../data/bodyfatmen.csv"), verbose = TRUE) {
-    data <- read.csv("../data/bodyfatmen.csv")
+RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
+                       dir = ".",
+                       verbose = TRUE) {
     fit <- lm(formula = density ~ ., data = data)
-    boot.sum <- BootstrapEstimates(data, R = 10)
+    b <- BootstrapEstimates(data = data, R = 10)
     data$predicted <- predict(fit)
     data$residuals <- residuals(fit)
     data$r.student <- rstudent(fit)

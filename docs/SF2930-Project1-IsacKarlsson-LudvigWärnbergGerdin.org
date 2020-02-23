@@ -332,7 +332,14 @@ Examiner \par
 
 ** Variable selection
    
-   The full results of the best subsets regression is presented in section [[Appendix B]].
+   The full results of the best subsets regression is presented in section [[Appendix B]]. The model corresponding
+   to each model index in Table 3 in [[Appendix B]] is presented in Table 4. The best subset plots 
+   are presented in figure [[fig:variable_selection]]. 
+
+   #+NAME: fig:variable_selection
+   #+CAPTION: Number of regressors against multiple performance measures for the best subset regression models.
+   #+ATTR_LATEX: :width 8cm
+   [[~/courses/Regression Analysis/regone/variable_selection.png]]
 
 \newpage
 * Conclusion
@@ -342,5 +349,9 @@ Examiner \par
   #+NAME: fig:hm
   #+CAPTION: Correlation matrix of the full model
   [[~/courses/Regression Analysis/regone/hm.png]]
-
+  
 * Appendix B
+
+  \input{../variable_selection.tex}
+
+  \input{../model_table.tex}
