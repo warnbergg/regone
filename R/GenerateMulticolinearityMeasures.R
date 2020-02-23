@@ -25,10 +25,10 @@ GenerateMulticolinearityMeasures <- function(data, fit, save.plots = TRUE) {
     cormat <- reshape2::melt(c)
     hm <- cormat %>%
         ggplot2::ggplot(ggplot2::aes(x = Var2, y = Var1, fill = value, label = value),
-                        color = "black", size = 4) +
+                        color = "white", size = 4) +
         ggplot2::geom_tile() +
         ggplot2::geom_text(ggplot2::aes(Var2, Var1,
-                                        label = round(value, 2)), color = "black", size = 4) + 
+                                        label = round(value, 2)), color = "white", size = 4) + 
         ggplot2::theme(axis.title.x = ggplot2::element_blank(),
                        axis.title.y = ggplot2::element_blank())
     plts <- list(hm = hm, vif = plt)

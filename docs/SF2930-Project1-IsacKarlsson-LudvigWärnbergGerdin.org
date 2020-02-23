@@ -319,9 +319,28 @@ Examiner \par
    \texttt{chest}, \texttt{abdomen}, and \texttt{hip} regressors are larger than 10 (NOTERA DETTA I METOD). Hence, there appears 
    to be an indication of multicolinearity amongst the candidate regressors.
 
+   A coorelation matrix for the full model is found in section [[Appendix A]]. The strong multicolinearity
+   associated with the \texttt{weight} regressor is apparent in the correlation matrix in figure
+   [[fig:hm]]. The \texttt{weight} regressor shows a strong correlation with all but the \texttt{age} and
+   the \texttt{height} regressors.
+
+   In a later stage we use all possible regression in order to determine the candidate regression models. 
+   In that stage we further examine the results of removing the regressors with an indication of high 
+   multicolinearity.
+
    \input{../mc.tex} 
+
+** Variable selection
+   
+   The full results of the best subsets regression is presented in section [[Appendix B]].
 
 \newpage
 * Conclusion
 \bibliographystyle{plain}
 \bibliography{library}
+* Appendix A
+  #+NAME: fig:hm
+  #+CAPTION: Correlation matrix of the full model
+  [[~/courses/Regression Analysis/regone/hm.png]]
+
+* Appendix B
