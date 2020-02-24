@@ -3,9 +3,11 @@
 #' Produces variance inflation factors, eigenvalue system analysis for the fitted model.
 #' @param data data.frame Data used to fit the model. Used for pair-wise correlation analysis and eigenvalue system analysis. No default.
 #' @param fit lm object. Fitted model. No default
+#' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
 #' @param save.plots Logical vector of length 1. If TRUE the VIF plot and correlation heatmap are saved to disk. Defaults to TRUE.
 #' @export
-GenerateMulticolinearityMeasures <- function(data, fit, save.plots = TRUE) {
+GenerateMulticolinearityMeasures <- function(data, fit, dir = ".",
+                                             save.plots = TRUE) {
     d <- data[, !names(data) %in% c("density", "predicted", "residuals", "r.student")]
     c <- cor(d)
     e <- eigen(c)$values
@@ -21,7 +23,7 @@ GenerateMulticolinearityMeasures <- function(data, fit, save.plots = TRUE) {
         kableExtra::kable(format = "latex", booktabs = TRUE,
                           caption = "Multicolinearity measures.") %>%
         kableExtra::kable_styling(latex_options = "scale_down") %>%
-        write("mc.tex")
+        write(paste0(dir, "mc.tex"))
     ## http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-
     ## heatmap-r-software-and-data-visualization
     cormat <- reshape2::melt(c)
@@ -40,7 +42,7 @@ GenerateMulticolinearityMeasures <- function(data, fit, save.plots = TRUE) {
     if (save.plots)
         for (nm in names(plts))
             suppressMessages({
-                ggplot2::ggsave(paste0(nm, ".png"), plts[[nm]])
+                ggplot2::ggsave(paste0(dir, nm, ".png"), plts[[nm]])
             })
     
     return (return.object)

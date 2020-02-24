@@ -5,6 +5,7 @@
 #' @param fit lm object. Model fit to the data. No default.
 #' @param data data.frame. Data that the model was fit to. No default.
 #' @param lambda Numeric vector of length 1. Lambda to transform the dependent variable in fit. Default to 0.9.
+#' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
 #' @param save.plot Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE 
 #' @export
 CreateTransformedQQPlot<- function(fit, data, lambda = 0.9,
@@ -18,7 +19,7 @@ CreateTransformedQQPlot<- function(fit, data, lambda = 0.9,
     plt <- gridExtra::grid.arrange(bx, qq, ncol = 2)
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave("boxcox_fit.png", plt,
+            ggplot2::ggsave(paste0(dir, "boxcox_fit.png"), plt,
                             width = 12, height = 5)
         })
     return (plt)

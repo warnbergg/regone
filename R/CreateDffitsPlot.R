@@ -3,9 +3,11 @@
 #' Computes the DFFITS statstic for the fitted model, plots them, and optionally saves the to disk.
 #' @param fit lm object. Linear Model fit to the data. No default.
 #' @param critical.value Numeric vector of length 1. Cutoff/critical value for DFFITS plot. Defaults to NULL, in which case no critical values are plotted.
+#' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
 #' @param save.plot Logical vector of length 1. If TRUE the DFFITS plot are saved to disk. Defaults to TRUE.
 #' @export
-CreateDffitsPlot <- function(fit, critical.value = NULL, save.plot = TRUE) {
+CreateDffitsPlot <- function(fit, critical.value = NULL, dir = ".",
+                             save.plot = TRUE) {
     di <- dffits(fit)
     plot.data <- data.frame(DFFITS = di, Observation = seq_along(di))
     plt <- plot.data %>%
@@ -33,7 +35,7 @@ CreateDffitsPlot <- function(fit, critical.value = NULL, save.plot = TRUE) {
     }
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave("dffits.png", plt)
+            ggplot2::ggsave(paste0(dir, "dffits.png"), plt)
         })
     return (plt)
 }

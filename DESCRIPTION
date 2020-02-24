@@ -1,7 +1,8 @@
 Package: regone
 Title: regone
 Version: 0.0.0.9000
-Authors@R: person("Ludde", "Last", email = "ludvigge@kth.se", role = c("aut", "cre"))
+Authors@R: c(person("Ludde", "WG", email = "ludvigge@kth.se", role = c("aut", "cre")),
+	     person("Isac", "K", email = "email@email.com", role = c("aut")))
 Description: Code for project one, scenario one in SF2930 Regression Analysis at KTH Royal Institute of Technology
 Depends: R (>= 3.5.3)
 Imports:
@@ -18,7 +19,8 @@ Imports:
 	MASS,
 	gridExtra,
 	kableExtra,
-	knitr
+	knitr,
+	lindia
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

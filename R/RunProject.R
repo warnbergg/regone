@@ -8,6 +8,8 @@
 RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
                        dir = ".",
                        verbose = TRUE) {
+    if (!dir.exists(dir))
+        dir.create(dir)
     fit <- lm(formula = density ~ ., data = data)
     b <- BootstrapEstimates(data = data, R = 10)
     data$predicted <- predict(fit)
@@ -29,7 +31,6 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
     far <- CreateFittedAgainstResidualsPlot(data)
     if (verbose)
         message("Detecting possible variable transformation...")
-    bx <- CreateBoxCoxPlot(fit = fit)
     trans <- CreateTransformedQQPlot(fit = fit, data = data)
     if (verbose)
         message("Running outlier detection analysis...")

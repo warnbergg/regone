@@ -6,6 +6,7 @@
 #' @param ... Additional argument for anova().
 #' @export
 GenerateAnovaTable<- function(fit,
+                              dir = ".",
                               pretty.names = c("Sum sq", "Mean sq",
                                                "F value", "Pr(>F)"),
                               ...) {
@@ -19,5 +20,5 @@ GenerateAnovaTable<- function(fit,
         kableExtra::kable(format = "latex", booktabs = TRUE,
                           caption = "ANOVA table for full model.") %>%
         kableExtra::kable_styling(latex_options = "scale_down") %>%
-        write("anova.tex")
+        write(paste0(dir. "anova.tex"))
 }

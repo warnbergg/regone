@@ -3,9 +3,10 @@
 #' Plot added variable plots. Much credit to: https://stackoverflow.com/questions/59150905/is-there-a-ggplot2-analogue-to-the-avplots-function-in-r
 #' @param nms Character vector. Regressors to be plotted against residuals. Each regressor is individually plotted against the externally studentized residuals. No default.
 #' @param fit lm object. LM model that has been fit to the data. No default.
+#' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
 #' @param save.plot Logical vector of length 1. If TRUE the added variable plots are saved to disk. Defaults to TRUE.
 #' @export
-CreateAddedVariablePlots <- function(nms, fit, save.plot = TRUE) {
+CreateAddedVariablePlots <- function(nms, fit, dir = ".", save.plot = TRUE) {
     plot.data.lst <- InvisibleAvPlots(fit)[nms]
     plot.data <- do.call(rbind, lapply(names(plot.data.lst), function(nm) {
         id <- rep(nm, nrow(plot.data.lst[[nm]]))
