@@ -1,4 +1,3 @@
-
 library(devtools)
 devtools::load_all()
 `%>%` <- magrittr::`%>%`
@@ -31,4 +30,5 @@ db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
 mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit)
 ## Variable selection
 apr <- RunAllPossibleRegression(fit = fit)
+
 

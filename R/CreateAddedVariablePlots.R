@@ -7,7 +7,7 @@
 #' @param save.plot Logical vector of length 1. If TRUE the added variable plots are saved to disk. Defaults to TRUE.
 #' @export
 CreateAddedVariablePlots <- function(nms, fit, dir = ".", save.plot = TRUE) {
-    plot.data.lst <- InvisibleAvPlots(fit)[nms]
+    plot.data.lst <- InvisiblePlot(car::avPlots(fit, ask = FALSE))[nms]
     plot.data <- do.call(rbind, lapply(names(plot.data.lst), function(nm) {
         id <- rep(nm, nrow(plot.data.lst[[nm]]))
         df <- data.frame(id = id, plot.data.lst[[nm]])
@@ -26,19 +26,5 @@ CreateAddedVariablePlots <- function(nms, fit, dir = ".", save.plot = TRUE) {
                             width = 10, height = 5)
         })
     return(plt)
-}
-#' InvisibleAvPlots
-#'
-#' Gets the data from the avPlots function to use with ggplot.
-#' @param fit lm object. LM model that has been fit to the data. No default.
-#' @param ... Additional arguments.
-#' @export
-InvisibleAvPlots <- function(fit, ...) {
-    ff <- tempfile()
-    png(filename = ff)
-    out <- car::avPlots(fit, ask = FALSE, ...)
-    dev.off()
-    unlink(ff)
-    return (out)
 }
 

@@ -9,14 +9,14 @@
 #' @param save.plot Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE 
 #' @export
 CreateTransformedQQPlot<- function(fit, data, lambda = 0.9,
-                                   save.plot = TRUE) {
+                                   dir = ".", save.plot = TRUE) {
     ## Error handling
     bx <- CreateBoxCoxPlot(fit, save.plot = FALSE)
     new.fit <- lm(formula = ((density^lambda - 1)/lambda) ~ ., data = data)
     res <- data.frame(residuals = MASS::studres(new.fit))
     qq <- CreateQQPlot(res, save.plot = FALSE)
     qq <- qq + ggplot2::ggtitle("Quantile-Quantile plot")
-    plt <- gridExtra::grid.arrange(bx, qq, ncol = 2)
+    plt <- InvisiblePlot(gridExtra::grid.arrange(bx, qq, ncol = 2))
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave(paste0(dir, "boxcox_fit.png"), plt,

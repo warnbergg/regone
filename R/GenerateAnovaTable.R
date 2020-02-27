@@ -20,5 +20,5 @@ GenerateAnovaTable<- function(fit,
         kableExtra::kable(format = "latex", booktabs = TRUE,
                           caption = "ANOVA table for full model.") %>%
         kableExtra::kable_styling(latex_options = "scale_down") %>%
-        write(paste0(dir. "anova.tex"))
+        write(paste0(dir, "anova.tex"))
 }
