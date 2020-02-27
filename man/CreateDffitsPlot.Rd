@@ -4,12 +4,15 @@
 \alias{CreateDffitsPlot}
 \title{CreateDffitsPlot}
 \usage{
-CreateDffitsPlot(fit, critical.value = NULL, save.plot = TRUE)
+CreateDffitsPlot(fit, critical.value = NULL, dir = ".",
+  save.plot = TRUE)
 }
 \arguments{
 \item{fit}{lm object. Linear Model fit to the data. No default.}
 
 \item{critical.value}{Numeric vector of length 1. Cutoff/critical value for DFFITS plot. Defaults to NULL, in which case no critical values are plotted.}
+
+\item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
 
 \item{save.plot}{Logical vector of length 1. If TRUE the DFFITS plot are saved to disk. Defaults to TRUE.}
 }

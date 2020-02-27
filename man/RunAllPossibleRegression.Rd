@@ -4,10 +4,18 @@
 \alias{RunAllPossibleRegression}
 \title{RunAllPossibleRegression}
 \usage{
-RunAllPossibleRegression(fit, save.plot = TRUE)
+RunAllPossibleRegression(fit, performance.measures = c("adjr", "aic",
+  "sbic", "cp"), pretty.labels = c("Adjusted R-squared", "AIC", "BIC",
+  "C(p)"), dir = ".", save.plot = TRUE)
 }
 \arguments{
 \item{fit}{lm object. Full model fit to the data. No default.}
+
+\item{performance.measures}{Character vector. Performance measures of candidate model to include in the performance table. Defaults to c("adjr", "aic", "sbic", "cp").}
+
+\item{pretty.labels}{Character vector. Column names for performance measures in performance table. Defaults to c("Adjusted R-squared", "AIC", "BIC", "C(p)")}
+
+\item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
 
 \item{save.plot}{Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE}
 }

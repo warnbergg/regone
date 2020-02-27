@@ -4,10 +4,12 @@
 \alias{CreateQQPlot}
 \title{CreateQQPlot}
 \usage{
-CreateQQPlot(residuals.df, save.plot = TRUE)
+CreateQQPlot(residuals.df, dir = ".", save.plot = TRUE)
 }
 \arguments{
 \item{residuals.df}{data.frame. Data frame with one column: the residuals from the multiple regression. No default.}
+
+\item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
 
 \item{save.plot}{Logical vector of length 1. If TRUE the plot is saved to disk. Defaults to TRUE.}
 }

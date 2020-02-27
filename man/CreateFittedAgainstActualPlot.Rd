@@ -4,12 +4,14 @@
 \alias{CreateFittedAgainstActualPlot}
 \title{CreateFittedAgainstActualPlot}
 \usage{
-CreateFittedAgainstActualPlot(nms, data, save.plot = TRUE)
+CreateFittedAgainstActualPlot(nms, data, dir = ".", save.plot = TRUE)
 }
 \arguments{
 \item{nms}{Character vector. Regressors to be plotted against residuals. Each regressor is individually plotted against the externally studentized residuals. No default}
 
 \item{data}{data.frame object. Data as prepared in "make.project.R". Regressor values, predicted response, and residuals. No default.}
+
+\item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
 
 \item{save.plot}{Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE}
 }
