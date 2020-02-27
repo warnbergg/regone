@@ -1,7 +1,7 @@
 #' CreateFittedAgainstResidualspLot
 #'
 #' Creates and returns a plot with fitted against residuals plot.
-#' @param data data.frame. Containing the externally studentized residuals, and the fitted response varibles. No default.
+#' @param data data.frame object. Data as prepared in "RunProject.R". Regressor values, predicted response, and residuals. No default.
 #' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
 #' @param save.plot Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE
 #' @importFrom magrittr "%>%"
