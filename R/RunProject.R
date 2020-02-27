@@ -43,7 +43,7 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
     mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit, dir = dir)
     if (verbose)
         message("Running variable selection analysis...")
-    apr <- RunAllPossibleRegression(fit = fit, dir = dir)
+    best.model <- RunCrossValidation(data = data)
     if (verbose)
         message("Project finished.")
 }

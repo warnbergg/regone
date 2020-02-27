@@ -29,6 +29,4 @@ db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
 ## Multicolinearity 
 mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit)
 ## Variable selection
-apr <- RunAllPossibleRegression(fit = fit)
-
-
+test <- RunCrossValidation(data = data)
