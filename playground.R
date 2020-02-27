@@ -3,7 +3,6 @@ devtools::load_all()
 `%>%` <- magrittr::`%>%`
 data <- read.csv(file = "../data/bodyfatmen.csv")
 fit <- lm(formula = density ~ ., data = data)
-b <- BootstrapEstimates(data = data, R = 2000)
 data$predicted <- predict(object = fit)
 data$residuals <- MASS::studres(fit)
 data$r.student <- rstudent(model = fit)
@@ -29,4 +28,6 @@ db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
 ## Multicolinearity 
 mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit)
 ## Variable selection
-test <- RunCrossValidation(data = data)
+vars <- RunCrossValidation(data = data)
+## Bootstrapping coefficients
+b <- BootstrapEstimates(data = data, vars = vars, R = 1000)
