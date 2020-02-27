@@ -4,12 +4,14 @@
 \alias{BootCoefs}
 \title{BootCoefs}
 \usage{
-BootCoefs(data, indices)
+BootCoefs(data, indices, vars)
 }
 \arguments{
 \item{data}{data.frame. Data to fit the lm model to. No default.}
 
 \item{indices}{Helper argument for the boot::boot function.}
+
+\item{vars}{Character vector. Predictors derived to be best from some variable selection / model building process. No default.}
 }
 \description{
 Statistic function for boot::boot.

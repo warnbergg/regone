@@ -4,10 +4,16 @@
 \alias{BootstrapEstimates}
 \title{BoostrapEstimates}
 \usage{
-BootstrapEstimates(data, ...)
+BootstrapEstimates(data, vars, dir = ".", digits = 4, ...)
 }
 \arguments{
 \item{data}{data.frame. Data to fit the lm model to. No default.}
+
+\item{vars}{Named numeric vector. Coefficient values and corresponding variable names. No default.}
+
+\item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
+
+\item{digits}{Numeric vector of length 1. Digits to round to for values. Defaults to 4.}
 
 \item{...}{Additional arguments for the boot function Description. Default/No default.}
 }
