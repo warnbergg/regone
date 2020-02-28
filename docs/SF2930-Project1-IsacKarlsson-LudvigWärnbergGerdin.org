@@ -178,16 +178,18 @@ Examiner \par
 * Results
 ** Significance tests
    
-   Table 1 presents the ANOVA table for the full model. 
+   Table 1 presents the ANOVA table for the full model. Using a 5% significance level, we see that neither of 
+   the regressors \texttt{hip}, \texttt{knee}, \texttt{ankle}, \texttt{biceps}, and \texttt{forearm} are 
+   significant predictors. 
 
    \input{../anova.tex}
 
 ** Residual analysis
 *** Normality of residuals
     
-    Figure [[fig:qqplot]] illustrates QQ plot of the model residuals. The observer may say that the 
-    points exhibit a pattern that indicates that the residuals come from a distribution with heavier tails
-    than that of a normal distribution. 
+    Figure [[fig:qqplot]] illustrates a quantile-quantile plot of the externally studentized residuals.
+    The observer may say that the  points exhibit a pattern that indicates that the residuals come from
+    a distribution with heavier tails than that of a normal distribution. 
     \cite{Montgomery2012}. Still, the deviations from the diagonal line is relatively small, and hence
     we conclude that the first Gauss-Markov condition is fulfilled. That is, the model errors seem to be 
     normally distributed.
@@ -209,8 +211,7 @@ Examiner \par
     #+ATTR_LATEX: :width 8cm
     [[~/courses/Regression Analysis/regone/far.png]]
    
-*** Added Variable Analysis
-   
+*** Added Variable Analysis  
    Partial regression plots are found in figure [[fig:biceps_forearm_wrist_av]], [[fig:thigh_knee_ankle_av]],
    [[fig:age_weight_height_neck]], and [[fig:chest_abdomen_hip_av]]. All figures exhibits potential outliers 
    (which will be further considered in section [[Diagnostics and handling of Outliers]]).
@@ -226,6 +227,9 @@ Examiner \par
    \texttt{chest} adds to the model. These regressors seem to follow a horizontal band along a fitted 
    line from the origin, which may suggest that none of the regressors adds additional information 
    to the predictions.
+
+   No single regressors expresses non-linear tendencies, and hence these plots gives us no indication 
+   that the regressors should be transformed.
 
    #+NAME: fig:biceps_forearm_wrist_av
    #+CAPTION: Partial regression plots of regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.
@@ -287,6 +291,7 @@ Examiner \par
    [[fig:chest_abdomen_hip_dfbeta]] presents $DFBETA$ values for groups of regressors. Observation 39
    is present in a number of these figures. Using the aforementioned cut-off value of $\frac{2}{\sqrt{n}}$, we 
    we note that none of these points would be considered influential points.
+
    #+NAME: fig:dffits
    #+CAPTION: $DFFITS$ for all observations.
    #+ATTR_LATEX: :width 8cm :placement [h]
@@ -324,19 +329,17 @@ Examiner \par
    [[fig:hm]]. The \texttt{weight} regressor shows a strong correlation with all but the \texttt{age} and
    the \texttt{height} regressors.
 
-   In a later stage we use all possible regression in order to determine the candidate regression models. 
-   In that stage we further examine the results of removing the regressors with an indication of high 
-   multicolinearity.
-
    \input{../mc.tex} 
 
-** Variable selection 
+** Variable selection
    
    The full results of the best subsets regression is presented in section [[Appendix B]]. The model corresponding
    to each model index in Table 3 in [[Appendix B]] is presented in Table 4. The best subset plots 
-   are presented in figure [[fig:variable_selection]]. 
-   
-   
+   are presented in figure [[fig:variable_selection]].
+
+   The best performing model, its predictors and the corresponding coefficients along with 95% confidence intervals 
+   are presented in Table 3. A full re-run of the analysis with solely these predictors are presented in [[Appendix C]].
+
    #+NAME: fig:cv_apr
    #+CAPTION: Cross-validated mean squared error for the best subset model and number of regressors.
    #+ATTR_LATEX: :width 8cm
@@ -350,8 +353,6 @@ Examiner \par
    \input{../cis.tex}
 \newpage
 * Conclusion
-\bibliographystyle{plain}
-\bibliography{library}
 * Appendix A
   #+NAME: fig:hm
   #+CAPTION: Correlation matrix of the full model
@@ -362,3 +363,6 @@ Examiner \par
   \input{../variable_selection.tex}
 
   \input{../model_table.tex}
+* Appendix C
+\bibliographystyle{plain}
+\bibliography{library}
