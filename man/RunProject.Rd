@@ -4,7 +4,7 @@
 \alias{RunProject}
 \title{RunProject}
 \usage{
-RunProject(data = read.csv("../data/bodyfatmen.csv"), dir = ".",
+RunProject(data = read.csv("../data/bodyfatmen.csv"), dir = "./",
   verbose = TRUE)
 }
 \arguments{

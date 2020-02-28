@@ -4,12 +4,14 @@
 \alias{RunCrossValidation}
 \title{RunCrossValidation}
 \usage{
-RunCrossValidation(data, k = 10, save.plot = TRUE)
+RunCrossValidation(data, k = 10, dir = "./", save.plot = TRUE)
 }
 \arguments{
 \item{data}{data.frame object. Data as prepared in "RunProject.R". Regressor values, predicted response, and residuals. No default.}
 
 \item{k}{Numeric vector of length 1. Number of folds to use in k-fold cross-validation. Defaults to 10.}
+
+\item{dir}{Character vector of length 1. Directory in which to store the cv-plot. Defaults to "./"}
 
 \item{save.plot}{Logical vector of length 1. If TRUE then the mean cv error plot -is saved to disk. Defaults to TRUE}
 }

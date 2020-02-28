@@ -4,7 +4,7 @@
 \alias{MakeTable}
 \title{MakeTable}
 \usage{
-MakeTable(tbl, labels.list, file.name, dir = ".", ...)
+MakeTable(tbl, labels.list, file.name, dir = "./", ...)
 }
 \arguments{
 \item{tbl}{data.frame Data to be kable'd. No default.}
