@@ -6,12 +6,11 @@
 #' @param verbose Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE 
 #' @export
 RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
-                       dir = ".",
+                       dir = "./",
                        verbose = TRUE) {
     if (!dir.exists(dir))
         dir.create(dir)
     fit <- lm(formula = density ~ ., data = data)
-    b <- BootstrapEstimates(data = data, R = 10)
     data$predicted <- predict(fit)
     data$residuals <- MASS::studres(fit)
     data$r.student <- rstudent(fit)
@@ -27,8 +26,10 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
         CreateFittedAgainstActualPlot(data = data, nms = nms, dir = dir)
         CreateRegressorAgainstResidualsPlot(data = data, nms = nms, dir = dir)
         CreateAddedVariablePlots(fit = fit, nms = nms, dir = dir)
+        CreateRegressorRegressorsPlots(data = data, nms = nms, dir = dir)
     })
     far <- CreateFittedAgainstResidualsPlot(data = data)
+    p <- PRESS(fit)
     if (verbose)
         message("Detecting possible variable transformation...")
     trans <- CreateTransformedQQPlot(fit = fit, data = data, dir = dir)
@@ -42,8 +43,30 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
         message("Computing multicolinearity measures...")
     mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit, dir = dir)
     if (verbose)
-        message("Running variable selection analysis...")
-    best.model <- RunCrossValidation(data = data)
-    if (verbose)
-        message("Project finished.")
+        message("Running variable selection analysis and bootstrapping...")
+    RunAllPossibleRegression(fit = fit, dir = dir)
+    vars <- RunCrossValidation(data = data, dir = dir)
+    b <- BootstrapEstimates(data = data, vars = vars, dir = dir, R = 1000)
+    results <- list(
+        fit = fit,
+        st = st,
+        qq = qq,
+        ra = ra,
+        far = far,
+        press = p,
+        trans = trans,
+        cd = cd,
+        di = di,
+        db = db,
+        mc.list = mc.list,
+        vars = vars,
+        b = b
+    )
+    saveRDS(results, paste0(dir, "results.Rds"))
+    if (verbose) {
+        verbose.dir <- "current working directory"
+        if (dir != "./")
+            verbose.dir <- dir
+        message(paste("Project finished. Plots and results were saved to", verbose.dir))
+    }
 }

@@ -16,14 +16,16 @@ ra <- lapply(nm.chunks, function(nms) {
     CreateFittedAgainstActualPlot(data = data, nms = nms)
     CreateRegressorAgainstResidualsPlot(data = data, nms = nms)
     CreateAddedVariablePlots(fit = fit, nms = nms)
+    CreateRegressorRegressorsPlots(data = data, nms = nms)
 })
 far <- CreateFittedAgainstResidualsPlot(data = data)
+p <- PRESS(fit)
 ## Variable transformation
 bx <- CreateBoxCoxPlot(fit = fit)
 trans <- CreateTransformedQQPlot(fit = fit, data = data)
 ## Outlier detection
 cd <- CreateCooksDistancePlot(fit = fit)
-di <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)))
+pdi <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)))
 db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
 ## Multicolinearity 
 mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit)
