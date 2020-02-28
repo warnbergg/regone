@@ -22,7 +22,7 @@ CreateAddedVariablePlots <- function(nms, fit, dir = ".", save.plot = TRUE) {
         ggplot2::facet_wrap(~id, scale = "free_x")
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave(paste0(paste0(nms, collapse = "_"), "_av.png"), plt,
+            ggplot2::ggsave(paste0(dir, paste0(nms, collapse = "_"), "_av.png"), plt,
                             width = 10, height = 5)
         })
     return(plt)

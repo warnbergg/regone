@@ -12,7 +12,7 @@ CreateRegressorRegressorsPlots <- function(data, nms, dir = "./", save.plot = TR
         GGally:::ggscatmat()
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave(paste0(paste0(nms, collapse = "_"), "_rar.png"), plt)
+            ggplot2::ggsave(paste0(dir, paste0(nms, collapse = "_"), "_regreg.png"), plt)
         })
     return (plt)
 }

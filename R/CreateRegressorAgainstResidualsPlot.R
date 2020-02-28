@@ -17,7 +17,7 @@ CreateRegressorAgainstResidualsPlot <- function(data, nms, dir = ".", save.plot 
         ggplot2::facet_wrap(~variable, scale = "free", ncol = 1)
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave(paste0(paste0(nms, collapse = "_"), "_far.png"), plt)
+            ggplot2::ggsave(paste0(dir, paste0(nms, collapse = "_"), "_rar.png"), plt)
         })
     return(plt)
 }

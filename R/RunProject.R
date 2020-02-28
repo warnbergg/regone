@@ -28,7 +28,7 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
         CreateAddedVariablePlots(fit = fit, nms = nms, dir = dir)
         CreateRegressorRegressorsPlots(data = data, nms = nms, dir = dir)
     })
-    far <- CreateFittedAgainstResidualsPlot(data = data)
+    far <- CreateFittedAgainstResidualsPlot(data = data, dir = dir)
     p <- PRESS(fit)
     if (verbose)
         message("Detecting possible variable transformation...")
