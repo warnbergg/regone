@@ -2,10 +2,11 @@
 #'
 #' Run variable selection nested into cross-validation. Source: https://uc-r.github.io/model_selection. See section 6.1 of Introduction to Statistical Learning.
 #' @param data data.frame object. Data as prepared in "RunProject.R". Regressor values, predicted response, and residuals. No default.
-#' @param k Numeric vector of length 1. Number of folds to use in k-fold cross-validation. Defaults to 10. 
+#' @param k Numeric vector of length 1. Number of folds to use in k-fold cross-validation. Defaults to 10.
+#' @param dir Character vector of length 1. Directory in which to store the cv-plot. Defaults to "./" 
 #' @param save.plot Logical vector of length 1. If TRUE then the mean cv error plot -is saved to disk. Defaults to TRUE 
 #' @export
-RunCrossValidation <- function(data, k = 10, save.plot = TRUE) {
+RunCrossValidation <- function(data, k = 10, dir = "./", save.plot = TRUE) {
     set.seed(123)
     data <- data[, !names(data) %in% c("predicted", "r.student", "residuals")]
     n.regressors <- ncol(data) - 1
@@ -27,7 +28,7 @@ RunCrossValidation <- function(data, k = 10, save.plot = TRUE) {
         ggplot2::geom_line() + ggplot2::geom_point()
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave("cv_apr.png", plt)
+            ggplot2::ggsave(paste0(dir, "cv_apr.png"), plt)
         })
     b <- which.min(colMeans(cv.errors))
     all.reg <- leaps::regsubsets(density ~ ., data = data, nvmax = n.regressors)

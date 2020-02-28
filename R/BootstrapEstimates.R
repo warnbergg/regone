@@ -3,7 +3,7 @@
 #' Uses the boot package to bootstrap the regression coefficients for our fitted model.
 #' @param data data.frame. Data to fit the lm model to. No default.
 #' @param vars Named numeric vector. Coefficient values and corresponding variable names. No default.
-#' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
+#' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "./"
 #' @param digits Numeric vector of length 1. Digits to round to for values. Defaults to 4.
 #' @param ... Additional arguments for the boot function Description. Default/No default. 
 #' @export
