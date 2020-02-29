@@ -58,6 +58,5 @@ MakeTable <- function(tbl, labels.list, file.name, dir = "./", ...) {
     tbl[, unlist(labels.list)] %>%
         `colnames<-`(names(labels.list)) %>%
         kableExtra::kable(format = "latex", booktabs = TRUE, ...) %>%
-        kableExtra::kable_styling(latex_options = "scale_down") %>%
         write(paste0(dir, file.name))
 }
