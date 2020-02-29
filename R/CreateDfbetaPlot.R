@@ -21,7 +21,6 @@ CreateDfbetaPlot <- function(nms, fit, critical.value = NULL,
     label.data <- plot.data %>%
         dplyr::group_by(Regressor) %>%
         dplyr::top_n(n = n.largest, wt = abs(Value))
-    print(label.data)
     if (!is.null(critical.value)) {
         label.data <- plot.data %>%
             dplyr::group_by(Regressor) %>%

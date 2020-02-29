@@ -3,10 +3,10 @@
 #' Prepares data to plottable format, and plots as well as optionally saves faceted plot of regressors against externally studentized residuals.
 #' @param data data.frame object. Data as prepared in "make.project.R". Regressor values, predicted response, and residuals. No default.
 #' @param nms Character vector. Regressors to be plotted against residuals. Each regressor is individually plotted against the externally studentized residuals. No default
-#' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
+#' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "./"
 #' @param save.plot Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE 
 #' @export
-CreateRegressorAgainstResidualsPlot <- function(data, nms, dir = ".", save.plot = TRUE) {
+CreateRegressorAgainstResidualsPlot <- function(data, nms, dir = "./", save.plot = TRUE) {
     ## Error handling
     plot.data <- suppressMessages({reshape2::melt(data[, nms], id = ) %>%
         dplyr::mutate(r.student = rep(data$r.student, length(nms)))})

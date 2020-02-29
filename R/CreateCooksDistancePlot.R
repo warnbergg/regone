@@ -12,9 +12,9 @@ CreateCooksDistancePlot <- function(fit, critical.value = NULL,
                                     save.plot = TRUE) {
     ## Error handling
     cd <- cooks.distance(fit)
-    plot.data <- data.frame(cd = cd, observation = seq_along(cd))
+    plot.data <- data.frame(cd = cd, Observation = seq_along(cd))
     plt <- plot.data %>%
-        ggplot2::ggplot(ggplot2::aes(x = observation, y = cd, label = observation)) +
+        ggplot2::ggplot(ggplot2::aes(x = Observation, y = cd, label = Observation)) +
         ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black")
     label.data <- plot.data %>% dplyr::top_n(n = 3, wt = cd)
     if (!is.null(critical.value)) {
