@@ -10,12 +10,18 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
                        verbose = TRUE) {
     if (!dir.exists(dir))
         dir.create(dir)
+    verbose.dir <- "current working directory\n"
+    if (dir != "./")
+        verbose.dir <- paste0(dir, "\n")
+    CreateCharacteristicsTable(data = data, dir = dir)
+    if (verbose)
+        message(paste("Sample characteristics table saved to", verbose.dir)) 
     fit <- lm(formula = density ~ ., data = data)
     data$predicted <- predict(fit)
     data$residuals <- MASS::studres(fit)
     data$r.student <- rstudent(fit)
     if (verbose)
-        message("Generate significance tests...")    
+        message("Generating significance tests...")    
     st <- GenerateAnovaTable(fit = fit, dir = dir)
     if (verbose)
         message("Running residual analysis...")
@@ -35,10 +41,12 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
     trans <- CreateTransformedQQPlot(fit = fit, data = data, dir = dir)
     if (verbose)
         message("Running outlier detection analysis...")
-    cd <- CreateCooksDistancePlot(fit = fit, dir = dir)
-    di <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)),
-                           dir = dir)
-    db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit, dir = dir)
+    AnalyzeInfluence(
+        data = data,
+        fit = fit,
+        nm.chunks = nm.chunks,
+        dir = dir
+    )
     if (verbose)
         message("Computing multicolinearity measures...")
     mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit, dir = dir)
@@ -55,18 +63,11 @@ RunProject <- function(data = read.csv("../data/bodyfatmen.csv"),
         far = far,
         press = p,
         trans = trans,
-        cd = cd,
-        di = di,
-        db = db,
         mc.list = mc.list,
         vars = vars,
         b = b
     )
     saveRDS(results, paste0(dir, "results.Rds"))
-    if (verbose) {
-        verbose.dir <- "current working directory"
-        if (dir != "./")
-            verbose.dir <- dir
+    if (verbose) 
         message(paste("Project finished. Plots and results were saved to", verbose.dir))
-    }
 }
