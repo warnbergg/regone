@@ -24,9 +24,7 @@ p <- PRESS(fit)
 bx <- CreateBoxCoxPlot(fit = fit)
 trans <- CreateTransformedQQPlot(fit = fit, data = data)
 ## Outlier detection
-cd <- CreateCooksDistancePlot(fit = fit)
-pdi <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)))
-db <- lapply(nm.chunks, CreateDfbetaPlot, fit = fit)
+AnalyzeInfluence(data = data, nm.chunks = nm.chunks)
 ## Multicolinearity 
 mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit)
 ## Variable selection

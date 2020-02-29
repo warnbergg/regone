@@ -5,7 +5,8 @@
 #' @param nm.chunks List. Chunks of predictor labels as prepared in RunProject.R. No default. 
 #' @param save.plots Logical vector of length 1. If TRUE plots from the analysis are saved to disk. Defaults to TRUE. 
 #' @export
-AnalyzeInfluence <- function(data, nm.chunks, dir = "./", save.plots = TRUE) {
+AnalyzeInfluence <- function(data, fit, nm.chunks,
+                             dir = "./", save.plots = TRUE) {
     cd <- CreateCooksDistancePlot(fit = fit, save.plot = save.plots)
     pdi <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)),
                             save.plot = save.plots)
@@ -19,6 +20,7 @@ AnalyzeInfluence <- function(data, nm.chunks, dir = "./", save.plots = TRUE) {
         dplyr::select(-c(density, predicted, residuals, r.student))
     data.frame(Observation = top.points, df) %>%
         kableExtra::kable(format = "latex", row.names = FALSE,
-                          caption = "Top five most frequenly occuring points from the Cook's distance, \textit{DFBETA}, and \textit{DFFITS} analysis.") %>%
+                          caption = "Top five most frequenly occuring points from the Cook's distance, \\textit{DFBETA}, and \\textit{DFFITS} analysis.", booktabs = TRUE) %>%
+        kableExtra::kable_styling("scale_down") %>%
         write(paste0(dir, "influence_table.tex"))
 }
