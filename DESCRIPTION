@@ -21,7 +21,8 @@ Imports:
 	kableExtra,
 	knitr,
 	lindia,
-	leaps
+	leaps,
+	tableone
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
