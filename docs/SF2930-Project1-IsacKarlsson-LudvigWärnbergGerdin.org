@@ -176,13 +176,14 @@ Examiner \par
 ** Diagnostics and handling of Multicolinearity
 \newpage
 * Results
-** Significance tests
+** Sample characteristics and significance tests 
    
    Table 1 presents the ANOVA table for the full model. Using a 5% significance level, we see that neither of 
    the regressors \texttt{hip}, \texttt{knee}, \texttt{ankle}, \texttt{biceps}, and \texttt{forearm} are 
    significant predictors. 
 
-   \input{../anova.tex}
+   \input{../main/tblone.tex}
+   \input{../main/anova.tex}
 
 ** Residual analysis
 *** Normality of residuals
@@ -197,7 +198,7 @@ Examiner \par
     #+NAME: fig:qqplot
     #+CAPTION: Normality plot of residuals.
     #+ATTR_LATEX: :width 8cm
-    [[~/courses/Regression Analysis/regone/qqplot.png]]
+    [[~/courses/Regression Analysis/regone/main/qqplot.png]]
 
 *** Fitted Against Residuals
     
@@ -209,9 +210,9 @@ Examiner \par
     #+NAME: fig:far
     #+CAPTION: Fitted values against R-student residuals.
     #+ATTR_LATEX: :width 8cm
-    [[~/courses/Regression Analysis/regone/far.png]]
+    [[~/courses/Regression Analysis/regone/main/far.png]]
    
-*** Added Variable Analysis  
+*** Added Variable Analysis
    Partial regression plots are found in figure [[fig:biceps_forearm_wrist_av]], [[fig:thigh_knee_ankle_av]],
    [[fig:age_weight_height_neck]], and [[fig:chest_abdomen_hip_av]]. All figures exhibits potential outliers 
    (which will be further considered in section [[Diagnostics and handling of Outliers]]).
@@ -228,44 +229,45 @@ Examiner \par
    line from the origin, which may suggest that none of the regressors adds additional information 
    to the predictions.
 
-   No single regressors expresses non-linear tendencies, and hence these plots gives us no indication 
-   that the regressors should be transformed.
+   No single regressor expresses a non-linear marginal relationship with the response variable, and hence
+   these plots gives us no indication that the regressors need to be transformed to correct model inadequacies.
 
    #+NAME: fig:biceps_forearm_wrist_av
    #+CAPTION: Partial regression plots of regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.
    #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/biceps_forearm_wrist_av.png]]   
+   [[~/courses/Regression Analysis/regone/main/biceps_forearm_wrist_av.png]]   
 
    #+NAME: fig:thigh_knee_ankle_av
    #+CAPTION: Partial regression plots of regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.
    #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/thigh_knee_ankle_av.png]]
+   [[~/courses/Regression Analysis/regone/main/thigh_knee_ankle_av.png]]
 
    #+NAME: fig:age_weight_height_neck
    #+CAPTION: Partial regression plots of regressors \texttt{age}, \texttt{weight}, \texttt{height}, and \texttt{neck}.
    #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/age_weight_height_neck_av.png]]
+   [[~/courses/Regression Analysis/regone/main/age_weight_height_neck_av.png]]
 
    #+NAME: fig:chest_abdomen_hip_av
    #+CAPTION: Partial regression plots of regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.
    #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/chest_abdomen_hip_av.png]]
+   [[~/courses/Regression Analysis/regone/main/chest_abdomen_hip_av.png]]
 ** Transformations of variables
-   
-   Figure [[fig:boxcox_fit]] displays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
+
+   Figure [[fig:boxcox_fit]] pdisplays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
    the dependent variable \texttt{density}. The $\lambda$ that maximized the log-likelihood is 0.9 (0.7-1.1 95% CI). 
 
    Using $\lambda = 0.9$ gives us the normal probability plot displayed on the right hand side in figure [[fig:boxcox_fit]].
    We notice that this affects the distribution of residuals by making it more light-tailed. That is, the 
    the tails of the distribution are too light for the distribution to be considered normal.
 
-   In section [[Residual analysis]] we noted that there was no indication that a transformation was needed. 
-   Here, we see that the transformation of the response variable only makes matters worse.
+   In section [[Residual analysis]] we noted that there was no indication that a transformation was needed,
+   neither on the regressors nor on the response variable.
+   Here, we see that the transformation of the response variable skewes the results negatively.
 
    #+NAME: fig:boxcox_fit
    #+CAPTION: Values for lambda against the log-likelihood of \texttt{density} for Box-Cox transformations.
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/boxcox_fit.png]]
+   [[~/courses/Regression Analysis/regone/main/boxcox_fit.png]]
 
 ** Diagnostics and handling of Outliers
    
@@ -273,12 +275,12 @@ Examiner \par
    Cook's distance are labelled. Considering the cut-off $D_i = 1$ as proposed in \cite{Montgomery2012}, 
    where $D_i$ is the Cook's distance for observation $i$, we note that none of the observations would be 
    considered influential. Still, observation 39 and 83 are largely different relative
-   to the other points in terms of their Cook's distance. 
+   to the other points in terms of their Cook's distance, and should be further examined
 
    #+NAME: fig:cd
    #+CAPTION: Cook's distance for all observations.
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/cd.png]]
+   [[~/courses/Regression Analysis/regone/main/cd.png]]
 
    Figure [[fig:dffits]] reports the $DFFITS$ values. We label observations as in figure [[fig:cd]]. We observe 
    that the three largest absolute $DFFITS$ correspond to the same observations as in the Cook's distance plot.
@@ -289,39 +291,45 @@ Examiner \par
 
    Figure [[fig:biceps_forearm_wrist_dfbeta]], [[fig:age_weight_height_neck_dfbeta]], [[fig:thigh_knee_ankle_dfbeta]], and
    [[fig:chest_abdomen_hip_dfbeta]] presents $DFBETA$ values for groups of regressors. Observation 39
-   is present in a number of these figures. Using the aforementioned cut-off value of $\frac{2}{\sqrt{n}}$, we 
-   we note that none of these points would be considered influential points.
+   is present in a number of these figures, as well as observation number 83 and 217. 
+   Using the aforementioned cut-off value of $\frac{2}{\sqrt{n}}$, we note however that none of these points
+   would be considered influential points.
+
+   We present the five most frequently occuring points in the outlier/influence plots in Table \ref{tab}
+   Comparing with the sample characteristics in Table x.
+
+   \input{../main/influence_table.tex}
 
    #+NAME: fig:dffits
    #+CAPTION: $DFFITS$ for all observations.
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/dffits.png]]
+   [[~/courses/Regression Analysis/regone/main/dffits.png]]
 
    #+NAME: fig:biceps_forearm_wrist_dfbeta
    #+CAPTION: $DFBETA$ for regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/biceps_forearm_wrist_dfbeta.png]]
+   [[~/courses/Regression Analysis/regone/main/biceps_forearm_wrist_dfbeta.png]]
 
    #+NAME: fig:age_weight_height_neck_dfbeta
    #+CAPTION: $DFBETA$ for regressors \texttt{age}, \texttt{weight}, \texttt{height} and \texttt{neck}.
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/age_weight_height_neck_dfbeta.png]]
+   [[~/courses/Regression Analysis/regone/main/age_weight_height_neck_dfbeta.png]]
 
    #+NAME: fig:thigh_knee_ankle_dfbeta
    #+CAPTION: $DFBETA$ for regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/thigh_knee_ankle_dfbeta.png]]
+   [[~/courses/Regression Analysis/regone/main/thigh_knee_ankle_dfbeta.png]]
 
    #+NAME: fig:chest_abdomen_hip_dfbeta
    #+CAPTION: $DFBETA$ for regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/chest_abdomen_hip_dfbeta.png]]
+   [[~/courses/Regression Analysis/regone/main/chest_abdomen_hip_dfbeta.png]]
 
 ** Diagnostics and Handling of Multicolinearity
    
    Table 2 presents the VIF and eigen value for each respective regressor. The eigen values for the \texttt{biceps},
    \texttt{forearm}, and \texttt{wrist} regressors are relatively close to zero, and the VIF of the \texttt{weight},
-   \texttt{chest}, \texttt{abdomen}, and \texttt{hip} regressors are larger than 10 (NOTERA DETTA I METOD). Hence, there appears 
+   \texttt{chest}, \texttt{abdomen}, and \texttt{hip} regressors are larger than 10. Hence, there appears 
    to be an indication of multicolinearity amongst the candidate regressors.
 
    A coorelation matrix for the full model is found in section [[Appendix A]]. The strong multicolinearity
@@ -329,7 +337,7 @@ Examiner \par
    [[fig:hm]]. The \texttt{weight} regressor shows a strong correlation with all but the \texttt{age} and
    the \texttt{height} regressors.
 
-   \input{../mc.tex} 
+   \input{../main/mc.tex} 
 
 ** Variable selection
    
@@ -337,32 +345,35 @@ Examiner \par
    to each model index in Table 3 in [[Appendix B]] is presented in Table 4. The best subset plots 
    are presented in figure [[fig:variable_selection]].
 
-   The best performing model, its predictors and the corresponding coefficients along with 95% confidence intervals 
-   are presented in Table 3. A full re-run of the analysis with solely these predictors are presented in [[Appendix C]].
+   The most well performing model (indicated by its cross-validated mean squared error), its predictors and
+   the corresponding coefficients along with 95% confidence intervals are presented in Table 3. 
 
    #+NAME: fig:cv_apr
    #+CAPTION: Cross-validated mean squared error for the best subset model and number of regressors.
    #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/cv_apr.png]]
+   [[~/courses/Regression Analysis/regone/main/cv_apr.png]]
    
    #+NAME: fig:variable_selection
    #+CAPTION: Number of regressors against multiple performance measures for the best subset regression models.
    #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/variable_selection.png]]
+   [[~/courses/Regression Analysis/regone/main/variable_selection.png]]
 
-   \input{../cis.tex}
+   \input{../main/cis.tex}
 \newpage
+* Discussion
+  Note that the \texttt{weight} predictor is included in this model. In section [[Diagnostics and Handling of Multicolinearity]]
+  we noted a strong indication of colinearity associated with this predictor.
 * Conclusion
 * Appendix A
   #+NAME: fig:hm
   #+CAPTION: Correlation matrix of the full model
-  [[~/courses/Regression Analysis/regone/hm.png]]
+  [[~/courses/Regression Analysis/regone/main/hm.png]]
   
 * Appendix B
 
-  \input{../variable_selection.tex}
+  \input{../main/variable_selection.tex}
 
-  \input{../model_table.tex}
+  \input{../main/model_table.tex}
 * Appendix C
 \bibliographystyle{plain}
 \bibliography{library}
