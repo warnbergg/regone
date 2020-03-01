@@ -18,7 +18,7 @@ AnalyzeInfluence <- function(data, fit, nm.chunks,
     knitr::opts_current$set(label = "influence")
     data.frame(Observation = points, df) %>%
         kableExtra::kable(format = "latex", row.names = FALSE,
-                          caption = "Observations considered as outliers from the Cook's distance, \\textit{DFBETA}, and \\textit{DFFITS} analysis.", booktabs = TRUE) %>%
+                          caption = "Observations considered as outliers from the Cook's distance and \\textit{DFFITS} analysis.", booktabs = TRUE) %>%
         kableExtra::kable_styling(latex_options = "scale_down") %>%
         write(paste0(dir, "influence_table.tex"))
 

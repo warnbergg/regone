@@ -26,10 +26,13 @@ CreateDffitsPlot <- function(fit, critical.value = NULL,
     plt <- plt +
         ggplot2::geom_label(data = label.data %>%
                                 dplyr::filter(DFFITS >= 0),
-                            nudge_y = 0.1) + 
+                            nudge_y = 0.1) +
         ggplot2::geom_label(data = label.data %>%
                                 dplyr::filter(DFFITS < 0),
-                            nudge_y = -0.1)
+                            nudge_y = -0.1) + 
+        ggplot2::geom_bar(data = label.data, stat = "identity", width = 0.1, color = "blue") +
+        ggplot2::xlab("Observation") +
+        ggplot2::ylab("DFFITS")
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave(paste0(dir, "dffits.png"), plt)

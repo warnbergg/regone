@@ -22,7 +22,12 @@ CreateCooksDistancePlot <- function(fit, critical.value = NULL,
         plt <- plt + ggplot2::geom_hline(yintercept = c(critical.value, -critical.value),
                                          linetype = "dashed")
     }
-    plt <- plt + ggplot2::geom_label(data = label.data)  
+    plt <- plt + ggplot2::geom_label(data = label.data,
+                                     nudge_x = 10) + 
+        ggplot2::geom_bar(data = label.data,
+                          stat = "identity", width = 0.1, color = "blue") +
+        ggplot2::xlab("Observation") +
+        ggplot2::ylab("Cook's Distance")
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave(paste0(dir, "cd.png"), plt)
