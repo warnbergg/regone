@@ -3,10 +3,11 @@
 #' Run a full cycle of residual analysis, multicolinearity analysis etc.
 #' @param data data.frame. The data to print use for analysis. Defaults to read.csv("../data/bodyfatmen.csv")
 #' @param dir Character vector of length 1. Directory in which to save analysis results. Defaults to "."
+#' @param run.apr Logical vector of length 1. If TRUE all possible regression is run. Note that this is quite time and resource consuming. Defaults to TRUE.
 #' @param verbose Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE 
 #' @export
 RunFullAnalysis <- function(data = read.csv("../data/bodyfatmen.csv"),
-                            dir = "./",
+                            dir = "./", run.apr = TRUE,
                             verbose = TRUE) {
     if (!dir.exists(dir))
         dir.create(dir)
@@ -34,11 +35,13 @@ RunFullAnalysis <- function(data = read.csv("../data/bodyfatmen.csv"),
         CreateAddedVariablePlots(fit = fit, nms = nms, dir = dir)
         CreateRegressorRegressorsPlots(data = data, nms = nms, dir = dir)
     })
-    d <- data %>% dplyr::mutate(height = 1/height^2)
+    d <- data %>%
+        dplyr::select(-c(predicted, residuals, r.student)) %>%
+        dplyr::mutate(height = 1/(height^3))
     f <- lm(formula = density ~ ., data = d)
-    av_height <- CreateAddedVariablePlots(fit = f, nms = "height", dir = dir)
+    av_height <- CreateAddedVariablePlots(nms = "height", fit = f, dir = dir)
     far <- CreateFittedAgainstResidualsPlot(data = data, dir = dir)
-    xp <- PRESS(fit)
+    p <- PRESS(fit)
     if (verbose)
         message("Detecting possible variable transformation...")
     trans <- CreateTransformedQQPlot(fit = fit, data = data, dir = dir)
@@ -55,7 +58,8 @@ RunFullAnalysis <- function(data = read.csv("../data/bodyfatmen.csv"),
     mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit, dir = dir)
     if (verbose)
         message("Running variable selection analysis and bootstrapping...")
-    RunAllPossibleRegression(fit = fit, dir = dir)
+    if (run.apr)
+        RunAllPossibleRegression(fit = fit, dir = dir)
     vars <- RunCrossValidation(data = data, dir = dir)
     b <- BootstrapEstimates(data = data, vars = vars, dir = dir, R = 1000)
     results <- list(
@@ -71,7 +75,7 @@ RunFullAnalysis <- function(data = read.csv("../data/bodyfatmen.csv"),
         vars = vars,
         b = b
     )
-    saveRDS(results, paste0(dir, "results.Rds"))
+    saveRDS(results, paste0(dir, "results.rds"))
     if (verbose) 
         message(paste("Plots and results were saved to", verbose.dir))
 }
