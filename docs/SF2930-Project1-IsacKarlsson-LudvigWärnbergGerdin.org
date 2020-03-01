@@ -263,13 +263,14 @@ Examiner \par
 ** Transformations of variables
 
    In section [[Residual analysis]] we noted that there was no indication that a transformation was needed on the 
-   response variable. Here, we see that the transformation of the response variable skews the results negatively.
+   response variable. Here, we will see that the transformation of the response variable skews the results negatively.
    Figure [[fig:boxcox_fit]] displays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
-   the dependent variable \texttt{density}. The $\lambda$ that maximized the log-likelihood is 0.9 (0.7-1.1 95% CI). 
+   the dependent variable \texttt{density}. The $\lambda$ that maximized the log-likelihood is 0.9 
+   (0.7-1.1 approximate 95% CI). 
 
-   Using $\lambda = 0.9$ gives us the normal probability plot displayed on the right hand side in figure [[fig:boxcox_fit]].
-   We notice that this affects the distribution of residuals by making it more light-tailed. That is, the 
-   the tails of the distribution are too light for the distribution to be considered normal.
+   Using $\lambda = 0.9$ gives us the normal probability plot displayed on the right hand side in figure
+   [[fig:boxcox_fit]]. We notice that this affects the distribution of residuals by making it more light-tailed. 
+   That is, the tails of the distribution are too light for the distribution to be considered normal.
 
    In section [[Residual analysis]], however, we noted that the relationship between the \texttt{height} regressor 
    and the reponse variable was misspecified as indicated by the partial regression plot. In order to correct 
@@ -284,7 +285,7 @@ Examiner \par
    #+NAME: fig:av_height
    #+CAPTION: The partial regression plot for $1/\text{\texttt{height}}^2$
    #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/main/av_height.png]]
+   [[~/courses/Regression Analysis/regone/main/height_av.png]]
 
 ** Diagnostics and Handling of Outliers
    
@@ -321,11 +322,17 @@ Examiner \par
 
    We present the observations noted in the Cook's distance and DFFITS plots in Table \ref{tab:influence}.
    The points labelled in the $DFBETA$ plots are not considered by the reason noted previously 
-   in section [[DFFITS & DFBETAS]]. Looking at the observations, we note some observations are unlikely but 
-   plausible measurements, for example observation 39. In other words, they are not a result of mis-measurement.
-   By this argument, we choose not to exclude the observations. Still, they have considerable effect on the model fit
+   in section [[DFFITS & DFBETAS]]. 
+
+   We analyse these observations from two perspectives: Cause of outlier tendencies and effect on fit of 
+   the model. Looking at the observations, we note that some observations are unlikely but 
+   still plausible measurements, for example observation 39. In other words, they are not likely a result
+   of mis-measurements, and hence should not be removed for that reason. For the second perspective, 
+   we re-run the regression analysis without the influential observations. 
 
    \input{../main/influence_table.tex}
+
+   \input{../woinfluence/mc.tex}
 
 ** Diagnostics and Handling of Multicolinearity
    

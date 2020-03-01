@@ -24,10 +24,11 @@ p <- PRESS(fit)
 bx <- CreateBoxCoxPlot(fit = fit)
 trans <- CreateTransformedQQPlot(fit = fit, data = data)
 ## Outlier detection
-AnalyzeInfluence(data = data, nm.chunks = nm.chunks)
+inf.points <- AnalyzeInfluence(data = data, fit = fit, nm.chunks = nm.chunks)
 ## Multicolinearity 
 mc.list <- GenerateMulticolinearityMeasures(data = data, fit = fit)
 ## Variable selection
 vars <- RunCrossValidation(data = data)
 ## Bootstrapping coefficients
 b <- BootstrapEstimates(data = data, vars = vars, R = 1000)
+

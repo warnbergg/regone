@@ -6,7 +6,7 @@
 #' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
 #' @param save.plots Logical vector of length 1. If TRUE the VIF plot and correlation heatmap are saved to disk. Defaults to TRUE.
 #' @export
-GenerateMulticolinearityMeasures <- function(data, fit, dir = ".",
+GenerateMulticolinearityMeasures <- function(data, fit, dir = "./",
                                              save.plots = TRUE) {
     d <- data[, !names(data) %in% c("density", "predicted", "residuals", "r.student")]
     c <- cor(d)
@@ -18,7 +18,7 @@ GenerateMulticolinearityMeasures <- function(data, fit, dir = ".",
     })
     plt <- PlotVar(plot.data)
     ## Save table for multicolinearity measures
-    knitr::opts_current$set(label = "mc")
+    knitr::opts_current$set(label = paste0("mc")
     tbl <- round(t(data.frame(Eigen = e, VIF = v)), 2) %>%
         kableExtra::kable(format = "latex", booktabs = TRUE,
                           caption = "Multicolinearity measures.") %>%
