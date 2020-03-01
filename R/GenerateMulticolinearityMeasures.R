@@ -22,7 +22,6 @@ GenerateMulticolinearityMeasures <- function(data, fit, dir = ".",
     tbl <- round(t(data.frame(Eigen = e, VIF = v)), 2) %>%
         kableExtra::kable(format = "latex", booktabs = TRUE,
                           caption = "Multicolinearity measures.") %>%
-        kableExtra::kable_styling(latex_options = "scale_down") %>%
         write(paste0(dir, "mc.tex"))
     ## http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-
     ## heatmap-r-software-and-data-visualization

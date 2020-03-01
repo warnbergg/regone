@@ -12,13 +12,14 @@ BootstrapEstimates <- function(data, vars, dir = "./", digits = 4, ...) {
     b <- boot::boot(data = data, statistic = BootCoefs, vars = names(vars)[-1], ...)
     ci.mat <- sapply(seq(vars), function(i) boot::boot.ci(b, index = i, type = "basic")$basic[, c(4, 5)])
     confs <- paste0("(", apply(round(ci.mat, digits), 2, paste, collapse = " to "), ")")
+    knitr::opts_current$set(label = "coeffs")
     data.frame(p = names(vars),
                c = paste(round(vars, digits), confs)) %>%
         `colnames<-`(c("Predictor", "Coefficient (95 %)")) %>%
         kableExtra::kable(format = "latex", booktabs = TRUE,
                           caption = "Coefficients (95\\% CI) of final model.",
                           row.names = FALSE) %>%
-        write(paste0(dir, "cis.tex"))
+        write(paste0(dir, "coeffs.tex"))
     return (list(summary = summary(b),
                  boot.object = b))
 }

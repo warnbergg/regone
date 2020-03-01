@@ -55,6 +55,7 @@ RunAllPossibleRegression <- function(fit, performance.measures = c("adjr", "aic"
 #' @param file.name Character vector of length 1. File name of the table. No default
 #' @param ... Additional arguments for kableExtra::kable. 
 MakeTable <- function(tbl, labels.list, file.name, dir = "./", ...) {
+    knitr::opts_current$set(label = sub("\\.*", "", file.name))
     tbl[, unlist(labels.list)] %>%
         `colnames<-`(names(labels.list)) %>%
         kableExtra::kable(format = "latex", booktabs = TRUE, ...) %>%

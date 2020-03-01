@@ -6,6 +6,7 @@
 #' @param ... Additional arguments for tableone::CreateTableOne.
 #' @export
 CreateCharacteristicsTable<- function(data, dir = "./", ...) {
+    knitr::opts_current$set(label = "tblone")
     tableone::CreateTableOne(data = data, ...) %>%
         print(nonnormal = names(data), printToggle = FALSE) %>%
         kableExtra::kable(format = "latex", booktabs = TRUE,
