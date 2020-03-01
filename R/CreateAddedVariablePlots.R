@@ -10,15 +10,21 @@ CreateAddedVariablePlots <- function(nms, fit, dir = "./", save.plot = TRUE) {
     plot.data.lst <- InvisiblePlot(car::avPlots(fit, ask = FALSE))[nms]
     plot.data <- do.call(rbind, lapply(names(plot.data.lst), function(nm) {
         id <- rep(nm, nrow(plot.data.lst[[nm]]))
-        df <- data.frame(id = id, plot.data.lst[[nm]])
-        colnames(df) <- c("id", "x", "y")
+        df <- data.frame(id = id, plot.data.lst[[nm]]) %>%
+            dplyr::mutate(observation = row.names(.)) %>%
+            `colnames<-`(c("id", "x", "y", "observation"))
         return(df)
     }))
-    plt <- ggplot2::ggplot(plot.data, ggplot2::aes(x = x, y = y)) +
+    label.data <- plot.data %>%
+        dplyr::group_by(id) %>%
+        dplyr::filter(x > quantile(x, 0.999) | x < quantile(x, 0.001))
+    plt <- ggplot2::ggplot(plot.data, ggplot2::aes(x = x, y = y, label = observation)) +
         ggplot2::geom_point() +
+        ggplot2::geom_point(data = label.data, colour = "blue") + 
         ggplot2::geom_smooth(method = 'lm', se = FALSE, 
-                             color = 'red', formula = y ~ x,
+                             color = 'black', formula = y ~ x,
                              linetype = 'dashed') +
+        ggplot2::geom_text(data = label.data, nudge_y = 0.003) + 
         ggplot2::facet_wrap(~id, scale = "free_x")
     if (save.plot)
         suppressMessages({
