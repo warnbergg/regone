@@ -18,7 +18,7 @@ GenerateMulticolinearityMeasures <- function(data, fit, dir = "./",
     })
     plt <- PlotVar(plot.data)
     ## Save table for multicolinearity measures
-    knitr::opts_current$set(label = paste0("mc")
+    knitr::opts_current$set(label = paste0("mc"))
     tbl <- round(t(data.frame(Eigen = e, VIF = v)), 2) %>%
         kableExtra::kable(format = "latex", booktabs = TRUE,
                           caption = "Multicolinearity measures.") %>%

@@ -8,10 +8,11 @@
 #' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
 #' @param save.plot Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE 
 #' @export
-CreateTransformedQQPlot<- function(fit, data, lambda = 0.9,
-                                   dir = ".", save.plot = TRUE) {
+CreateTransformedQQPlot <- function(fit, data, lambda = 0.9,
+                                    dir = ".", save.plot = TRUE) {
+    
     ## Error handling
-    bx <- CreateBoxCoxPlot(fit, save.plot = FALSE)
+    bx <- CreateBoxCoxPlot(fit = fit, save.plot = FALSE)
     new.fit <- lm(formula = ((density^lambda - 1)/lambda) ~ ., data = data)
     res <- data.frame(residuals = MASS::studres(new.fit))
     qq <- CreateQQPlot(res, save.plot = FALSE)

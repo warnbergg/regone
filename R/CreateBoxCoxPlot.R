@@ -8,7 +8,7 @@
 #' @export
 CreateBoxCoxPlot <- function(fit, dir = ".", save.plot = TRUE, ...) {
     ## Error handling
-    plt <- lindia::gg_boxcox(fit, ...)
+    plt <- lindia::gg_boxcox(fit = fit, ...)
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave(paste0(dir, "boxcox.png"), plt)

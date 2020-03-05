@@ -8,11 +8,12 @@
 #' @export
 AnalyzeInfluence <- function(data, fit, nm.chunks,
                              dir = "./", save.plots = TRUE) {
+    
     cd <- CreateCooksDistancePlot(fit = fit, save.plot = save.plots, dir = dir)
     pdi <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)),
                             save.plot = save.plots, dir = dir)
     influential.obs <- lapply(list(cd, pdi), function(l) l$influential.obs$Observation)
-    points <- unlist(influential.obs)
+    points <- unique(unlist(influential.obs))
     df <- data[points, ] %>%
         dplyr::select(-c(density, predicted, residuals, r.student))
     knitr::opts_current$set(label = "influence")
