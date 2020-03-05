@@ -4,37 +4,56 @@
 #' @param data data.frame object. Data as prepared in "RunProject.R". Regressor values, predicted response, and residuals. No default.
 #' @param k Numeric vector of length 1. Number of folds to use in k-fold cross-validation. Defaults to 10.
 #' @param dir Character vector of length 1. Directory in which to store the cv-plot. Defaults to "./" 
-#' @param save.plot Logical vector of length 1. If TRUE then the mean cv error plot -is saved to disk. Defaults to TRUE 
+#' @param save.plot Logical vector of length 1. If TRUE then the mean cv error and all possible regression plots are saved to disk. Defaults to TRUE 
 #' @export
 RunCrossValidation <- function(data, k = 10, dir = "./", save.plot = TRUE) {
     set.seed(123)
     data <- data[, !names(data) %in% c("predicted", "r.student", "residuals")]
     n.regressors <- ncol(data) - 1
-    folds <- sample(1:k, nrow(data), replace = TRUE)
-    cv.errors <- matrix(NA, k, n.regressors, dimnames = list(NULL, paste(1:n.regressors)))
-    for (j in 1:k) {
-        ## perform best subset on rows not equal to j
-        best_subset <- leaps::regsubsets(density ~ ., data[folds != j, ], nvmax = n.regressors)
-        ## perform cross-validation
-        for(i in 1:n.regressors) {
-            pred.x <- PredictRegsubsets(best_subset, data[folds == j, ], id = i)
-            cv.errors[j, i] <- mean((data$density[folds == j] - pred.x)^2)
-        }
-    }
-    plot.data <- colMeans(cv.errors) %>% reshape2::melt()
-    plot.data$id <- factor(as.numeric(rownames(plot.data)))
-    plt <- plot.data %>%
-        ggplot2::ggplot(ggplot2::aes(x = id, y = value, group = 1)) +
-        ggplot2::geom_line() + ggplot2::geom_point()
+    ## Partition the data set
+    train.i <- caret::createDataPartition(y = data$density, p = 0.75)
+    train.validation <- data[train.i[[1]], ]
+    test <- data[-train.i[[1]], ]
+    folds <- sample(1:k, nrow(train.validation), replace = TRUE)
+    ## Get the cv'd mean squared errors for each model
+    cv.errors <- GetErrors(
+        d = train.validation,
+        k = k,
+        p = n.regressors,
+        folds = folds,
+        dir = dir,
+        save.plot = save.plot
+    )
+    ## Find the combination of predictors that minimize the cv'd MSE
+    b <- which.min(colMeans(cv.errors))
+    all.reg <- leaps::regsubsets(density ~ ., data = train.validation, nvmax = n.regressors)
+    s <- summary(all.reg)
+    ## Plot summary statistics
+    plt <- data.frame(predictors = factor(1:n.regressors),
+                      adj_R2 = s$adjr2,
+                      Cp = s$cp,
+                      BIC = s$bic) %>%
+        tidyr::gather(statistic, value, -predictors) %>%
+        dplyr::mutate(statistic = factor(statistic, labels = c("Adjusted R^2", "C(p)", "BIC"))) %>%
+        ggplot2::ggplot(ggplot2::aes(x = predictors, y = value, group = 1)) +
+        ggplot2::geom_line() +
+        ggplot2::geom_point() +
+        ggplot2::facet_wrap(~statistic, scale = "free")
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave(paste0(dir, "cv_apr.png"), plt)
+            ggplot2::ggsave(paste0(dir, "apr.png"), plt)
         })
-    b <- which.min(colMeans(cv.errors))
-    all.reg <- leaps::regsubsets(density ~ ., data = data, nvmax = n.regressors)
+    ## Predict on the test set, and compute MSE
+    p <- PredictRegsubsets(
+        all.reg,
+        newdata = test,
+        i = names(which.min(b))[[1]]
+    )
+    test.mse <- mean((test$density - p)^2)
     final <- coef(all.reg, names(which.min(b))[1])
     
-    return (final)
+    return (list(vars = final,
+                 test.mse = test.mse))
 }
 #' PredictRegsubsets
 #'
@@ -48,4 +67,35 @@ PredictRegsubsets <- function(object, newdata, id, ...) {
     coefi <- coef(object, id = id)
     xvars <- names(coefi)
     mat[, xvars] %*% coefi
+}
+#' GetErrors
+#'
+#' Sets up the cross-validation, saves the cv-plot and runs best-subset regression on the full train-validation set.
+#' @param d data.frame. Training and validation set. No default
+#' @param k Numeric vector of length 1. Number of folds to use in k-fold cross-validation. No default.
+#' @param p Numeric vector of length 1. Number of regressors in the data. No default.
+#' @param folds Folds to use in CV. No default.
+GetErrors <- function(d, k, p, folds,
+                      dir = "./", save.plot = TRUE) {
+    cv.errors <- matrix(NA, k, p, dimnames = list(NULL, paste(1:p)))
+    for (j in 1:k) {
+        ## perform best subset on rows not equal to j
+        best_subset <- leaps::regsubsets(density ~ ., d[folds != j, ], nvmax = p)
+        ## perform cross-validation
+        for(i in 1:p) {
+            pred.x <- PredictRegsubsets(best_subset, d[folds == j, ], id = i)
+            cv.errors[j, i] <- mean((d$density[folds == j] - pred.x)^2)
+        }
+    }
+    plot.d <- colMeans(cv.errors) %>% reshape2::melt()
+    plot.d$id <- factor(as.numeric(rownames(plot.d)))
+    plt <- plot.d %>%
+        ggplot2::ggplot(ggplot2::aes(x = id, y = value, group = 1)) +
+        ggplot2::geom_line() + ggplot2::geom_point()
+    if (save.plot)
+        suppressMessages({
+            ggplot2::ggsave(paste0(dir, "cv_apr.png"), plt)
+        })
+    
+    return (cv.errors)
 }
