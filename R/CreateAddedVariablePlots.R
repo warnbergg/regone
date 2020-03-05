@@ -17,7 +17,7 @@ CreateAddedVariablePlots <- function(nms, fit, dir = "./", save.plot = TRUE) {
     }))
     label.data <- plot.data %>%
         dplyr::group_by(id) %>%
-        dplyr::filter(x > quantile(x, 0.999) | x < quantile(x, 0.001))
+        dplyr::filter(x > quantile(x, 0.99) | x < quantile(x, 0.01))
     plt <- ggplot2::ggplot(plot.data, ggplot2::aes(x = x, y = y, label = observation)) +
         ggplot2::geom_point() +
         ggplot2::geom_point(data = label.data, colour = "blue") + 

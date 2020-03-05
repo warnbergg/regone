@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{davison_hinkley_1997}
+A.~C. Davison and D.~V. Hinkley.
+\newblock {\em Bootstrap Methods and their Application}.
+\newblock Cambridge Series in Statistical and Probabilistic Mathematics.
+  Cambridge University Press, 1997.
+
 \bibitem{Fox1991}
 John Fox.
 \newblock {\em {Regression Diagnostics: An Introduction}}.
@@ -11,6 +17,13 @@ gung \-Reinstate Monica
 \newblock How to read cook's distance plots?
 \newblock Cross Validated.
 \newblock URL:https://stats.stackexchange.com/q/22286 (version: 2012-02-05).
+
+\bibitem{20856}
+gung Reinstate Monica
+  (https://stats.stackexchange.com/users/7290/gung-reinstate monica).
+\newblock Algorithms for automatic model selection.
+\newblock Cross Validated.
+\newblock URL:https://stats.stackexchange.com/q/20856 (version: 2012-01-11).
 
 \bibitem{Montgomery2012}
 Douglas~C Montgomery, Elizabeth~A Peck, and G~Geoffrey Vining.
