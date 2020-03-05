@@ -1,6 +1,6 @@
 #' AnalyzeInfluence
 #'
-#' Wrapper to run Cook's distance and DFFITS, and tabulate the influential points for further investigation.
+#' Wrapper to run Cook's distance, DFFITS, and DFBETA's and tabulate the influential points for further investigation.
 #' @param data data.frame. Data as prepared in RunProject.R. No default.
 #' @param nm.chunks List. Chunks of predictor labels as prepared in RunProject.R. No default.
 #' @param dir Character vector of length 1. Directory in which to save the plots and the influence table. Defaults to "./" 
@@ -8,7 +8,16 @@
 #' @export
 AnalyzeInfluence <- function(data, fit, nm.chunks,
                              dir = "./", save.plots = TRUE) {
-    
+
+    ## Run DFBETA analysis
+    db <- lapply(
+        X=nm.chunks,
+        FUN=CreateDfbetaPlot,
+        fit = fit,
+        dir = dir,
+        save.plot = save.plots
+    )
+    ## Run other outlier detection and tabulate
     cd <- CreateCooksDistancePlot(fit = fit, save.plot = save.plots, dir = dir)
     pdi <- CreateDffitsPlot(fit = fit, critical.value = 2 * sqrt(ncol(data)/nrow(data)),
                             save.plot = save.plots, dir = dir)

@@ -25,6 +25,12 @@ gung Reinstate Monica
 \newblock Cross Validated.
 \newblock URL:https://stats.stackexchange.com/q/20856 (version: 2012-01-11).
 
+\bibitem{hastie2009elements}
+T.~Hastie, R.~Tibshirani, and J.H. Friedman.
+\newblock {\em The Elements of Statistical Learning: Data Mining, Inference,
+  and Prediction}.
+\newblock Springer series in statistics. Springer, 2009.
+
 \bibitem{Montgomery2012}
 Douglas~C Montgomery, Elizabeth~A Peck, and G~Geoffrey Vining.
 \newblock {\em {Introduction to Linear Regression Analysis}}.

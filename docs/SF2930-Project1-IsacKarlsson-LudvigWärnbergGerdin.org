@@ -225,7 +225,9 @@ Examiner \par
    the stability of the model is heavily influenced by it. 
 
 ** Computer-Intensive Procedures and Variable Selection
-*** The Boostrap
+
+*** The Bootstrap
+
    Bootstrapping is a computer-intensive technique that allow us to compute reliable estimates of the standard
    errors of regression estimates when there is no standard procedure available or cases where the results are
    only approximate techniques (e.g. based on large-sample theory). 
@@ -235,7 +237,9 @@ Examiner \par
    proceed to fit the model to this sample by using the procedure as for the original sample. This gives us
    the first bootstrap estimate BetaHat1(star). We repeat this process many times and each repetition, a new 
    bootstrap sample is selected, the model is fit, and an estimate BetaHati(star) is concluded. 
-*** Variable selection
+
+*** Variable Selection
+
    If multicollinearity is present, variable selection methods are very useful. Note that variable selection does
    not result in complete elimination of multicollinearity, in some cases two or more regressors are highly related 
    even though some subset of them indeed should be a part of the model, instead it helps us justify the presence
@@ -244,17 +248,41 @@ Examiner \par
 
 *** All Possible Regression and Other Methods
 
-   Simply requires to fit all the regression equations starting with one candidate regressor, then two
-   candidate regressors and so on. These are later analyzed regarding some criterion and the “best” one is selected. 
+    Simply requires to fit all the regression equations starting with one candidate regressor, then two
+    candidate regressors and so on. These are later analyzed regarding some criterion and the “best” one is selected. 
 
-   Since evaluating all possible regressions can sometimes be time consuming computationally, there are other
-   methods for evaluating only a smaller number of subset regression models by adding/removing regressors one
-   at a time. These methods are generally called stepwise procedures, and examples are forward selection and backward
-   elimination. These are not considered here, since the use of all possible regression is justified.
+    Since evaluating all possible regressions can sometimes be time consuming computationally, there are other
+    methods for evaluating only a smaller number of subset regression models by adding/removing regressors one
+    at a time. These methods are generally called stepwise procedures, and examples are forward selection and backward
+    elimination. These are not considered here, since the use of all possible regression is justified.
 
-   Note that we have not included any of the stepwise regression methods mentioned above. Primarily
-   because of the list of problems connected with these methods \cite{20856}, which are for example that they yield
-   R-squared values that are highly biased and cause severe problems in the presence of collinearity.
+    Note that we have not included any of the stepwise regression methods mentioned above. Primarily
+    because of the list of problems connected with these methods \cite{20856}, which are for example that they yield
+    R-squared values that are highly biased and cause severe problems in the presence of collinearity.
+
+*** Cross-validation
+    
+    The all possible regression procedure were nested into a cross-validation procedure. The most 
+    primitive form of cross-validation is when the data is split into two parts, and the model
+    is trained one subset of the data (usually referred to as the training set) and validated 
+    on the other part of the data (usually referred to as the validation set).
+
+    The most extreme form of cross-validation is the leave-one-out cross-validation, where the model 
+    is fit on $n - 1$ observations and tested on one the last observation. Then the "validation"-observation 
+    is swapped for one of the $n - 1$ observations and the procedure is looped until every observation has acted 
+    as the validation observation.
+
+    In the analysis we first combine a simple split of the data as described in the first paragraph, and 
+    $K$-fold cross-validation where the data is split into $K$ parts. The cross-validation is conducted on
+    one part of the data and the final model error is tested on the other 
+    part of the data. That way we derive a model from one part of the data, and get an performance 
+    estimate of the chosen model on unseen data. The K-fold cross the model is trained on $K - 1$ parts of the data,
+    and validated on the last part. The validation part is swapped for one of the $K - 1$ parts, and the
+    procedure is run until all "folds" has acted the validation fold.
+
+    We set the $K = 10$ in this analysis. This has been recommended as a compromise of keeping both the bias of 
+    overestimating the generalization error of the model and the variance of the model low.
+    \cite{hastie2009elements}
 
 \newpage
 * Results
@@ -366,10 +394,15 @@ Examiner \par
 
    In order to handle the multicollinearity in the data, we replace the variables that appear to be involved 
    in the multicolinearity with a summary variable. \cite{Montgomery2012} The summary variable is referred to as
-   \texttt{combo} and was defined as $\frac{\texttt{hip}\times\texttt{thigh}\times\texttt{abdomen}}{\texttt{weight}}$
-   The rationale for this particular combiation of predictors was that it minimizes the MSE, as well as makes sure
-   that the VIF are below 10 and that the eigen values of the $\textbf{X}\textbf{X}'$. The resulting VIF are
-   presented in figure [[fig:vif_combo]]. 
+   \texttt{combo} and was defined as
+
+   \[
+   \frac{\texttt{hip}\times\texttt{thigh}\times\texttt{abdomen}}{\texttt{weight}}   
+   \]
+
+   The rationale for this particular combination of predictors was that it minimizes the MSE, as well as makes sure
+   that the VIF are below 10 and that the eigen values of the $\textbf{X}\textbf{X}'$ are kept relatively 
+   large. The resulting VIF are presented in figure [[fig:vif_combo]]. 
 
    The residual analysis were re-run in order to make sure that the assumptions for normality still hold.
    The plots are presented in [[Appendix B]]. We note that the effort to reduce multicolinearity did not affect the
@@ -378,7 +411,7 @@ Examiner \par
    #+NAME: fig:vif_combo
    #+CAPTION: Variance Inflation Factors (VIF) when using the summary variable \texttt{combo}.
    #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/woinfluence/vif.png]]   
+   [[~/courses/Regression Analysis/regone/combo/vif.png]]   
 
 ** Diagnostics and Handling of Outliers
    
@@ -386,9 +419,10 @@ Examiner \par
    Cook's distance are labelled. Considering the cut-off $D_i = 1$ as proposed in \cite{Montgomery2012}, 
    where $D_i$ is the Cook's distance for observation $i$, we note that none of the observations would be 
    considered influential. Still, observation 39, 83, and 41 are large relative
-   to the other points in terms of their Cook's distance, which have been mentioned as a diagnostic for further
-   inspection of outliers. \cite{Fox1991} The three points are henceforth considered as outliers that may
-   influence our model fit in a considerable way.
+   to the other points in terms of their Cook's distance. Noting the relative differences, rather 
+   than relying to a specific cut-off-value, has been mentioned as a diagnostic for further
+   inspection of influential points. \cite{Fox1991} These observations are therefore considered as influence
+   points that may affect our model fit in a considerable way.
 
    #+NAME: fig:cd
    #+CAPTION: Cook's distance for all observations.
@@ -398,10 +432,8 @@ Examiner \par
    Figure [[fig:dffits]] reports the $DFFITS$ values. 
    The recommended cutoff-value mentioned in \cite{Montgomery2012}, i.e. $\pm 2\sqrt{\frac{p}{n}}$
    where $p = 13$ is the number of potential regressors and $n = 248$ is the sample size, is 
-   plotted as a dotted line, and the points that lie below or above this cut-off value is labelled.
-   We observe that several points are considered influential points when using that cut-off value.
-   The same values as from the Cook's distance plot appear in the $DFFITS$ plot, but also several 
-   new points
+   plotted as a dotted line, and the points that lie below or above this cut-off value are labelled.
+   We observe that several points are considered influential points when using the this cut-off value.
 
    #+NAME: fig:dffits
    #+CAPTION: $DFFITS$ for all observations.
@@ -422,11 +454,12 @@ Examiner \par
    added-variable plots, and is also in included as one of the more influential observations considering 
    its DFFITS and Cook's distance values.
 
-   We analyse these observations from two perspectives: Cause of outlier tendencies and effect on fit of 
-   the model. Looking at the observations, we note that some observations are unlikely but 
-   still plausible measurements, for example observation 39. In other words, they are likely not results
-   of mis-measurements, and hence should not be removed for that reason. The second perspective is handled 
-   section [[Variable selection]].
+   When handling the outliers we consider two perspectives: Cause of outlier tendencies and effect on fit of 
+   the model. Looking at the observations, and comparing it to the sample characteristics in Table \ref{tab:characteristics}
+   we note that some observations are indeed outliers in the x-space however 
+   plausible measurements, for example observation 39. In other words, they are likely not results
+   of mis-measurements, and hence should not be removed for that reason. The second perspective, the outliers 
+   effect on the model, is discussed in section [[Variable selection]].
 
    \input{../combo/influence_table.tex}
 
@@ -446,16 +479,20 @@ Examiner \par
    
    Secondly, regarding our method of handling multicolinearity. Since our primary purpose was prediction, 
    one could argue that we should proceeded with the model that minimizes the MSE on the test sample, that is
-   the full model without the summary variable. We would argue, however, that by handling multicolinerity we 
-   ensure more stable least-squares estimators for the model, and hence more stable predictions. In doing so,
-   we sacrifice a gain in MSE. There are other methods of handling multicolinearity that were not considered
-   here, for example Principal Component Regression (PCR) or ridge regression.
+   the full model without the summary variable. In fact, the predictions made by the model may still be 
+   perfectly accurate even if the model is misspecified, as long as predictions are mode on observations within or
+   close to the x-space on which the model was fitted. \cite{Montgomery2012} We would argue, however, that by
+   handling multicolinerity we ensure stable least-squares estimators for the model, and hence predictions  
+   that more valid outside the training x-space. In doing so, we sacrifice a gain in MSE. 
+   There are also other methods of handling multicolinearity that were not considered here, for example
+   Principal Component Regression (PCR) or ridge regression, that could have been better 
+   options for our purpose.
 
    Thirdly, the choice to bootstrap confidence intervals around the model coefficients. Another method 
-   would be conduct the percentile bootstrap on the prediction intervals \cite{davison_hinkley_1997}. This 
-   would arguably be more useful for our purpose, since the primary use of this model would be prediction. 
-   However, the CI boostrap around the regression coefficients give us a confidence estimate around 
-   the coefficients of our model and is therefore useful for prediction as well.
+   would be bootstrap prediction intervals \cite{davison_hinkley_1997}. This 
+   would arguably be more useful for our prediction purpose. However, the CI boostrap around the regression 
+   coefficients give us a confidence estimate around the stability of the coefficients of our model and is
+   therefore useful for prediction.
    
    \input{../performance.tex}
 
@@ -474,10 +511,7 @@ Examiner \par
 \newpage
 * Conclusion
   
-  A preliminary model should include. The included predictors and the corresponding coefficients are 
-
-  Contextual dimensions are missing for us to make an adequate decision on whether this model should be implemented
-  such as the cost and context of measurement.
+  A preliminary model should include. The included predictors and the corresponding coefficients 
 
 * Appendix A
 
