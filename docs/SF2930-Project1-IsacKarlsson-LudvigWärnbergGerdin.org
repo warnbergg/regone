@@ -454,8 +454,8 @@ Examiner \par
    Figure [[fig:biceps_forearm_wrist_dfbeta]], [[fig:age_weight_height_neck_dfbeta]], [[fig:thigh_knee_ankle_dfbeta]], and
    [[fig:chest_abdomen_hip_dfbeta]] in section [[Appendix C]] presents $DFBETA$ values for groups of regressors. 
    Observation 39 is present in a number of these figures, as well as observation number 83 and 217. 
-   Using the aforementioned cut-off value of $\frac{2}{\sqrt{n}}$, we note however that none of these points
-   would be considered influential points.
+   Using the a cut-off value of $\frac{2}{\sqrt{n}}$ as proposed in \cite{Montgomery2012}, we note however that 
+   none of these points would be considered influential points.
 
    #+NAME: fig:cd
    #+CAPTION: Cook's distance for all observations.
@@ -473,8 +473,8 @@ Examiner \par
    When handling the outliers we consider two perspectives: Cause of outlier tendencies and effect on fit of 
    the model. Looking at the observations, and comparing it to the sample characteristics in Table \ref{tab:tblone}
    we note that some observations are indeed outliers in the x-space however 
-   plausible measurements, for example observation 39. In other words, they are likely not results
-   of mis-measurements, and hence should not be removed for that reason. The second perspective, the outliers 
+   plausible measurements, for example observation 39. In other words, they are likely not a result
+   of mis-measurement, and hence should not be removed for that reason. The second perspective, the outliers 
    effect on the model, is discussed in section [[Variable selection]].
 
    #+NAME: fig:dffits
