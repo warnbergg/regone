@@ -200,15 +200,17 @@ Examiner \par
 
 *** Pair-wise Correlation Matrix
 
-   One simple way to detect multicollinearity is by inspecting the off-diagonal element rij in $\textbf{X}’\textbf{X}$.
-   A near linear dependency between $x_i$ and $x_j$ will result in abs(rij) to be near unity. Note that this is
+   One simple way to detect multicollinearity is by inspecting the off-diagonal element $r_{ij}$ in the 
+   $\textbf{X}' \textbf{X}$ matrix. $\textbf X$ is an $n-\text{by}-p$ matrix, where $n$ is the number of observations 
+   and $p$ is the number of predictors.
+   A near linear dependency between $x_i$ and $x_j$ will result in $|r_{ij}|$ to be near unity. Note that this is
    useful for detecting linear dependence between pairs of regressors and that this can not be used as a tools for
    detecting anything more complex than that. Therefore, this method of detecting multicollinearity will
    only be considered as a complementary method to more appropriate methods described here.
 
 *** Variance Inflation Factors and Eigensystem analysis
 
-   The diagonal elements of the matrix $C = (\textbf{X}’\textbf{X})^{-1}$ can also be used for detecting multicollinearity. Note that 
+   The diagonal elements of the matrix $C = (\textbf{X}' \textbf{X})^{-1}$ can also be used for detecting multicollinearity. Note that 
    the jth element of $C$ can be written as
    
    \[
@@ -268,9 +270,12 @@ Examiner \par
     R-squared values that are highly biased and cause severe problems in the presence of collinearity. 
     The use of all possible regression have been recommended in favour of the stepwise techniques, if 
     computationally feasible. \cite{Montgomery2012} Since we are dealing with a relatively small dataset, 
-    and 13 candidate predictors, we choose to use all possible regression in our variable selection.
+    and less than 20 candidate predictors, we choose to use all possible regression in our variable selection.
 
 *** Cross-validation
+    :LOGBOOK:
+    CLOCK: [2020-03-06 Fri 08:22]--[2020-03-06 Fri 08:22] =>  0:00
+    :END:
     
     The all possible regression procedure were nested into a cross-validation procedure. The most 
     primitive form of cross-validation is when the data is split into two parts, and the model
@@ -282,13 +287,13 @@ Examiner \par
     is swapped for one of the $n - 1$ observations and the procedure is looped until every observation has acted 
     as the validation observation.
 
-    In the analysis we first combine a simple split of the data as described in the first paragraph, and 
-    $K$ -fold cross-validation where the data is split into $K$ parts. The cross-validation is conducted on
-    one part of the data and the final model error is tested on the other 
-    part of the data. That way we derive a model from one part of the data, and get an performance 
-    estimate of the chosen model on unseen data. In the $K$ -fold cross-validation, the model is trained
-    on $K - 1$ parts of the data and validated on the last part. The validation part is swapped for one of
-    the $K - 1$ parts, and the procedure is re-run until all "folds" has acted the validation fold.
+    In this project we first make a simple split of the data as described in the first paragraph, and 
+    end up with a training and validation sample. We combine this split with the use of
+    $K$ -fold cross-validation. In $K$ -fold cross-validation, the sample is split into $K$ parts, and the
+    model is fitted on $K - 1$ parts of the data and validated on the last part. The validation part is swapped for one of
+    the $K - 1$ parts, and the procedure is re-run until all "folds" has acted the validation fold. The cross-validation 
+    is conducted on the training sample and the final model error is validation sample. That way we derive a model
+    from one part of the data, and get an performance estimate of the chosen model on unseen data.
 
     We set the $K = 10$ in this analysis. This has been recommended as a compromise for keeping low both the bias of 
     overestimating the generalization error of the model and the variance of the model.
@@ -365,7 +370,7 @@ Examiner \par
    that the R-student residuals approximately follows a normal distribution. Therefore, we assume 
    that the significance tests presented here are valid. 
 
-   The results from the ANOVA analysis will not be covered in detail in the preceding sections. Since
+   The results from the ANOVA analysis will not be covered in detail in the upcoming sections. Since
    our primary purpose is prediction, not explanation, the results presented here are left for the 
    reader. Instead, we place greater emphasis on handling multicollinearity 
    (see section [[Diagnostics and Handling of Multicollinearity]]) and conducting
@@ -379,8 +384,8 @@ Examiner \par
    In section [[Residual analysis]] we noted that there was no indication that a transformation was needed on the 
    response variable. Here, we will see that the transformation of the response variable skews the results negatively.
    Figure [[fig:boxcox_fit]] displays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
-   the dependent variable \texttt{density}. The $\lambda$ that maximized the log-likelihood is 0.9 
-   (0.7-1.1 approximate 95% CI). Using $\lambda = 0.9$ gives us the normal probability plot displayed on the 
+   the dependent variable. The $\lambda$ that maximized the log-likelihood is 0.9 
+   (0.7-1.1 approximate 95% CI). Using $\lambda = 0.9$ gives us the quantile-quantile plot displayed on the 
    right hand side in figure [[fig:boxcox_fit]]. We notice that this affects the distribution of residuals by
    making it more light-tailed. 
 
@@ -392,7 +397,7 @@ Examiner \par
 ** Diagnostics and Handling of Multicollinearity
    
    Table \ref{tab:mc} presents the VIF for each respective regressor and eigen values of the
-   $\textbf{X}\textbf{X}'$. The eigen values for the 
+   $\textbf{X}\textbf{X}'$ matrix. The eigen values for the 
    \texttt{biceps}, \texttt{forearm}, and \texttt{wrist} regressors are relatively close to zero, and the
    VIF of the \texttt{weight}, \texttt{chest}, \texttt{abdomen}, and \texttt{hip} regressors are larger than 10.
    Hence, there appears to be multicollinearity in the data.
@@ -428,6 +433,8 @@ Examiner \par
 
 
 ** Diagnostics and Handling of Outliers
+
+   \input{../combo/influence_table.tex}
    
    Figure [[fig:cd]] illustrates Cook's distance for all points, where the three observations with the largest 
    Cook's distance are labelled. Considering the cut-off $D_i = 1$ as proposed in \cite{Montgomery2012}, 
@@ -438,27 +445,22 @@ Examiner \par
    inspection of influential points. \cite{Fox1991} These observations are therefore considered as influence
    points that may affect our model fit in a considerable way.
 
-   #+NAME: fig:cd
-   #+CAPTION: Cook's distance for all observations.
-   #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/combo/cd.png]]
-
    Figure [[fig:dffits]] reports the $DFFITS$ values. 
    The recommended cutoff-value mentioned in \cite{Montgomery2012}, i.e. $\pm 2\sqrt{\frac{p}{n}}$
    where $p = 13$ is the number of potential regressors and $n = 248$ is the sample size, is 
    plotted as a dotted line, and the points that lie below or above this cut-off value are labelled.
    We observe that several points are considered influential points when using the this cut-off value.
 
-   #+NAME: fig:dffits
-   #+CAPTION: $DFFITS$ for all observations.
-   #+ATTR_LATEX: :width 8cm :placement [h]
-   [[~/courses/Regression Analysis/regone/combo/dffits.png]]
-
    Figure [[fig:biceps_forearm_wrist_dfbeta]], [[fig:age_weight_height_neck_dfbeta]], [[fig:thigh_knee_ankle_dfbeta]], and
    [[fig:chest_abdomen_hip_dfbeta]] in section [[Appendix C]] presents $DFBETA$ values for groups of regressors. 
    Observation 39 is present in a number of these figures, as well as observation number 83 and 217. 
    Using the aforementioned cut-off value of $\frac{2}{\sqrt{n}}$, we note however that none of these points
    would be considered influential points.
+
+   #+NAME: fig:cd
+   #+CAPTION: Cook's distance for all observations.
+   #+ATTR_LATEX: :width 8cm :placement [H]
+   [[~/courses/Regression Analysis/regone/combo/cd.png]]
 
    We present the observations noted in the Cook's distance and DFFITS plots in Table \ref{tab:influence}.
    The points labelled in the $DFBETA$ plots are not considered by the reason noted previously 
@@ -469,13 +471,16 @@ Examiner \par
    its DFFITS and Cook's distance values.
 
    When handling the outliers we consider two perspectives: Cause of outlier tendencies and effect on fit of 
-   the model. Looking at the observations, and comparing it to the sample characteristics in Table \ref{tab:characteristics}
+   the model. Looking at the observations, and comparing it to the sample characteristics in Table \ref{tab:tblone}
    we note that some observations are indeed outliers in the x-space however 
    plausible measurements, for example observation 39. In other words, they are likely not results
    of mis-measurements, and hence should not be removed for that reason. The second perspective, the outliers 
    effect on the model, is discussed in section [[Variable selection]].
 
-   \input{../combo/influence_table.tex}
+   #+NAME: fig:dffits
+   #+CAPTION: $DFFITS$ for all observations.
+   #+ATTR_LATEX: :width 8cm :placement [h]
+   [[~/courses/Regression Analysis/regone/combo/dffits.png]]
 
 ** Variable selection
    
@@ -509,12 +514,12 @@ Examiner \par
    \input{../performance.tex}
 
    #+NAME: fig:cv_apr
-   #+CAPTION: Cross-validated mean squared error for the best subset model and number of regressors.
+   #+CAPTION: Cross-validated mean squared error for the best subset model for each number of regressors.
    #+ATTR_LATEX: :width 8cm
    [[~/courses/Regression Analysis/regone/woinfluence/cv_apr.png]]
    
    #+NAME: fig:variable_selection
-   #+CAPTION: Number of regressors against multiple performance measures for the best subset regression models.
+   #+CAPTION: Number of regressors against multiple performance measures for the best subset models.
    [[~/courses/Regression Analysis/regone/woinfluence/apr.png]]
   
 \newpage
