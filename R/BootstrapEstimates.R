@@ -4,10 +4,10 @@
 #' @param data data.frame. Data to fit the lm model to. No default.
 #' @param vars Named numeric vector. Coefficient values and corresponding variable names. No default.
 #' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "./"
-#' @param digits Numeric vector of length 1. Digits to round to for values. Defaults to 4.
+#' @param digits Numeric vector of length 1. Digits to round to for values. Defaults to 5.
 #' @param ... Additional arguments for the boot function Description. Default/No default. 
 #' @export
-BootstrapEstimates <- function(data, vars, dir = "./", digits = 4, ...) {
+BootstrapEstimates <- function(data, vars, dir = "./", digits = 5, ...) {
     data <- data %>% dplyr::select(-c(predicted, residuals, r.student))
     b <- boot::boot(data = data, statistic = BootCoefs, vars = names(vars)[-1], ...)
     ci.mat <- sapply(seq(vars), function(i) boot::boot.ci(b, index = i, type = "basic")$basic[, c(4, 5)])
@@ -19,6 +19,7 @@ BootstrapEstimates <- function(data, vars, dir = "./", digits = 4, ...) {
         kableExtra::kable(format = "latex", booktabs = TRUE,
                           caption = "Coefficients (95\\% CI) of final model.",
                           row.names = FALSE) %>%
+        kableExtra::kable_styling(latex_options = "HOLD_position") %>%
         write(paste0(dir, "coeffs.tex"))
     return (list(summary = summary(b),
                  boot.object = b))

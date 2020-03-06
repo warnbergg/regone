@@ -1,4 +1,4 @@
-% Created 2020-03-05 Thu 21:40
+% Created 2020-03-06 Fri 08:02
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -15,7 +15,7 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \usepackage{minted}
-\usepackage[margin=1.25in]{geometry} \usepackage{booktabs} \usepackage{graphicx} \usepackage{adjustbox} \usepackage{amsmath} \hypersetup{colorlinks=true,linkcolor=blue} \usepackage{amsthm} \newtheorem{definition}{Definition} \usepackage{bookmark}
+\usepackage[margin=1.25in]{geometry} \usepackage{booktabs} \usepackage{graphicx} \usepackage{adjustbox} \usepackage{amsmath} \usepackage{amsthm} \newtheorem{definition}{Definition} \usepackage{bookmark}
 \author{Ludde}
 \date{\today}
 \title{}
@@ -52,9 +52,9 @@ Examiner \par
 \newpage
 
 \section{Introduction and Project Goals}
-\label{sec:org50bbb40}
+\label{sec:orgfa9901f}
 \subsection{Introduction}
-\label{sec:org552a58b}
+\label{sec:org25af460}
 Our choice of scenario is Scenario I: Body fat assessment, which involves Large-Sample regression (p < n). 
 According to the World Health organization (WHO) obesity, the state where excess body fat is causing
 extensive health effects, is a large risk factor for some chronic diseases. Some examples are cancer
@@ -62,17 +62,17 @@ and diabetes. Since the number of cases of obesity is increasing one may want to
 quickly and reliably.
 
 \subsection{Data Description}
-\label{sec:orgab66f98}
+\label{sec:orgc504d81}
 
 Since BMI has shown to be a bad predictor of actual fatness, this project focuses on body fat mass (BFM).
-There exists very accurate methods for calculating BFM but because of high costs and efforts cheaper 
-methods such as regression models are widely used. 
+Accurate methods for calculating BFM have been developed, but because of the high costs and efforts 
+associated with these methods researchers turn to techniques such as regression models for computing BFM.
 
-The given dataset (BFM MEN) describes data of body density (calculated using underwater weighing), 
+The given dataset \texttt{bodyfatmen.csv} describes data of body density (calculated using underwater weighing), 
 age and other anthropometric variables about 252 men.
 
 \subsection{Project Goals}
-\label{sec:orgf2fa6c1}
+\label{sec:org2f3a68a}
 
 The main goal of the project is to create and validate our own regression model in order to predict BFM.
 This includes the following:
@@ -88,13 +88,13 @@ This includes the following:
 
 \newpage
 \section{Analyses and Model Development}
-\label{sec:org01a46d8}
+\label{sec:org99dbd72}
 
 The information presented in the proceding sections are primarily taken from \textit\{Introduction to
 Linear Regression Analysis\} \cite{Montgomery2012}. If not, the information is cited.
 
 \subsection{Residual analysis}
-\label{sec:org0cab385}
+\label{sec:orgb7e914d}
 
 Some major assumptions we use in our analysis are:
 
@@ -118,7 +118,7 @@ is a effective method to examine how the regression model fits the data and make
 are not violated.
 
 \subsubsection{R-Student}
-\label{sec:orgf2f9831}
+\label{sec:org0b95deb}
 
 One type of residual is the externally studentized residual, which is given by
 
@@ -135,7 +135,7 @@ should be analyzed routinely when solving any kind of regression modelling probl
 externally studentized residuals are often the ones plotted since they have constant variance.
 
 \subsubsection{Normality of residuals}
-\label{sec:orgdd72519}
+\label{sec:org7c51623}
 
 This is a tool for analysing if two datasets (of quantiles) come from the same probability distribution. 
 By plotting the quantiles against each other we will hopefully see somewhat of a straight line. This 
@@ -148,7 +148,7 @@ normality assumption. One may check the normality assumption simply by construct
 plot of the residuals. 
 
 \subsubsection{Fitted Values Against Residuals}
-\label{sec:org3a4a2d0}
+\label{sec:org62bcfdf}
 
 Simply a plot of the, often externally studentized, residuals versus the fitted values. This is useful
 because it allows an easy way to detect model inadequacies. If the plot shows the residuals contained in
@@ -156,7 +156,7 @@ a horizontal band, then the model does not contain any obvious defects. If this 
 conclude that there are likely model imperfections.
 
 \subsubsection{Added Variable Analysis}
-\label{sec:org9ce5155}
+\label{sec:orge9273f5}
 
 Particularly useful when analysing if the relationship between the regressor variables and the response
 has been defined accurately. Another way to use these plots are when evaluating the marginal usefulness
@@ -166,9 +166,9 @@ follow for each regression. When plotting these residuals against each other one
 relationship for the regressor \(x_j\) that has caught our attention.
 
 \subsection{Diagnostics and handling of Outliers}
-\label{sec:org8f1b81e}
+\label{sec:org1bf9fb6}
 \subsubsection{Treatment of outliers}
-\label{sec:org4fd989e}
+\label{sec:orgbfb8469}
 
 An observation that is noticeably different from the rest of the data is considered an outlier. A way
 to spot y space outliers is simply by analyzing the residuals. The ones that are noticeably larger 
@@ -185,7 +185,7 @@ properties when modelling.
 One way to analyse the effect of each outliers is by simply not including the data point and refitting.
 In general we prefer it when the model is not too sensitive to a small number of observations. 
 
-The hat matrix is can be very useful when detecting potential outliers, since it determines the variances
+The hat matrix can be very useful when detecting potential outliers, since it determines the variances
 and covariances of \(\hat{y}_j\) and \(\textbf{e}\). Each element \(h_{ij}\) corresponds to the amount of
 leverage exercised by the ith observation \(y_i\) on the jth, fitted value, \(\hat{y_j}\).
 
@@ -195,7 +195,7 @@ the studentized residuals of each observation. Large hat diagonals along with la
 are likely an influential observation. 
 
 \subsubsection{Cook's Distance}
-\label{sec:org1d22420}
+\label{sec:org85f761a}
 
 One way to both of these at the same time is by using the squared distance between the least-squares
 estimate (based on all n points) and also the estimate obtained when deleting the ith point. This is
@@ -206,10 +206,10 @@ The Cook's distance is arguably one of the more important metrics for our predic
 the observation's effect on the predicted y-values. \cite{22286}
 
 \subsubsection{DFFITS \& DFBETAS}
-\label{sec:org488bb2e}
+\label{sec:orgefb9cc5}
 
 Two other measures of the effects when deletion an observation is \(DFBETAS\) and \(DFFITS\). \(DFBETAS\) tells us
-about the effects on the regression coefficient \$\hat{\beta_j} when deleting the ith observation. It is defined as
+about the effects on the regression coefficient \(\hat{\beta_j}\) when deleting the ith observation. It is defined as
 follows and is given in units of standard deviation.
 
 \(DFFITS\) analyses the effects on the fitted value when deleting the ith observation. Here \(DFFITS\) tells us
@@ -222,74 +222,83 @@ primary purpose of this report. We therefore analyse the Cook's distance and the
 thoroughly that the \(DFBETA\) values.
 
 \subsection{Transformations of variables}
-\label{sec:org2abde0e}
+\label{sec:org6a9f382}
 
-Whenever an assumption mentioned above is violated it is usually a good idea to consider data transformation. 
-In some cases expressing the regressor and or the response variables using another measurement results in 
-violations no longer being present, e.g. inequality of variance. 
+Whenever an assumption mentioned in \ref{sec:orgb7e914d} violated it is usually a good idea to consider data 
+transformation. In some cases expressing the regressor and or the response variables using another measurement
+results in violations no longer being present, e.g. inequality of variance. 
 
-If we wish to transform y, in order to correct for example nonconstant variance, we can use the power
-transformation ylambda where lambda is what we want to determine. We can do this by using the Box-Cox method
+If we wish to transform \(y\), in order to correct for example nonconstant variance, we can use the power
+transformation \(y^\lambda\) where \(\lambda\) is what we want to determine. We can do this by using the Box-Cox method
 which also allows us to estimate the parameters of the regression model simultaneously, using maximum likelihood.
-The method is described as follows:
 
-Note that when analysing a partial regression plot for some regressor variable x1 ,entering the model linearly, 
-then partial residuals will show a straight line. Note that the slope of this line is the regression coefficient 
-of x1 in the multiple regression model. When x1 is considered a candidate variable for the model, if the partial
-regression plot shows a horizontal band, that tells us that no additional information for predicting y is 
-described by x1. When the partial regression plot shows a curvilinear band, then one may use a transformation 
-(e.g. replacing x1 with 1/x1).
+Further, we might want to transform the regressors \(x_j\), for example if the regressor expresses a non-linear 
+relationship with the response variable. Partial regression plots can be used to determine if such a transformation
+is needed. If the regressors \(x_j\) enters the model linearly, then the partial regression plot will show a
+straight line. When \(x_1\) is considered a candidate variable for the model, if the
+partial regression plot shows a horizontal band, that tells us that no additional information for predicting \(y\) is 
+described by \(x_1\). When the partial regression plot shows a curvilinear band, then one may use a transformation 
+(e.g. replacing \(x_1\) with \(1/x_1\)).
 
-\subsection{Diagnostics and handling of Multicolinearity}
-\label{sec:org804976d}
+\subsection{Diagnostics and handling of Multicollinearity}
+\label{sec:orge4b1b42}
 
-Note that if the equation given above is approximately true, at least for some subset of the columns of X,
-then the problem of multicollinearity exists. As a result of this the least-squares analysis, of the model
-itself, may be very deficient. This may cause the usefulness of the regression model to decrease significantly. 
+As a result of multicollinearity, the model fit with the least-squares method may be very deficient.
+This may cause the usefulness of the regression model to decrease significantly. 
 
-One simple way to detect multicollinearity is by inspecting the off-diagonal element rij in X’X. A near
-linear dependency between xi and xj will result in abs(rij) to be near unity. Note that this is useful for
-detecting linear dependence between pairs of regressors and that this can not be used as a tools for
-detecting anything more complex than that. Therefore, this method of detecting multicolinearity will
+\subsubsection{Pair-wise Correlation Matrix}
+\label{sec:org5684d73}
+
+One simple way to detect multicollinearity is by inspecting the off-diagonal element rij in \(\textbf{X}’\textbf{X}\).
+A near linear dependency between \(x_i\) and \(x_j\) will result in abs(rij) to be near unity. Note that this is
+useful for detecting linear dependence between pairs of regressors and that this can not be used as a tools for
+detecting anything more complex than that. Therefore, this method of detecting multicollinearity will
 only be considered as a complementary method to more appropriate methods described here.
 
-The diagonal elements of the matrix C = (X’X)-1 can also be used for detecting multicollinearity. Note that 
-the jth element of C can be written as follows: Cjj=(1-Rj2)-1, 
-here R\(^{\text{2j}}\) is obtained when xj is regressed on the other p-1 regressors.
-When xj is almost orthogonal to the other regressors, Rj2 is small and Cjj is close to unity. Meanwhile 
-if xj is nearly linear dependent, on a subset of the other regressors, R2j is close to unity and Cjj is large.
+\subsubsection{Variance Inflation Factors and Eigensystem analysis}
+\label{sec:org5c21d00}
 
-One may also analyze the characteristic roots/eigenvalues of X’X to measure the extent of multicollinearity. 
-When one or more of the eigenvalues are small, then there exists one or more near-linear dependencies. 
-The condition number of X’X defined as:
+The diagonal elements of the matrix \(C = (\textbf{X}’\textbf{X})^{-1}\) can also be used for detecting multicollinearity. Note that 
+the jth element of \(C\) can be written as
 
-if <100, no serious problem
-if between 100-1000, medium multicollinearity
-if >1000, strong multicollinearity
+\[
+   C_{jj}=(1-R_j^2)^{-1}
+   \]
 
-As an ending note, we should mention the inhererent multicolinearity in this dataset. Most candidate predictors 
+where \(R_j^2\) is obtained when \(x_j\) is regressed on the other \(p-1\) regressors.
+
+When \(x_j\) is almost orthogonal to the other regressors, \(R_j^2\) is small and \(C_{jj}\) is close to unity. Meanwhile 
+if \(x_j\) is nearly linear dependent on a subset of the other regressors, \(R^2_j\) is close to unity and \(C_{jj}\)
+is large.
+
+One may also analyze the characteristic roots/eigenvalues of \(\textbf{X}’\textbf{X}\) to measure the extent of
+multicollinearity. When one or more of the eigenvalues are small, then there exists one or more near-linear
+dependencies. 
+
+As an ending note, we should mention the inhererent multicollinearity in this dataset. Most candidate predictors 
 are measures of body size, which naturally causes the predictors to be linearly related in to each other. That 
-being said, it is still appropriate to investigate methods to alleviate the effect of multicolinearity since 
-the stability of the model is heavily influenced by it. 
+said, it is appropriate to investigate methods to alleviate the effect of multicollinearity since 
+the stability of the model is heavily influenced by multicollinearity.
 
 \subsection{Computer-Intensive Procedures and Variable Selection}
-\label{sec:orgb866434}
+\label{sec:orge43e684}
 
-\subsubsection{The Bootstrap}
-\label{sec:orgcffca56}
+\subsubsection{Bootstrap}
+\label{sec:org785a9fa}
 
-Bootstrapping is a computer-intensive technique that allow us to compute reliable estimates of the standard
-errors of regression estimates when there is no standard procedure available or cases where the results are
-only approximate techniques (e.g. based on large-sample theory). 
+Bootstrapping is a computer-intensive technique that allow us to compute, for example, reliable estimates 
+of the standard errors of regression estimates when there is no standard procedure available or cases where 
+the results are only approximate techniques (e.g. based on large-sample theory). 
 
-If we are interested in a particular regression coefficient BetaHat. First we are required to select a random
-sample of size n with replacement from this original sample, this is called the bootstrap sample. Then we
-proceed to fit the model to this sample by using the procedure as for the original sample. This gives us
-the first bootstrap estimate BetaHat1(star). We repeat this process many times and each repetition, a new 
-bootstrap sample is selected, the model is fit, and an estimate BetaHati(star) is concluded. 
+Say, for instance, that we are interested in the standard error for a particular predictor coefficient \(\hat \beta_j\).
+Then, we are required to select a random sample of size n with replacement from this original sample, this
+is called the bootstrap sample. We proceed to fit the model to this sample by using the procedure as for the original sample. This gives us
+the first bootstrap estimate \(\hat \beta_1^*\). We repeat this process many times and in each repetition, a new 
+bootstrap sample is selected, the model is fit, and an estimate \(\hat \beta^*_i\) is determined. From 
+these bootstrapped estimates, an approximate standard error is computed.
 
 \subsubsection{Variable Selection}
-\label{sec:orgb602509}
+\label{sec:org851211b}
 
 If multicollinearity is present, variable selection methods are very useful. Note that variable selection does
 not result in complete elimination of multicollinearity, in some cases two or more regressors are highly related 
@@ -298,22 +307,25 @@ of multicollinearity in the final model. One should also note that experience an
 should always be considered as a part of the variable selection problem.
 
 \subsubsection{All Possible Regression and Other Methods}
-\label{sec:org8f681b7}
+\label{sec:orgf952d54}
 
 Simply requires to fit all the regression equations starting with one candidate regressor, then two
 candidate regressors and so on. These are later analyzed regarding some criterion and the “best” one is selected. 
 
-Since evaluating all possible regressions can sometimes be time consuming computationally, there are other
+Since evaluating all possible regressions can sometimes be computationally infeasible, there are other
 methods for evaluating only a smaller number of subset regression models by adding/removing regressors one
 at a time. These methods are generally called stepwise procedures, and examples are forward selection and backward
-elimination. These are not considered here, since the use of all possible regression is justified.
+elimination. 
 
 Note that we have not included any of the stepwise regression methods mentioned above. Primarily
 because of the list of problems connected with these methods \cite{20856}, which are for example that they yield
-R-squared values that are highly biased and cause severe problems in the presence of collinearity.
+R-squared values that are highly biased and cause severe problems in the presence of collinearity. 
+The use of all possible regression have been recommended in favour of the stepwise techniques, if 
+computationally feasible. \cite{Montgomery2012} Since we are dealing with a relatively small dataset, 
+and 13 candidate predictors, we choose to use all possible regression in our variable selection.
 
 \subsubsection{Cross-validation}
-\label{sec:org205d860}
+\label{sec:org93bb3e9}
 
 The all possible regression procedure were nested into a cross-validation procedure. The most 
 primitive form of cross-validation is when the data is split into two parts, and the model
@@ -326,49 +338,49 @@ is swapped for one of the \(n - 1\) observations and the procedure is looped unt
 as the validation observation.
 
 In the analysis we first combine a simple split of the data as described in the first paragraph, and 
-\$K\$-fold cross-validation where the data is split into \(K\) parts. The cross-validation is conducted on
+\(K\) -fold cross-validation where the data is split into \(K\) parts. The cross-validation is conducted on
 one part of the data and the final model error is tested on the other 
 part of the data. That way we derive a model from one part of the data, and get an performance 
-estimate of the chosen model on unseen data. The K-fold cross the model is trained on \(K - 1\) parts of the data,
-and validated on the last part. The validation part is swapped for one of the \(K - 1\) parts, and the
-procedure is run until all "folds" has acted the validation fold.
+estimate of the chosen model on unseen data. In the \(K\) -fold cross-validation, the model is trained
+on \(K - 1\) parts of the data and validated on the last part. The validation part is swapped for one of
+the \(K - 1\) parts, and the procedure is re-run until all "folds" has acted the validation fold.
 
-We set the \(K = 10\) in this analysis. This has been recommended as a compromise of keeping both the bias of 
-overestimating the generalization error of the model and the variance of the model low.
+We set the \(K = 10\) in this analysis. This has been recommended as a compromise for keeping low both the bias of 
+overestimating the generalization error of the model and the variance of the model.
 \cite{hastie2009elements}
 
 \newpage
 \section{Results}
-\label{sec:orgea46f36}
+\label{sec:org54c2480}
 \subsection{Sample characteristics}
-\label{sec:org4a5de4e}
+\label{sec:orge94a746}
 
 Table \ref{tab:tblone} reports the sample characteristics. These are left for the reader, in particular to
-compare with the outliers presented in section \ref{sec:orgeb1540f}.
+compare with the outliers presented in section \ref{sec:org7e5005a}.
 
 \input{../main/tblone.tex}
 
 \subsection{Residual analysis}
-\label{sec:org1e5ab03}
+\label{sec:org9b7e806}
 \subsubsection{Normality of residuals}
-\label{sec:orgad42b79}
+\label{sec:org5a55b0d}
 
-Figure \ref{fig:org7062c3e} illustrates a quantile-quantile plot of the externally studentized residuals.
-The observer may say that the points exhibit a pattern that indicates that the residuals are distribute with
+Figure \ref{fig:orgf605834} illustrates a quantile-quantile plot of the externally studentized residuals.
+The observer may say that the points exhibit a pattern that indicates that the residuals are distributed with
 heavier tails than that of a normal distribution. \cite{Montgomery2012}. Still, the deviations from the
 diagonal line is relatively small, and hence we conclude that the residuals are normally distributed.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/qqplot.png}
-\caption{\label{fig:org7062c3e}
+\caption{\label{fig:orgf605834}
 Normality plot of residuals.}
 \end{figure}
 
 \subsubsection{Fitted Against Residuals}
-\label{sec:orga44e7e9}
+\label{sec:org58b7006}
 
-Figure \ref{fig:orgb268c35} illustrates the fitted values \(\hat y_j\) against the R-student residuals. No apparent 
+Figure \ref{fig:org9ae98e4} illustrates the fitted values \(\hat y_j\) against the R-student residuals. No apparent 
 pattern is formed by the points, i.e. the points seem to be randomly scattered along the dotted horizontal
 line. Hence we conclude that the residuals have constant variance, and thus assume that the errors do
 as well.
@@ -376,49 +388,51 @@ as well.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/far.png}
-\caption{\label{fig:orgb268c35}
+\caption{\label{fig:org9ae98e4}
 Fitted values against R-student residuals.}
 \end{figure}
 
 \subsubsection{Added Variable Analysis}
-\label{sec:orgcf273fe}
+\label{sec:org97f0855}
 
-Partial regression plots are found in figure \ref{fig:org4cccd2f}, \ref{fig:org16952ae},
-\ref{fig:org13f8e23}, and \ref{fig:org28c13b2}. All figures exhibit potential points 
+Partial regression plots are found in figure \ref{fig:orge822e5e}, \ref{fig:org623cde9},
+\ref{fig:org9151e88}, and \ref{fig:orgcf7c2db}. All figures exhibit potential points 
 that are unusually large in the x-space and hence their influence on the model fit should be 
-examined further. This will be considered in section \ref{sec:org8f1b81e}.
-Interestingly, 
+examined further. This will be considered in section \ref{sec:org1bf9fb6}. All regressors
+seem to enter the model linearly. The \texttt{height} regressor exhibit a slight double-bow pattern, however
+the pattern is not obvious. With these points in mind, we choose not to transform any of the 
+predictors.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/biceps_forearm_wrist_av.png}
-\caption{\label{fig:org4cccd2f}
+\includegraphics[width=14cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/biceps_forearm_wrist_av.png}
+\caption{\label{fig:orge822e5e}
 Partial regression plots of regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.}
 \end{figure}   
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/thigh_knee_ankle_av.png}
-\caption{\label{fig:org16952ae}
+\includegraphics[width=14cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/thigh_knee_ankle_av.png}
+\caption{\label{fig:org623cde9}
 Partial regression plots of regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/age_weight_height_neck_av.png}
-\caption{\label{fig:org13f8e23}
+\includegraphics[width=14cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/age_weight_height_neck_av.png}
+\caption{\label{fig:org9151e88}
 Partial regression plots of regressors \texttt{age}, \texttt{weight}, \texttt{height}, and \texttt{neck}.}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/chest_abdomen_hip_av.png}
-\caption{\label{fig:org28c13b2}
+\includegraphics[width=14cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/chest_abdomen_hip_av.png}
+\caption{\label{fig:orgcf7c2db}
 Partial regression plots of regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.}
 \end{figure}
 
 \subsection{Significance tests}
-\label{sec:org9b246f5}
+\label{sec:org3948fa3}
 
 Table \ref{tab:anova} presents the Analysis of Variance table (ANOVA) for the full model. In the 
 preceding sections we concluded that the R-student residuals seem to be randomly scattered and 
@@ -427,49 +441,47 @@ that the significance tests presented here are valid.
 
 The results from the ANOVA analysis will not be covered in detail in the preceding sections. Since
 our primary purpose is prediction, not explanation, the results presented here are left for the 
-readers interpretation. Instead, we place greater emphasis on handling multicolinearity 
-(see section \ref{sec:orgba0afc1}) and conducting
-cross-validation for model development (see section \ref{sec:org83cebf2}),
-since these aspects affect the stability of our predictions and generalizability of our model.
+reader. Instead, we place greater emphasis on handling multicollinearity 
+(see section \ref{sec:orgce6c97e}) and conducting
+cross-validation for model development (see section \ref{sec:org2106c2e}),
+since these methods affect the stability of our predictions and generalizability of our model.
 
 \input{../main/anova.tex}
 
 \subsection{Transformations of variables}
-\label{sec:orgddd06f4}
+\label{sec:orga57053c}
 
-In section \ref{sec:org0cab385} we noted that there was no indication that a transformation was needed on the 
+In section \ref{sec:orgb7e914d} we noted that there was no indication that a transformation was needed on the 
 response variable. Here, we will see that the transformation of the response variable skews the results negatively.
-Figure \ref{fig:org96407b0} displays the values of \(\lambda\) to be used in a potential Box-Cox transformation of 
+Figure \ref{fig:orgf335f7f} displays the values of \(\lambda\) to be used in a potential Box-Cox transformation of 
 the dependent variable \texttt{density}. The \(\lambda\) that maximized the log-likelihood is 0.9 
 (0.7-1.1 approximate 95\% CI). Using \(\lambda = 0.9\) gives us the normal probability plot displayed on the 
-right hand side in figure \ref{fig:org96407b0}. We notice that this affects the distribution of residuals by
+right hand side in figure \ref{fig:orgf335f7f}. We notice that this affects the distribution of residuals by
 making it more light-tailed. 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/boxcox_fit.png}
-\caption{\label{fig:org96407b0}
+\includegraphics[width=15cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/boxcox_fit.png}
+\caption{\label{fig:orgf335f7f}
 Values for lambda against the log-likelihood for Box-Cox transformations.}
 \end{figure}
 
-\subsection{Diagnostics and Handling of Multicolinearity}
-\label{sec:orgba0afc1}
+\subsection{Diagnostics and Handling of Multicollinearity}
+\label{sec:orgce6c97e}
 
 Table \ref{tab:mc} presents the VIF for each respective regressor and eigen values of the
 \(\textbf{X}\textbf{X}'\). The eigen values for the 
 \texttt{biceps}, \texttt{forearm}, and \texttt{wrist} regressors are relatively close to zero, and the
 VIF of the \texttt{weight}, \texttt{chest}, \texttt{abdomen}, and \texttt{hip} regressors are larger than 10.
-Hence, there appears to be multicolinearity in the data.
+Hence, there appears to be multicollinearity in the data.
 
-A correlation matrix for the full model is found in section \ref{sec:orgdef5996}. The strong collinearity
+A correlation matrix for the full model is found in section \ref{sec:org71c000c}. The strong collinearity
 between the \texttt{weight} regressor and other predictors is apparent in the correlation matrix in figure
-\ref{fig:org3e51c99}. The \texttt{weight} regressor shows a strong correlation with all but the \texttt{age} and
+\ref{fig:orga6cd4c7}. The \texttt{weight} regressor shows a strong correlation with all but the \texttt{age} and
 the \texttt{height} regressors.
 
-\input{../main/mc.tex} 
-
 In order to handle the multicollinearity in the data, we replace the variables that appear to be involved 
-in the multicolinearity with a summary variable. \cite{Montgomery2012} The summary variable is referred to as
+in the multicollinearity with a summary variable. \cite{Montgomery2012} The summary variable is referred to as
 \texttt{combo} and was defined as
 
 \[
@@ -478,23 +490,27 @@ in the multicolinearity with a summary variable. \cite{Montgomery2012} The summa
 
 The rationale for this particular combination of predictors was that it minimizes the MSE, as well as makes sure
 that the VIF are below 10 and that the eigen values of the \(\textbf{X}\textbf{X}'\) are kept relatively 
-large. The resulting VIF are presented in figure \ref{fig:org72cd293}. 
+large. The resulting VIF are presented in figure \ref{fig:org9a62b39}. 
 
 The residual analysis were re-run in order to make sure that the assumptions for normality still hold.
-The plots are presented in \ref{sec:org9a48ec0}. We note that the effort to reduce multicolinearity did not affect the
+The plots are presented in \ref{sec:orgd46e6c2}. Also the ANOVA table including the \texttt{combo} variable 
+is shown. We note that the effort to reduce multicollinearity did not affect the
 other diagnostics in a noticeable way. Therefore, we keep the summary variable and move to handling of outliers.
+
+\input{../main/mc.tex} 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/combo/vif.png}
-\caption{\label{fig:org72cd293}
+\includegraphics[width=10cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/combo/vif.png}
+\caption{\label{fig:org9a62b39}
 Variance Inflation Factors (VIF) when using the summary variable \texttt{combo}.}
 \end{figure}   
 
-\subsection{Diagnostics and Handling of Outliers}
-\label{sec:orgeb1540f}
 
-Figure \ref{fig:org121fae7} illustrates Cook's distance for all points, where the three observations with the largest 
+\subsection{Diagnostics and Handling of Outliers}
+\label{sec:org7e5005a}
+
+Figure \ref{fig:org218708f} illustrates Cook's distance for all points, where the three observations with the largest 
 Cook's distance are labelled. Considering the cut-off \(D_i = 1\) as proposed in \cite{Montgomery2012}, 
 where \(D_i\) is the Cook's distance for observation \(i\), we note that none of the observations would be 
 considered influential. Still, observation 39, 83, and 41 are large relative
@@ -506,11 +522,11 @@ points that may affect our model fit in a considerable way.
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/combo/cd.png}
-\caption{\label{fig:org121fae7}
+\caption{\label{fig:org218708f}
 Cook's distance for all observations.}
 \end{figure}
 
-Figure \ref{fig:orga0e2a3a} reports the \(DFFITS\) values. 
+Figure \ref{fig:org7f586d4} reports the \(DFFITS\) values. 
 The recommended cutoff-value mentioned in \cite{Montgomery2012}, i.e. \(\pm 2\sqrt{\frac{p}{n}}\)
 where \(p = 13\) is the number of potential regressors and \(n = 248\) is the sample size, is 
 plotted as a dotted line, and the points that lie below or above this cut-off value are labelled.
@@ -519,19 +535,19 @@ We observe that several points are considered influential points when using the 
 \begin{figure}[h]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/combo/dffits.png}
-\caption{\label{fig:orga0e2a3a}
+\caption{\label{fig:org7f586d4}
 \(DFFITS\) for all observations.}
 \end{figure}
 
-Figure \ref{fig:org0ccc98b}, \ref{fig:orga5fce17}, \ref{fig:org04efc7b}, and
-\ref{fig:org8ec42b0} in section \ref{sec:org661e022} presents \(DFBETA\) values for groups of regressors. 
+Figure \ref{fig:org580d4f3}, \ref{fig:org42a728e}, \ref{fig:org237620a}, and
+\ref{fig:org5dd6b8f} in section \ref{sec:orgf3f5ac3} presents \(DFBETA\) values for groups of regressors. 
 Observation 39 is present in a number of these figures, as well as observation number 83 and 217. 
 Using the aforementioned cut-off value of \(\frac{2}{\sqrt{n}}\), we note however that none of these points
 would be considered influential points.
 
 We present the observations noted in the Cook's distance and DFFITS plots in Table \ref{tab:influence}.
 The points labelled in the \(DFBETA\) plots are not considered by the reason noted previously 
-in section \ref{sec:org488bb2e}. The points that was identified as potential outliers in the added-variable
+in section \ref{sec:orgefb9cc5}. The points that was identified as potential outliers in the added-variable
 plots can be compared to the points that are considered as influential in the Cook's distance plots
 and the DFFITS plot. For example, we see that observation 39 would be noted as an outlier in a number of 
 added-variable plots, and is also in included as one of the more influential observations considering 
@@ -542,18 +558,16 @@ the model. Looking at the observations, and comparing it to the sample character
 we note that some observations are indeed outliers in the x-space however 
 plausible measurements, for example observation 39. In other words, they are likely not results
 of mis-measurements, and hence should not be removed for that reason. The second perspective, the outliers 
-effect on the model, is discussed in section \ref{sec:org83cebf2}.
+effect on the model, is discussed in section \ref{sec:org2106c2e}.
 
 \input{../combo/influence_table.tex}
 
 \subsection{Variable selection}
-\label{sec:org83cebf2}
+\label{sec:org2106c2e}
 
 The measurements for BIC, the C(p) criterion, and adjusted \(R^2\) of the best subset models are presented
-in figure \ref{fig:org51c3ad0}. The most well performing model, determined by its cross-validated 
-mean squared error, its predictors and the corresponding coefficients along with 95\% confidence intervals are 
-presented in Table \ref{tab:coeffs}. The cross-validated MSE for the full model, the model with a summary variable, 
-and the model the summary variable without the influential observations are presented in table
+in figure \ref{fig:org4050128}. The cross-validated MSE for the full model, the model with a summary variable, 
+and the model the summary variable without the influential observations are presented in Table
 \ref{tab:performance}. 
 
 Several methodological considerations were made in this step. Firstly, regarding influential and outlier 
@@ -561,14 +575,14 @@ observations. By removing influential observations we reduce the mean squared er
 However, we have no quantitative nor qualitative reason for removing them. Therefore, we will leave the 
 outliers in the dataset. 
 
-Secondly, regarding our method of handling multicolinearity. Since our primary purpose was prediction, 
+Secondly, regarding our method of handling multicollinearity. Since our primary purpose was prediction, 
 one could argue that we should proceeded with the model that minimizes the MSE on the test sample, that is
 the full model without the summary variable. In fact, the predictions made by the model may still be 
 perfectly accurate even if the model is misspecified, as long as predictions are mode on observations within or
 close to the x-space on which the model was fitted. \cite{Montgomery2012} We would argue, however, that by
 handling multicolinerity we ensure stable least-squares estimators for the model, and hence predictions  
 that more valid outside the training x-space. In doing so, we sacrifice a gain in MSE. 
-There are also other methods of handling multicolinearity that were not considered here, for example
+There are also other methods of handling multicollinearity that were not considered here, for example
 Principal Component Regression (PCR) or ridge regression, that could have been better 
 options for our purpose.
 
@@ -580,77 +594,92 @@ therefore useful for prediction.
 
 \input{../performance.tex}
 
-\input{../woinfluence/coeffs.tex}
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/woinfluence/cv_apr.png}
-\caption{\label{fig:org6ab726b}
+\caption{\label{fig:org2548892}
 Cross-validated mean squared error for the best subset model and number of regressors.}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/woinfluence/apr.png}
-\caption{\label{fig:org51c3ad0}
+\includegraphics[width=.9\linewidth]{/home/ludvigwgerdin/courses/Regression Analysis/regone/woinfluence/apr.png}
+\caption{\label{fig:org4050128}
 Number of regressors against multiple performance measures for the best subset regression models.}
 \end{figure}
 
 \newpage
 \section{Conclusion}
-\label{sec:orgcc88ad5}
+\label{sec:org2cb0a5f}
 
-A preliminary model should include. The included predictors and the corresponding coefficients 
+The most well performing model, determined by its cross-validated 
+mean squared error, its predictors and the corresponding coefficients along with 95\% confidence intervals are 
+presented in Table \ref{tab:coeffs}. 
+
+\input{../combo/coeffs.tex}
 
 \section{Appendix A}
-\label{sec:orgdef5996}
+\label{sec:org71c000c}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=.9\linewidth]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/hm.png}
-\caption{\label{fig:org3e51c99}
+\caption{\label{fig:orga6cd4c7}
 Correlation matrix of the full model}
 \end{figure}
 
 \newpage
 
 \section{Appendix B}
-\label{sec:org9a48ec0}
+\label{sec:orgd46e6c2}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/combo/qqplot.png}
+\caption{Normality plot of residuals when using the \texttt{combo} variable.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/combo/far.png}
+\caption{R-student residuals agaist fitted values when using the \texttt{combo} variable.}
+\end{figure}
+
+\input{../combo/anova.tex}
+
 \section{Appendix C}
-\label{sec:org661e022}
+\label{sec:orgf3f5ac3}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/biceps_forearm_wrist_dfbeta.png}
-\caption{\label{fig:org0ccc98b}
+\caption{\label{fig:org580d4f3}
 \(DFBETA\) for regressors \texttt{biceps}, \texttt{forearm}, and \texttt{wrist}.}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/thigh_knee_ankle_dfbeta.png}
-\caption{\label{fig:org04efc7b}
+\caption{\label{fig:org237620a}
 \(DFBETA\) for regressors \texttt{thigh}, \texttt{knee}, and \texttt{ankle}.}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/age_weight_height_neck_dfbeta.png}
-\caption{\label{fig:orga5fce17}
+\caption{\label{fig:org42a728e}
 \(DFBETA\) for regressors \texttt{age}, \texttt{weight}, \texttt{height} and \texttt{neck}.}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=8cm]{/home/ludvigwgerdin/courses/Regression Analysis/regone/main/chest_abdomen_hip_dfbeta.png}
-\caption{\label{fig:org8ec42b0}
+\caption{\label{fig:org5dd6b8f}
 \(DFBETA\) for regressors \texttt{chest}, \texttt{abdomen}, and \texttt{hip}.}
 \end{figure}
 
 \newpage
 
-\section{References}
-\label{sec:org0cd4344}
 
 \bibliographystyle{plain}
 \bibliography{library}

@@ -41,7 +41,7 @@ RunCrossValidation <- function(data, k = 10, dir = "./", save.plot = TRUE) {
         ggplot2::facet_wrap(~statistic, scale = "free")
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave(paste0(dir, "apr.png"), plt)
+            ggplot2::ggsave(paste0(dir, "apr.png"), plt, width = 20, height = 5)
         })
     ## Predict on the test set, and compute MSE
     p <- PredictRegsubsets(
