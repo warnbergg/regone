@@ -13,7 +13,9 @@ CreateFittedAgainstResidualsPlot <- function(data, dir = "./", save.plot = TRUE)
     plt <- data %>%
         ggplot2::ggplot(ggplot2::aes(x = predicted, y = r.student)) +
         ggplot2::geom_point() +
-        ggplot2::geom_hline(yintercept = 0, linetype = "dashed")
+        ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
+        ggplot2::xlab("Fitted values") +
+        ggplot2::ylab("R-student residuals")
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave(paste0(dir, "far.png"), plt, width = 5, height = 5)  

@@ -62,7 +62,8 @@ PlotVar <- function(plot.data, var = "vif") {
     plt <- plot.data %>%
         ggplot2::ggplot(ggplot2::aes(x = Regressor, y = value)) +
         ggplot2::geom_bar(stat = "identity", width = 0.1, color = "black")+
-        ggplot2::theme(axis.text.x = ggplot2::element_text(angle=45, hjust = 0.3, vjust = 0.3))
+        ggplot2::theme(axis.text.x = ggplot2::element_text(angle=45, hjust = 0.3, vjust = 0.3)) +
+        ggplot2::ylab("Variance Inflation Factor")
     if (var == "vif")
         plt <- plt + ggplot2::geom_hline(yintercept = c(5, 10), linetype = "dashed")
     else

@@ -38,10 +38,12 @@ RunCrossValidation <- function(data, k = 10, dir = "./", save.plot = TRUE) {
         ggplot2::ggplot(ggplot2::aes(x = predictors, y = value, group = 1)) +
         ggplot2::geom_line() +
         ggplot2::geom_point() +
+        ggplot2::xlab("Number of regresors") +
+        ggplot2::ylab("Metric value") + 
         ggplot2::facet_wrap(~statistic, scale = "free")
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave(paste0(dir, "apr.png"), plt, width = 20, height = 5)
+            ggplot2::ggsave(paste0(dir, "apr.png"), plt, width = 10, height = 5)
         })
     ## Predict on the test set, and compute MSE
     p <- PredictRegsubsets(
@@ -91,7 +93,9 @@ GetErrors <- function(d, k, p, folds,
     plot.d$id <- factor(as.numeric(rownames(plot.d)))
     plt <- plot.d %>%
         ggplot2::ggplot(ggplot2::aes(x = id, y = value, group = 1)) +
-        ggplot2::geom_line() + ggplot2::geom_point()
+        ggplot2::geom_line() + ggplot2::geom_point() +
+        ggplot2::xlab("Number of regressors") +
+        ggplot2::ylab("MSE")
     if (save.plot)
         suppressMessages({
             ggplot2::ggsave(paste0(dir, "cv_apr.png"), plt)

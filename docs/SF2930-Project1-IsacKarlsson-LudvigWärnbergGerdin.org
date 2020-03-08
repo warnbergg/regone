@@ -9,7 +9,7 @@
 \vspace{1.5cm}
 {\huge\bfseries Report I \\  \par}
 \vspace{2cm}
-{\Large\itshape Isac Karlsson\\ Ludvig Wärnberg Gerdin}
+{\Large\itshape Isac Karlsson \\ Ludvig Wärnberg Gerdin}
 \vfill
 Examiner \par
 \textsc{Tatjana Pavlenko}
@@ -55,19 +55,19 @@ Examiner \par
 \newpage
 * Analyses and Model Development
   
-  The information presented in the proceding sections are primarily taken from \textit{Introduction to
-  Linear Regression Analysis} \cite{Montgomery2012}. If not, the information is cited.
+  The information presented in the proceding sections are primarily taken from Introduction to
+  Linear Regression Analysis. \cite{Montgomery2012} If not, the information is cited.
 
 ** Residual analysis
 
-   Some major assumptions we use in our analysis are:
+   Multiple regression, the method that is used in this project, relies on the following assumptions:
 
    1. The errors $\epsilon_i$ for observation $i$ are independently and identically normally distributed.
    2. Mean of $\epsilon = 0$
    3. Variance of $\epsilon = \sigma^2$, where $\sigma$ is a constant.
    4. There is approximately a linear relationship between the regressors and the response ($y$).
 
-   When analysing violations of the assumptions given above, the primary tool is using the model residuals. 
+   The primary tool for analysing whether these assumptions hold for our data is model residuals. 
    We define the residual for observation $i$ as
    
    \[
@@ -103,9 +103,8 @@ Examiner \par
 
     Here some small departures from the normality assumption does not have a large impact. Meanwhile 
     large nonnormality could have more of an impact on the regression modelling process. Mainly, the problems 
-    relate to inference of the model building - for example, prediction intervals depend on the 
-    normality assumption. One may check the normality assumption simply by constructing a normal probability
-    plot of the residuals. 
+    relate to inference in the model building - for example, the ANOVA test relies on this assumption. One
+    may check the normality assumption simply by constructing a normal probability plot of the residuals. 
     
 *** Fitted Values Against Residuals 
 
@@ -127,10 +126,10 @@ Examiner \par
 *** Treatment of outliers
 
     An observation that is noticeably different from the rest of the data is considered an outlier. A way
-    to spot y space outliers is simply by analyzing the residuals. The ones that are noticeably larger 
+    to spot $y$ space outliers is simply by analyzing the residuals. The ones that are noticeably larger 
     (when considering the absolute value of these residuals) than the other residuals is an indication of
     potential outliers. The magnitude of the impact caused by these outliers depends on their location
-    in x space. An example of identifying potential outliers is by using scaled residuals (e.g. R-student). 
+    in $x$ space. An example of identifying potential outliers is by using scaled residuals (e.g. R-student). 
 
     Note that outliers that are considered bad values, e.g. values from mis-measuresments,
     should preferably be discarded. Meanwhile there should
@@ -146,7 +145,7 @@ Examiner \par
     leverage exercised by the ith observation $y_i$ on the jth, fitted value, $\hat{y_j}$.
 
     It appears that large hat diagonals may correspond to an influential outlier since they are remote
-    in x space when compared to the rest of the data. Knowing this analysts also want to observe
+    in $x$ space when compared to the rest of the data. Knowing this analysts also want to observe
     the studentized residuals of each observation. Large hat diagonals along with large residuals 
     are likely an influential observation. 
 
@@ -163,17 +162,14 @@ Examiner \par
 *** DFFITS & DFBETAS
 
     Two other measures of the effects when deletion an observation is $DFBETAS$ and $DFFITS$. $DFBETAS$ tells us
-    about the effects on the regression coefficient $\hat{\beta_j}$ when deleting the ith observation. It is defined as
-    follows and is given in units of standard deviation.
-
-    $DFFITS$ analyses the effects on the fitted value when deleting the ith observation. Here $DFFITS$ tells us
+    about the effects on the regression coefficient $\hat{\beta_j}$ when deleting the ith observation. 
+    $DFFITS$ analyses the effects on the fitted value when deleting the ith observation, and tells us
     the number of standard deviations that the fitted value is changed by when deleting observation $i$. Since 
-    the $DFFITS$ values consider the effect on the fitted value, this metric is arguably one of the more important 
-    ones for our purpose.
+    the $DFFITS$ values consider the effect on the fitted value, this metric is of interest.
 
     $DFBETA$ is presumably more interesting from an explanatory point-of-view \cite{22286}, which is not the
     primary purpose of this report. We therefore analyse the Cook's distance and the $DFFITS$ values more
-    thoroughly that the $DFBETA$ values.
+    thoroughly than the $DFBETA$ values.
     
 ** Transformations of variables
 
@@ -200,24 +196,25 @@ Examiner \par
 
 *** Pair-wise Correlation Matrix
 
-   One simple way to detect multicollinearity is by inspecting the off-diagonal element $r_{ij}$ in the 
-   $\textbf{X}' \textbf{X}$ matrix. $\textbf X$ is an $n-\text{by}-p$ matrix, where $n$ is the number of observations 
-   and $p$ is the number of predictors.
-   A near linear dependency between $x_i$ and $x_j$ will result in $|r_{ij}|$ to be near unity. Note that this is
-   useful for detecting linear dependence between pairs of regressors and that this can not be used as a tools for
-   detecting anything more complex than that. Therefore, this method of detecting multicollinearity will
-   only be considered as a complementary method to more appropriate methods described here.
+    One simple way to detect multicollinearity is by inspecting the off-diagonal element $r_{ij}$ in the 
+    $\textbf{X}' \textbf{X}$ matrix. $\textbf X$ is an $n-\text{by}-p$ matrix, where $n$ is the number of observations 
+    and $p$ is the number of predictors.
+    A near linear dependency between $x_i$ and $x_j$ will result in $|r_{ij}|$ to be near 1 or -1. Note that this is
+    useful for detecting linear dependence between pairs of regressors and that this can not be used as a tools for
+    detecting anything more complex than that. Therefore, this method of detecting multicollinearity will
+    only be considered as a complementary method to more appropriate methods described here.
 
 *** Variance Inflation Factors and Eigensystem analysis
 
-   The diagonal elements of the matrix $C = (\textbf{X}' \textbf{X})^{-1}$ can also be used for detecting multicollinearity. Note that 
-   the jth element of $C$ can be written as
+   The diagonal elements of the matrix $C = (\textbf{X}' \textbf{X})^{-1}$ can also be used for detecting multicollinearity. 
+   Note that the jth element of $C$ can be written as
    
    \[
    C_{jj}=(1-R_j^2)^{-1}
    \]
 
-   where $R_j^2$ is obtained when $x_j$ is regressed on the other $p-1$ regressors.
+   where $R_j^2$ is obtained when $x_j$ is regressed on the other $p-1$ regressors. The $R_j^2$'s are 
+   referred to as the Variance Inflation Factors.
    
    When $x_j$ is almost orthogonal to the other regressors, $R_j^2$ is small and $C_{jj}$ is close to unity. Meanwhile 
    if $x_j$ is nearly linear dependent on a subset of the other regressors, $R^2_j$ is close to unity and $C_{jj}$
@@ -228,12 +225,11 @@ Examiner \par
    dependencies. 
 
    As an ending note, we should mention the inhererent multicollinearity in this dataset. Most candidate predictors 
-   are measures of body size, which naturally causes the predictors to be linearly related in to each other. That 
+   are measures of body size, which naturally causes the predictors to be closely related to each other. That 
    said, it is appropriate to investigate methods to alleviate the effect of multicollinearity since 
    the stability of the model is heavily influenced by multicollinearity.
 
 ** Computer-Intensive Procedures and Variable Selection
-
 *** Bootstrap
 
     Bootstrapping is a computer-intensive technique that allow us to compute, for example, reliable estimates 
@@ -241,7 +237,7 @@ Examiner \par
     the results are only approximate techniques (e.g. based on large-sample theory). 
 
     Say, for instance, that we are interested in the standard error for a particular predictor coefficient $\hat \beta_j$.
-    Then, we are required to select a random sample of size n with replacement from this original sample, this
+    Then, we select a random sample of size n with replacement from this original sample - this
     is called the bootstrap sample. We proceed to fit the model to this sample by using the procedure as for the original sample. This gives us
     the first bootstrap estimate $\hat \beta_1^*$. We repeat this process many times and in each repetition, a new 
     bootstrap sample is selected, the model is fit, and an estimate $\hat \beta^*_i$ is determined. From 
@@ -273,17 +269,14 @@ Examiner \par
     and less than 20 candidate predictors, we choose to use all possible regression in our variable selection.
 
 *** Cross-validation
-    :LOGBOOK:
-    CLOCK: [2020-03-06 Fri 08:22]--[2020-03-06 Fri 08:22] =>  0:00
-    :END:
     
-    The all possible regression procedure were nested into a cross-validation procedure. The most 
+    The all possible regression procedure is nested into a cross-validation procedure. The most 
     primitive form of cross-validation is when the data is split into two parts, and the model
     is trained one subset of the data (usually referred to as the training set) and validated 
     on the other part of the data (usually referred to as the validation set).
 
     The most extreme form of cross-validation is the leave-one-out cross-validation, where the model 
-    is fit on $n - 1$ observations and tested on one the last observation. Then the "validation"-observation 
+    is fit on $n - 1$ observations and tested on the last observation. Then the "validation"-observation 
     is swapped for one of the $n - 1$ observations and the procedure is looped until every observation has acted 
     as the validation observation.
 
@@ -291,13 +284,11 @@ Examiner \par
     end up with a training and validation sample. We combine this split with the use of
     $K$ -fold cross-validation. In $K$ -fold cross-validation, the sample is split into $K$ parts, and the
     model is fitted on $K - 1$ parts of the data and validated on the last part. The validation part is swapped for one of
-    the $K - 1$ parts, and the procedure is re-run until all "folds" has acted the validation fold. The cross-validation 
-    is conducted on the training sample and the final model error is validation sample. That way we derive a model
-    from one part of the data, and get an performance estimate of the chosen model on unseen data.
-
-    We set the $K = 10$ in this analysis. This has been recommended as a compromise for keeping low both the bias of 
-    overestimating the generalization error of the model and the variance of the model.
-    \cite{hastie2009elements}
+    the $K - 1$ parts, and the procedure is re-run until all "folds" has acted the validation fold. The $K$ -fold
+    cross-validation is conducted on the training sample and the final model error is validation sample. That
+    way we derive a model from one part of the data, and get an performance estimate of the chosen model on
+    unseen data. We set the $K = 10$ in this analysis. This has been recommended as a compromise for keeping low both the bias of 
+    overestimating the generalization error of the model and the variance of the model. \cite{hastie2009elements}
 
 \newpage
 * Results
@@ -335,8 +326,8 @@ Examiner \par
    
 *** Added Variable Analysis
 
-    Partial regression plots are found in figure [[fig:biceps_forearm_wrist_av]], [[fig:thigh_knee_ankle_av]],
-    [[fig:age_weight_height_neck]], and [[fig:chest_abdomen_hip_av]]. All figures exhibit potential points 
+    Partial regression plots are found in Figure [[fig:biceps_forearm_wrist_av]], [[fig:thigh_knee_ankle_av]],
+    [[fig:age_weight_height_neck]], and [[fig:chest_abdomen_hip_av]]. All Figures exhibit potential points 
     that are unusually large in the x-space and hence their influence on the model fit should be 
     examined further. This will be considered in section [[Diagnostics and handling of Outliers]]. All regressors
     seem to enter the model linearly. The \texttt{height} regressor exhibit a slight double-bow pattern, however
@@ -386,7 +377,7 @@ Examiner \par
    Figure [[fig:boxcox_fit]] displays the values of $\lambda$ to be used in a potential Box-Cox transformation of 
    the dependent variable. The $\lambda$ that maximized the log-likelihood is 0.9 
    (0.7-1.1 approximate 95% CI). Using $\lambda = 0.9$ gives us the quantile-quantile plot displayed on the 
-   right hand side in figure [[fig:boxcox_fit]]. We notice that this affects the distribution of residuals by
+   right hand side in Figure [[fig:boxcox_fit]]. We notice that this affects the distribution of residuals by
    making it more light-tailed. 
 
    #+NAME: fig:boxcox_fit
@@ -403,7 +394,7 @@ Examiner \par
    Hence, there appears to be multicollinearity in the data.
 
    A correlation matrix for the full model is found in section [[Appendix A]]. The strong collinearity
-   between the \texttt{weight} regressor and other predictors is apparent in the correlation matrix in figure
+   between the \texttt{weight} regressor and other predictors is apparent in the correlation matrix in Figure
    [[fig:hm]]. The \texttt{weight} regressor shows a strong correlation with all but the \texttt{age} and
    the \texttt{height} regressors.
 
@@ -417,7 +408,7 @@ Examiner \par
 
    The rationale for this particular combination of predictors was that it minimizes the MSE, as well as makes sure
    that the VIF are below 10 and that the eigen values of the $\textbf{X}\textbf{X}'$ are kept relatively 
-   large. The resulting VIF are presented in figure [[fig:vif_combo]]. 
+   large. The resulting VIF are presented in Figure [[fig:vif_combo]]. 
 
    The residual analysis were re-run in order to make sure that the assumptions for normality still hold.
    The plots are presented in [[Appendix B]]. Also the ANOVA table including the \texttt{combo} variable 
@@ -430,7 +421,6 @@ Examiner \par
    #+CAPTION: Variance Inflation Factors (VIF) when using the summary variable \texttt{combo}.
    #+ATTR_LATEX: :width 10cm
    [[~/courses/Regression Analysis/regone/combo/vif.png]]   
-
 
 ** Diagnostics and Handling of Outliers
 
@@ -485,7 +475,7 @@ Examiner \par
 ** Variable selection
    
    The measurements for BIC, the C(p) criterion, and adjusted $R^2$ of the best subset models are presented
-   in figure [[fig:variable_selection]]. The cross-validated MSE for the full model, the model with a summary variable, 
+   in Figure [[fig:variable_selection]]. The cross-validated MSE for the full model, the model with a summary variable, 
    and the model the summary variable without the influential observations are presented in Table
    \ref{tab:performance}. 
 
@@ -516,18 +506,18 @@ Examiner \par
    #+NAME: fig:cv_apr
    #+CAPTION: Cross-validated mean squared error for the best subset model for each number of regressors.
    #+ATTR_LATEX: :width 8cm
-   [[~/courses/Regression Analysis/regone/woinfluence/cv_apr.png]]
+   [[~/courses/Regression Analysis/regone/combo/cv_apr.png]]
    
    #+NAME: fig:variable_selection
    #+CAPTION: Number of regressors against multiple performance measures for the best subset models.
-   [[~/courses/Regression Analysis/regone/woinfluence/apr.png]]
+   [[~/courses/Regression Analysis/regone/combo/apr.png]]
   
 \newpage
 * Conclusion
 
-  The most well performing model, determined by its cross-validated 
-  mean squared error, its predictors and the corresponding coefficients along with 95% confidence intervals are 
-  presented in Table \ref{tab:coeffs}. 
+  The most well performing model (adjusted for the methodological considerations mentioned in the previous section),
+  determined by its cross-validated mean squared error, its predictors, and the corresponding coefficients along 
+  with 95% confidence intervals are  presented in Table \ref{tab:coeffs}. 
 
   \input{../combo/coeffs.tex}
 
