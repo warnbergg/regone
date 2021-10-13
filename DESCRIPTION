@@ -1,8 +1,7 @@
 Package: regone
 Title: regone
 Version: 0.0.0.9000
-Authors@R: c(person("Ludde", "WG", email = "ludvigge@kth.se", role = c("aut", "cre")),
-	     person("Isac", "K", email = "email@email.com", role = c("aut")))
+Authors@R: person("Ludde", "Wärnberg Gerdin", email = "ludvigge@kth.se", role = c("aut", "cre"))
 Description: Code for project one, scenario one in SF2930 Regression Analysis at KTH Royal Institute of Technology
 Depends: R (>= 3.5.3)
 Imports:
