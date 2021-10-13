@@ -4,11 +4,12 @@
 \alias{GenerateMulticolinearityMeasures}
 \title{GenerateMulticolinearityMeasures}
 \usage{
-GenerateMulticolinearityMeasures(data, fit, dir = ".",
-  save.plots = TRUE)
+GenerateMulticolinearityMeasures(data, dv, fit, dir = "./", save.plots = TRUE)
 }
 \arguments{
 \item{data}{data.frame Data used to fit the model. Used for pair-wise correlation analysis and eigenvalue system analysis. No default.}
+
+\item{dv}{Character vector of length 1. Dependent variable. No default.}
 
 \item{fit}{lm object. Fitted model. No default}
 

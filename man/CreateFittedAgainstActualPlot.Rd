@@ -4,10 +4,18 @@
 \alias{CreateFittedAgainstActualPlot}
 \title{CreateFittedAgainstActualPlot}
 \usage{
-CreateFittedAgainstActualPlot(nms, data, dir = ".", save.plot = TRUE)
+CreateFittedAgainstActualPlot(
+  nms,
+  dv = "density",
+  data,
+  dir = ".",
+  save.plot = TRUE
+)
 }
 \arguments{
 \item{nms}{Character vector. Regressors to be plotted against residuals. Each regressor is individually plotted against the externally studentized residuals. No default}
+
+\item{dv}{Character vector of length 1. Dependent variable. Defaults to "density"}
 
 \item{data}{data.frame object. Data as prepared in "make.project.R". Regressor values, predicted response, and residuals. No default.}
 

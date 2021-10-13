@@ -4,16 +4,18 @@
 \alias{RunCrossValidation}
 \title{RunCrossValidation}
 \usage{
-RunCrossValidation(data, k = 10, dir = "./", save.plot = TRUE)
+RunCrossValidation(dv, data, k = 10, dir = "./", save.plot = TRUE)
 }
 \arguments{
+\item{dv}{Character vector of length 1. Dependent variable. No default.}
+
 \item{data}{data.frame object. Data as prepared in "RunProject.R". Regressor values, predicted response, and residuals. No default.}
 
 \item{k}{Numeric vector of length 1. Number of folds to use in k-fold cross-validation. Defaults to 10.}
 
 \item{dir}{Character vector of length 1. Directory in which to store the cv-plot. Defaults to "./"}
 
-\item{save.plot}{Logical vector of length 1. If TRUE then the mean cv error plot -is saved to disk. Defaults to TRUE}
+\item{save.plot}{Logical vector of length 1. If TRUE then the mean cv error and all possible regression plots are saved to disk. Defaults to TRUE}
 }
 \description{
 Run variable selection nested into cross-validation. Source: https://uc-r.github.io/model_selection. See section 6.1 of Introduction to Statistical Learning.

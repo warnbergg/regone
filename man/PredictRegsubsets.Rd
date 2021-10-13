@@ -4,7 +4,7 @@
 \alias{PredictRegsubsets}
 \title{PredictRegsubsets}
 \usage{
-PredictRegsubsets(object, newdata, id, ...)
+PredictRegsubsets(dv, object, newdata, id, ...)
 }
 \arguments{
 \item{object}{regsubsets object. Object returned from the leaps::regsubsets function. No default}

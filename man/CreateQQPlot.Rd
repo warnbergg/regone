@@ -4,7 +4,7 @@
 \alias{CreateQQPlot}
 \title{CreateQQPlot}
 \usage{
-CreateQQPlot(data, dir = ".", save.plot = TRUE)
+CreateQQPlot(data, dir = "./", save.plot = TRUE)
 }
 \arguments{
 \item{data}{data.frame object. Data as prepared in RunProject.R. Regressor values, predicted response, and residuals. No default.}

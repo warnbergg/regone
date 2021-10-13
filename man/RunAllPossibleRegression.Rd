@@ -4,9 +4,13 @@
 \alias{RunAllPossibleRegression}
 \title{RunAllPossibleRegression}
 \usage{
-RunAllPossibleRegression(fit, performance.measures = c("adjr", "aic",
-  "sbic", "cp"), pretty.labels = c("Adjusted R-squared", "AIC", "BIC",
-  "C(p)"), dir = "./", save.plot = TRUE)
+RunAllPossibleRegression(
+  fit,
+  performance.measures = c("adjr", "aic", "sbic", "cp"),
+  pretty.labels = c("Adjusted R-squared", "AIC", "BIC", "C(p)"),
+  dir = "./",
+  save.plot = TRUE
+)
 }
 \arguments{
 \item{fit}{lm object. Full model fit to the data. No default.}

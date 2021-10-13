@@ -4,12 +4,12 @@
 \alias{CreateFittedAgainstResidualsPlot}
 \title{CreateFittedAgainstResidualspLot}
 \usage{
-CreateFittedAgainstResidualsPlot(data, dir = ".", save.plot = TRUE)
+CreateFittedAgainstResidualsPlot(data, dir = "./", save.plot = TRUE)
 }
 \arguments{
 \item{data}{data.frame object. Data as prepared in "RunProject.R". Regressor values, predicted response, and residuals. No default.}
 
-\item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
+\item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "./"}
 
 \item{save.plot}{Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE}
 }

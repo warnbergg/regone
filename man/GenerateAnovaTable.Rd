@@ -4,8 +4,12 @@
 \alias{GenerateAnovaTable}
 \title{GenerateAnovaTable}
 \usage{
-GenerateAnovaTable(fit, dir = ".", pretty.names = c("Sum sq",
-  "Mean sq", "F value", "Pr(>F)"), ...)
+GenerateAnovaTable(
+  fit,
+  dir = ".",
+  pretty.names = c("Sum sq", "Mean sq", "F value", "Pr(>F)"),
+  ...
+)
 }
 \arguments{
 \item{fit}{lm object. Linear model that has been fit to the data. No default.}

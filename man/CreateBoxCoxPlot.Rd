@@ -4,7 +4,7 @@
 \alias{CreateBoxCoxPlot}
 \title{CreateBoxCoxPlot}
 \usage{
-CreateBoxCoxPlot(fit, dir = ".", save.plot = TRUE, ...)
+CreateBoxCoxPlot(fit, dir = "./", save.plot = TRUE, ...)
 }
 \arguments{
 \item{fit}{lm object. Model fit to the data. No default.}

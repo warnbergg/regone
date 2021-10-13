@@ -4,15 +4,10 @@
 \alias{RunProject}
 \title{RunProject}
 \usage{
-RunProject(data = read.csv("../data/bodyfatmen.csv"), dir = "./",
-  verbose = TRUE)
+RunProject(verbose = TRUE)
 }
 \arguments{
-\item{data}{data.frame. The data to print use for analysis. Defaults to read.csv("../data/bodyfatmen.csv")}
-
-\item{dir}{Character vector of length 1. Directory in which to save analysis results. Defaults to "."}
-
-\item{verbose}{Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE}
+\item{verbose}{Logical vector of length 1. If TRUE messages are printed for each stage of the project, e.g. when running residual analysis. Defaults to TRUE.}
 }
 \description{
 Run full code for project.

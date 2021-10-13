@@ -67,7 +67,7 @@ RunFullAnalysis <- function(data, dv, dir = "./",
     )
     if (verbose)
         message("Running variable selection analysis and bootstrapping...")
-    cv.list <- RunCrossValidation(dv = dv, data = data, k = 2, dir = dir)
+    cv.list <- RunCrossValidation(dv = dv, data = data, k = 10, dir = dir)
     b <- BootstrapEstimates(
         dv = dv,
         data = data,

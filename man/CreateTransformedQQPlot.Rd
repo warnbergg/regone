@@ -4,11 +4,22 @@
 \alias{CreateTransformedQQPlot}
 \title{CreateTransformedQQPlot}
 \usage{
-CreateTransformedQQPlot(fit, data, lambda = 0.9, dir = ".",
-  save.plot = TRUE)
+CreateTransformedQQPlot(
+  fit,
+  iv,
+  dv = "density",
+  data,
+  lambda = 0.9,
+  dir = "./",
+  save.plot = TRUE
+)
 }
 \arguments{
 \item{fit}{lm object. Model fit to the data. No default.}
+
+\item{iv}{Character vector. Independent variables. No default.}
+
+\item{dv}{Character vector of length 1. Dependent variable. Defaults to "density"}
 
 \item{data}{data.frame. Data that the model was fit to. No default.}
 

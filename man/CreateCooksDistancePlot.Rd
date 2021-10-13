@@ -4,9 +4,19 @@
 \alias{CreateCooksDistancePlot}
 \title{CreateCooksDistancePlot}
 \usage{
-CreateCooksDistancePlot(fit, dir = ".", save.plot = TRUE)
+CreateCooksDistancePlot(
+  fit,
+  critical.value = NULL,
+  return.inf = TRUE,
+  dir = ".",
+  save.plot = TRUE
+)
 }
 \arguments{
+\item{critical.value}{Numeric vector of length 1. Plotted as a dashed line, as a indicator of influential points. Defaults to NULL, in which case the value is not plotted. If not NULL, the observations whose corresponding values exceed the critical value is labelled in the plot. Else, the observations with the top 3 highest values are labelled.}
+
+\item{return.inf}{Logical vector of length 1. If TRUE the points that are "influential" are returned. Depends on the critical.value param: If NULL, then the top three points are returned, and if not null then the points whose values exceed the critical.value is returned. Defaults to TRUE.}
+
 \item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
 
 \item{save.plot}{Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE}

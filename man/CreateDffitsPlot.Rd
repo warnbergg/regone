@@ -4,13 +4,20 @@
 \alias{CreateDffitsPlot}
 \title{CreateDffitsPlot}
 \usage{
-CreateDffitsPlot(fit, critical.value = NULL, dir = ".",
-  save.plot = TRUE)
+CreateDffitsPlot(
+  fit,
+  critical.value = NULL,
+  return.inf = TRUE,
+  dir = ".",
+  save.plot = TRUE
+)
 }
 \arguments{
 \item{fit}{lm object. Linear Model fit to the data. No default.}
 
-\item{critical.value}{Numeric vector of length 1. Cutoff/critical value for DFFITS plot. Defaults to NULL, in which case no critical values are plotted.}
+\item{critical.value}{Numeric vector of length 1. Plotted as a dashed line, as a indicator of influential points. Defaults to NULL, in which case the value is not plotted. If not NULL, the observations whose corresponding values exceed the critical value is labelled in the plot. Else, the observations with the top 3 highest values are labelled.}
+
+\item{return.inf}{Logical vector of length 1. If TRUE the points that are "influential" are returned. Depends on the critical.value param: If NULL, then the top three points are returned, and if not null then the points whose values exceed the critical.value is returned. Defaults to TRUE.}
 
 \item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
 

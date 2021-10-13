@@ -4,19 +4,30 @@
 \alias{CreateDfbetaPlot}
 \title{CreateDfbetaPlot}
 \usage{
-CreateDfbetaPlot(nms, fit, critical.value = NULL, dir = ".",
-  save.plot = TRUE)
+CreateDfbetaPlot(
+  nms,
+  fit,
+  critical.value = NULL,
+  n.largest = 3,
+  return.inf = TRUE,
+  dir = ".",
+  save.plot = TRUE
+)
 }
 \arguments{
 \item{nms}{Character vector. Regresors from which to calculate dfbeta. No default.}
 
 \item{fit}{lm object. Linear Model fit to the data. No default.}
 
-\item{critical.value}{Numeric vector of length 1. Cutoff/critical value for DFBETA plots. Defaults to NULL, in which case no cut-off value is plotted.}
+\item{critical.value}{Numeric vector of length 1. Plotted as a dashed line, as a indicator of influential points. Defaults to NULL, in which case the value is not plotted. If not NULL, the observations whose corresponding values exceed the critical value is labelled in the plot. Else, the observations with the top 3 highest values are labelled.}
+
+\item{return.inf}{Logical vector of length 1. If TRUE the points that are "influential" are returned. Depends on the critical.value param: If NULL, then the top three points are returned, and if not null then the points whose values exceed the critical.value is returned. Defaults to TRUE.}
 
 \item{dir}{Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."}
 
 \item{save.plot}{Logical vector of length 1. If TRUE the DFBETA plots are saved to disk. Defaults to TRUE.}
+
+\item{n.largets}{Numeric vector of length 1. Number of values to consider when labelling the n largest points. Depends on the setting of critical.value: If null, then used; if not, then ignored. Defaults to 3.}
 }
 \description{
 Computes DFBETA for each parameter of the fitted model, plots the dfbetas as specified in nms, and optionally saves them to disk.

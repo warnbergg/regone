@@ -4,7 +4,7 @@
 \alias{BootCoefs}
 \title{BootCoefs}
 \usage{
-BootCoefs(data, indices, vars)
+BootCoefs(dv, data, indices, vars)
 }
 \arguments{
 \item{data}{data.frame. Data to fit the lm model to. No default.}
