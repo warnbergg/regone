@@ -9,7 +9,7 @@
 CreateRegressorAgainstResidualsPlot <- function(data, nms, dir = "./", save.plot = TRUE) {
     ## Error handling
     plot.data <- suppressMessages(
-        mutate(data[, nms], across(where(is.numeric), as.numeric)) %>%
+        dplyr::mutate(data[, nms], dplyr::across(where(is.numeric), as.numeric)) %>%
         reshape2::melt(.) %>%
         dplyr::mutate(r.student = rep(data$r.student, length(nms)))
     )

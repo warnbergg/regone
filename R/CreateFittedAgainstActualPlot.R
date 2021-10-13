@@ -12,8 +12,8 @@ CreateFittedAgainstActualPlot <- function(nms, dv = "density", data,dir = ".", s
     cols <- c(dv, "predicted", "residuals")
     mc <- match(cols, names(d))
     plt <- data[, c(nms, dv, "predicted", "residuals")] %>%
-        mutate(across(where(is.numeric), as.numeric)) %>%
-        tidyr::gather(key = "iv", value = "x", -all_of(mc)) %>%
+        dplyr::mutate(across(where(is.numeric), as.numeric)) %>%
+        tidyr::gather(key = "iv", value = "x", -dplyr::all_of(mc)) %>%
         ggplot2::ggplot(ggplot2::aes_string(x = "x", y = dv)) + 
         ggplot2::geom_segment(ggplot2::aes(xend = x, yend = predicted), alpha = .2) +
         ggplot2::geom_point(ggplot2::aes(color = residuals)) +
