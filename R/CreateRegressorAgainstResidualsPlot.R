@@ -8,8 +8,11 @@
 #' @export
 CreateRegressorAgainstResidualsPlot <- function(data, nms, dir = "./", save.plot = TRUE) {
     ## Error handling
-    plot.data <- suppressMessages({reshape2::melt(data[, nms], id = ) %>%
-        dplyr::mutate(r.student = rep(data$r.student, length(nms)))})
+    plot.data <- suppressMessages(
+        mutate(data[, nms], across(where(is.numeric), as.numeric)) %>%
+        reshape2::melt(.) %>%
+        dplyr::mutate(r.student = rep(data$r.student, length(nms)))
+    )
     plt <- plot.data %>%
         ggplot2::ggplot(ggplot2::aes(x = value, y = r.student)) +
         ggplot2::geom_point() +

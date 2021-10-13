@@ -1,15 +1,16 @@
 #' BoostrapEstimates
 #'
 #' Uses the boot package to bootstrap the regression coefficients for our fitted model.
+#' @param dv Character vector of length 1. Column name of dependent variable. No default. 
 #' @param data data.frame. Data to fit the lm model to. No default.
 #' @param vars Named numeric vector. Coefficient values and corresponding variable names. No default.
 #' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "./"
 #' @param digits Numeric vector of length 1. Digits to round to for values. Defaults to 5.
 #' @param ... Additional arguments for the boot function Description. Default/No default. 
 #' @export
-BootstrapEstimates <- function(data, vars, dir = "./", digits = 5, ...) {
+BootstrapEstimates <- function(dv, data, vars, dir = "./", digits = 5, ...) {
     data <- data %>% dplyr::select(-c(predicted, residuals, r.student))
-    b <- boot::boot(data = data, statistic = BootCoefs, vars = names(vars)[-1], ...)
+    b <- boot::boot(data = data, statistic = BootCoefs, vars = names(vars)[-1], dv=dv,...)
     ci.mat <- sapply(seq(vars), function(i) boot::boot.ci(b, index = i, type = "basic")$basic[, c(4, 5)])
     confs <- paste0("(", apply(round(ci.mat, digits), 2, paste, collapse = " to "), ")")
     knitr::opts_current$set(label = "coeffs")
@@ -30,8 +31,9 @@ BootstrapEstimates <- function(data, vars, dir = "./", digits = 5, ...) {
 #' @param data data.frame. Data to fit the lm model to. No default.
 #' @param indices Helper argument for the boot::boot function.
 #' @param vars Character vector. Predictors derived to be best from some variable selection / model building process. No default. 
-BootCoefs <- function(data, indices, vars) {
-    data <- data[indices, ][, c("density", vars)]
-    fit <- lm(formula = density ~ ., data = data)
+BootCoefs <- function(dv, data, indices, vars) {
+    data <- data[indices, ][, c(dv, vars)]
+    f <- paste0(dv, "~.")
+    fit <- lm(formula = as.formula(f), data = data)
     return (coef(fit))
 }

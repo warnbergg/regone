@@ -2,11 +2,12 @@
 #'
 #' Wrapper to run Cook's distance, DFFITS, and DFBETA's and tabulate the influential points for further investigation.
 #' @param data data.frame. Data as prepared in RunProject.R. No default.
+#' @param dv Character vector of length 1. Dependent variable. No default. 
 #' @param nm.chunks List. Chunks of predictor labels as prepared in RunProject.R. No default.
 #' @param dir Character vector of length 1. Directory in which to save the plots and the influence table. Defaults to "./" 
 #' @param save.plots Logical vector of length 1. If TRUE plots from the analysis are saved to disk. Defaults to TRUE. 
 #' @export
-AnalyzeInfluence <- function(data, fit, nm.chunks,
+AnalyzeInfluence <- function(data, dv, fit, nm.chunks,
                              dir = "./", save.plots = TRUE) {
 
     ## Run DFBETA analysis
@@ -23,8 +24,10 @@ AnalyzeInfluence <- function(data, fit, nm.chunks,
                             save.plot = save.plots, dir = dir)
     influential.obs <- lapply(list(cd, pdi), function(l) l$influential.obs$Observation)
     points <- unique(unlist(influential.obs))
-    df <- data[points, ] %>%
-        dplyr::select(-c(density, predicted, residuals, r.student))
+    d <- data[points, ]
+    cols <- c(dv, "predicted", "residuals", "r.student")
+    mc <- match(cols, names(d))
+    df <- d %>% dplyr::select(-mc)
     knitr::opts_current$set(label = "influence")
     data.frame(Observation = points, df) %>%
         kableExtra::kable(format = "latex", row.names = FALSE,

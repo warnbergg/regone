@@ -6,12 +6,13 @@
 #' @param save.plot Logical vector of length 1. If TRUE then the plot is saved to disk. Defaults to TRUE 
 #' @param ... Additional arguments for the lindia::gg_boxcox() function.
 #' @export
-CreateBoxCoxPlot <- function(fit, dir = ".", save.plot = TRUE, ...) {
+CreateBoxCoxPlot <- function(fit, dir = "./", save.plot = TRUE, ...) {
     ## Error handling
-    plt <- lindia::gg_boxcox(fit = fit, ...)
+    message("hej")
+    plt <- lindia::gg_boxcox(fitted.lm = fit)
     if (save.plot)
         suppressMessages({
-            ggplot2::ggsave(paste0(dir, "boxcox.png"), plt)
+            ggplot2::ggsave(paste0(dir, "boxcox.pntg"), plt)
         })
     return (plt)
 }

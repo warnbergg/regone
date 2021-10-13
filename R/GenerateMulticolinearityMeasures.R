@@ -2,13 +2,14 @@
 #'
 #' Produces variance inflation factors, eigenvalue system analysis for the fitted model.
 #' @param data data.frame Data used to fit the model. Used for pair-wise correlation analysis and eigenvalue system analysis. No default.
+#' @param dv Character vector of length 1. Dependent variable. No default. 
 #' @param fit lm object. Fitted model. No default
 #' @param dir Character vector of lenght 1. Directory in which to store the plot. Ignored if save.plot is FALSE. Defaults to "."
 #' @param save.plots Logical vector of length 1. If TRUE the VIF plot and correlation heatmap are saved to disk. Defaults to TRUE.
 #' @export
-GenerateMulticolinearityMeasures <- function(data, fit, dir = "./",
+GenerateMulticolinearityMeasures <- function(data, dv, fit, dir = "./",
                                              save.plots = TRUE) {
-    d <- data[, !names(data) %in% c("density", "predicted", "residuals", "r.student")]
+    d <- data[, !names(data) %in% c(dv, "predicted", "residuals", "r.student")]
     c <- cor(d)
     e <- eigen(c)$values
     k <- max(e)/min(e)
@@ -33,8 +34,9 @@ GenerateMulticolinearityMeasures <- function(data, fit, dir = "./",
         ggplot2::geom_tile() +
         ggplot2::geom_text(ggplot2::aes(Var2, Var1,
                                         label = round(value, 2)), color = "white", size = 4) + 
-        ggplot2::theme(axis.title.x = ggplot2::element_blank(),
-                       axis.title.y = ggplot2::element_blank())
+        ggplot2::theme(legend.title = ggplot2::element_blank(),
+                       axis.text.x = ggplot2::element_text(angle=30,hjust=1,vjust=1.0),
+                       axis.text.y = ggplot2::element_text(size = 12))
     plts <- list(hm = hm, vif = plt)
     return.object <- setNames(list(e = e, k = k, v = v, plts = plts),
                               c("Eigen values", "Condition number",
